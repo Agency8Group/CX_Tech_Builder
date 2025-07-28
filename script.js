@@ -108,16 +108,33 @@ document.addEventListener('DOMContentLoaded', function() {
         const video = projectImage.querySelector('video');
         
         if (img && video) {
-            if (img.style.opacity === '0') {
+            // 현재 이미지의 opacity 상태 확인 (기본값은 '1')
+            const currentImgOpacity = img.style.opacity || '1';
+            
+            if (currentImgOpacity === '0') {
                 // 이미지로 전환
                 img.style.opacity = '1';
                 video.style.opacity = '0';
                 video.pause();
+                video.currentTime = 0;
+                console.log('이미지로 전환됨');
             } else {
                 // 영상으로 전환
                 img.style.opacity = '0';
                 video.style.opacity = '1';
-                video.play();
+                
+                // 비디오 재생 시도
+                try {
+                    video.play().then(() => {
+                        console.log('비디오 재생 성공');
+                    }).catch(error => {
+                        console.log('비디오 자동 재생 실패:', error);
+                        showNotification('영상을 수동으로 재생해주세요.', 'info');
+                    });
+                } catch (error) {
+                    console.log('비디오 재생 오류:', error);
+                    showNotification('영상을 수동으로 재생해주세요.', 'info');
+                }
             }
         }
     };
@@ -560,4 +577,174 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
     });
     
     console.log('포트폴리오 웹사이트가 성공적으로 로드되었습니다! 🚀');
+
+    // 갤러리 데이터
+    const galleryData = {
+        '고객센터': {
+            images: [
+                {
+                    src: '업무TOOL소개/web고객센터(1).png',
+                    title: '웹AI 고객센터 구축 - 메인 화면',
+                    description: '인공지능 기반 고객 응대 자동화 시스템의 메인 인터페이스'
+                },
+                {
+                    src: '업무TOOL소개/web고객센터(2).png',
+                    title: '웹AI 고객센터 구축 - 대화 인터페이스',
+                    description: '실시간 AI 챗봇을 통한 고객 문의 자동 응대 시스템'
+                }
+            ]
+        }
+    };
+
+    // 갤러리 전역 변수
+    let currentGallery = null;
+    let currentImageIndex = 0;
+
+    // 갤러리 열기 함수
+    window.openGallery = function(galleryName) {
+        if (galleryData[galleryName]) {
+            currentGallery = galleryName;
+            currentImageIndex = 0;
+            updateGalleryImage();
+            
+            const galleryModal = document.getElementById('galleryModal');
+            galleryModal.style.display = 'block';
+            galleryModal.classList.add('show');
+            
+            // 스크롤 방지
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    // 갤러리 이미지 변경 함수
+    window.changeGalleryImage = function(direction) {
+        if (!currentGallery) return;
+        
+        const gallery = galleryData[currentGallery];
+        currentImageIndex += direction;
+        
+        // 순환 처리
+        if (currentImageIndex < 0) {
+            currentImageIndex = gallery.images.length - 1;
+        } else if (currentImageIndex >= gallery.images.length) {
+            currentImageIndex = 0;
+        }
+        
+        updateGalleryImage();
+    };
+
+    // 갤러리 이미지 업데이트 함수
+    function updateGalleryImage() {
+        if (!currentGallery) return;
+        
+        const gallery = galleryData[currentGallery];
+        const currentImage = gallery.images[currentImageIndex];
+        
+        const galleryImage = document.getElementById('galleryImage');
+        const galleryTitle = document.getElementById('galleryTitle');
+        const galleryDescription = document.getElementById('galleryDescription');
+        const galleryCounter = document.getElementById('galleryCounter');
+        
+        galleryImage.src = currentImage.src;
+        galleryImage.alt = currentImage.title;
+        galleryTitle.textContent = currentImage.title;
+        galleryDescription.textContent = currentImage.description;
+        galleryCounter.textContent = `${currentImageIndex + 1} / ${gallery.images.length}`;
+    }
+
+    // 갤러리 닫기 함수
+    window.closeGallery = function() {
+        const galleryModal = document.getElementById('galleryModal');
+        galleryModal.style.display = 'none';
+        galleryModal.classList.remove('show');
+        
+        // 스크롤 복원
+        document.body.style.overflow = 'auto';
+        
+        currentGallery = null;
+        currentImageIndex = 0;
+    };
+
+    // 갤러리 모달 외부 클릭 시 닫기
+    document.getElementById('galleryModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeGallery();
+        }
+    });
+
+    // 키보드 이벤트 (좌우 화살표로 이미지 변경)
+    document.addEventListener('keydown', function(e) {
+        if (currentGallery) {
+            if (e.key === 'ArrowLeft') {
+                changeGalleryImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeGalleryImage(1);
+            } else if (e.key === 'Escape') {
+                closeGallery();
+            }
+        }
+    });
+
+    // 비디오 모달 관련 함수들
+    window.openVideo = function(videoSrc, title, description) {
+        const videoModal = document.getElementById('videoModal');
+        const modalVideo = document.getElementById('modalVideo');
+        const videoTitle = document.getElementById('videoTitle');
+        const videoDescription = document.getElementById('videoDescription');
+        
+        // 비디오 소스 설정
+        modalVideo.querySelector('source').src = videoSrc;
+        modalVideo.load(); // 비디오 다시 로드
+        
+        // 제목과 설명 설정
+        videoTitle.textContent = title;
+        videoDescription.textContent = description;
+        
+        // 모달 표시
+        videoModal.style.display = 'flex';
+        videoModal.classList.add('show');
+        
+        // body 스크롤 방지
+        document.body.style.overflow = 'hidden';
+        
+        // 비디오 자동 재생 시도
+        setTimeout(() => {
+            modalVideo.play().catch(error => {
+                console.log('비디오 자동 재생 실패:', error);
+            });
+        }, 100);
+    };
+    
+    window.closeVideo = function() {
+        const videoModal = document.getElementById('videoModal');
+        const modalVideo = document.getElementById('modalVideo');
+        
+        // 비디오 정지
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+        
+        // 모달 숨기기
+        videoModal.style.display = 'none';
+        videoModal.classList.remove('show');
+        
+        // body 스크롤 복원
+        document.body.style.overflow = '';
+    };
+    
+    // 비디오 모달 외부 클릭 시 닫기
+    document.getElementById('videoModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeVideo();
+        }
+    });
+    
+    // ESC 키로 비디오 모달 닫기
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const videoModal = document.getElementById('videoModal');
+            if (videoModal.style.display === 'flex') {
+                closeVideo();
+            }
+        }
+    });
 }); 
