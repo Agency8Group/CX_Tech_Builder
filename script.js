@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalDescription = document.getElementById('modalDescription');
     const closeBtn = document.querySelector('.close');
     
-    // 크기보기 버튼 클릭 이벤트
+    // 크게보기 버튼 클릭 이벤트
     const demoButtons = document.querySelectorAll('.btn-outline');
     demoButtons.forEach(button => {
         button.addEventListener('click', function() {
