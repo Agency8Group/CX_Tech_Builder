@@ -1280,11 +1280,35 @@ html {
         gap: 6px;
         justify-content: center;
         flex-wrap: wrap;
+        margin-bottom: 15px;
     }
     
     .tech-tag {
         font-size: 0.7rem;
         padding: 3px 6px;
+    }
+    
+    .project-content .btn {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    /* 토글 버튼 컨테이너 중앙정렬 */
+    .project-content div[style*="display: flex"] {
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .project-content div[style*="display: flex"] .btn {
+        width: auto;
+        max-width: none;
+        margin: 0;
+        flex: 1;
+        max-width: 120px;
     }
     
     /* 서비스 섹션 */
@@ -1567,11 +1591,39 @@ html {
     
     .tech-stack {
         gap: 4px;
+        margin-bottom: 12px;
     }
     
     .tech-tag {
         font-size: 0.65rem;
         padding: 2px 5px;
+    }
+    
+    .project-content .btn {
+        width: 100%;
+        max-width: 180px;
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+    
+    /* 토글 버튼 컨테이너 중앙정렬 */
+    .project-content div[style*="display: flex"] {
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .project-content div[style*="display: flex"] .btn {
+        width: auto;
+        max-width: none;
+        margin: 0;
+        flex: 1;
+        max-width: 100px;
+        font-size: 0.75rem;
+        padding: 6px 8px;
     }
     
     /* 서비스 섹션 */
