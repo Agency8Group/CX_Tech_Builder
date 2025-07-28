@@ -874,11 +874,11 @@ body {
     min-height: 120px;
 }
 
-/* Footer - 좌우 여백 더 많이 줄여서 중앙으로 통일 */
+/* Footer - 더 보기 좋게 개선 */
 .footer {
     background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
     color: white;
-    padding: 60px 0 20px;
+    padding: 80px 0 30px;
     position: relative;
     overflow: hidden;
 }
@@ -896,57 +896,106 @@ body {
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 60px;
+    margin-bottom: 50px;
     position: relative;
     z-index: 2;
-    max-width: 800px;
-    margin: 0 auto 40px;
-    padding: 0 60px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    padding: 0 40px;
+    align-items: start;
+    justify-items: center;
 }
 
 .footer-section h4 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: #38b2ac;
+    position: relative;
+    text-align: center;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #38b2ac, #4fd1c7);
+    border-radius: 2px;
 }
 
 .footer-section p {
-    color: #d1d5db;
-    line-height: 1.6;
+    color: #e2e8f0;
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 .footer-section ul {
     list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .footer-section ul li {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
 }
 
 .footer-section ul li a {
     color: #d1d5db;
     text-decoration: none;
     transition: all 0.3s ease;
+    font-size: 1rem;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 100%;
 }
 
 .footer-section ul li a:hover {
     color: #38b2ac;
-    transform: translateX(5px);
+    transform: translateX(8px);
+}
+
+.footer-section ul li a::before {
+    content: '→';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: #38b2ac;
+}
+
+.footer-section ul li a:hover::before {
+    opacity: 1;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .footer-bottom {
     text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid #2d3748;
-    color: #a0aec0;
+    padding-top: 30px;
+    border-top: 1px solid #374151;
+    color: #9ca3af;
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 60px 0;
+    padding: 30px 40px 0;
+    font-size: 0.95rem;
 }
 
 /* Smooth Scrolling */
@@ -1635,32 +1684,42 @@ html {
     
     /* 푸터 */
     .footer {
-        padding: 40px 16px 25px;
+        padding: 50px 20px 30px;
     }
     
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 25px;
+        gap: 35px;
         max-width: 100%;
-        padding: 0 10px;
+        padding: 0 15px;
+        align-items: center;
+        justify-items: center;
     }
     
     .footer-bottom {
         max-width: 100%;
-        padding: 15px 10px 0;
+        padding: 20px 15px 0;
     }
     
     .footer-section h4 {
-        font-size: 1rem;
+        font-size: 1.2rem;
         text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 35px;
     }
     
     .footer-section p,
     .footer-section ul li a {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
         text-align: center;
+        display: block;
+        width: 100%;
     }
 }
 
@@ -1906,26 +1965,37 @@ html {
     
     /* 푸터 */
     .footer {
-        padding: 30px 12px 20px;
+        padding: 35px 15px 25px;
     }
     
     .footer-content {
-        gap: 20px;
-        padding: 0 5px;
+        gap: 25px;
+        padding: 0 8px;
+        align-items: center;
+        justify-items: center;
     }
     
     .footer-bottom {
-        padding: 12px 5px 0;
+        padding: 15px 8px 0;
     }
     
     .footer-section h4 {
-        font-size: 0.95rem;
-        margin-bottom: 12px;
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    
+    .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
     }
     
     .footer-section p,
     .footer-section ul li a {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+        text-align: center;
+        display: block;
+        width: 100%;
     }
 }
 
