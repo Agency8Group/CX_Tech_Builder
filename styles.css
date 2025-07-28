@@ -27,7 +27,8 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: #1a202c;
-    background-color: #ffffff;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    min-height: 100vh;
 }
 
 /* 공통 컨테이너 */
@@ -74,13 +75,14 @@ body {
 
 /* Navigation */
 .navbar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
     min-height: 70px;
 }
@@ -107,13 +109,14 @@ body {
     gap: 10px;
     font-weight: 700;
     font-size: 1.5rem;
-    color: #1a365d;
+    color: #ffffff;
     transition: all 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .nav-logo:hover {
     transform: scale(1.05);
-    color: #38b2ac;
+    color: #3b82f6;
 }
 
 .nav-logo i {
@@ -134,16 +137,18 @@ body {
 
 .nav-menu a {
     text-decoration: none;
-    color: #64748b;
+    color: #ffffff;
     font-weight: 500;
     transition: all 0.3s ease;
     position: relative;
     padding: 10px 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .nav-menu a:hover {
-    color: #1a365d;
+    color: #ffffff;
     transform: translateY(-2px);
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
 }
 
 .nav-menu a::after {
@@ -153,7 +158,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #38b2ac, #1a365d);
+    background: linear-gradient(90deg, #3b82f6, #1e40af);
     transition: width 0.3s ease;
 }
 
@@ -164,10 +169,13 @@ body {
 /* Hero Section */
 .hero {
     padding: 120px 0 80px;
-    background: linear-gradient(135deg, #1a365d 0%, #2d3748 50%, #4a5568 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
     color: white;
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .hero::before {
@@ -278,7 +286,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 15px 30px;
+    padding: 18px 35px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
@@ -288,6 +296,8 @@ body {
     font-size: 1rem;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
 }
 
 .btn::before {
@@ -306,15 +316,15 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #38b2ac, #319795);
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
     color: white;
-    box-shadow: 0 4px 15px rgba(56, 178, 172, 0.3);
+    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #319795, #2c7a7b);
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(56, 178, 172, 0.4);
+    box-shadow: 0 15px 35px rgba(30, 64, 175, 0.5);
 }
 
 .btn-secondary {
@@ -876,7 +886,7 @@ body {
 
 /* Footer - 더 보기 좋게 개선 */
 .footer {
-    background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     color: white;
     padding: 80px 0 30px;
     position: relative;
@@ -912,7 +922,7 @@ body {
     font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 25px;
-    color: #38b2ac;
+    color: #3b82f6;
     position: relative;
     text-align: center;
 }
@@ -925,7 +935,7 @@ body {
     transform: translateX(-50%);
     width: 40px;
     height: 3px;
-    background: linear-gradient(90deg, #38b2ac, #4fd1c7);
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
     border-radius: 2px;
 }
 
@@ -963,7 +973,7 @@ body {
 }
 
 .footer-section ul li a:hover {
-    color: #38b2ac;
+    color: #3b82f6;
     transform: translateX(8px);
 }
 
@@ -975,7 +985,7 @@ body {
     transform: translateY(-50%);
     opacity: 0;
     transition: all 0.3s ease;
-    color: #38b2ac;
+    color: #3b82f6;
 }
 
 .footer-section ul li a:hover::before {
