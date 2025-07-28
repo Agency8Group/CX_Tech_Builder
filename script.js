@@ -422,5 +422,44 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', updateOnScroll);
     
+    // 카카오톡 홍보 멘트 복사 기능
+    window.copyPromoMessage = function() {
+        const promoText = `안녕하세요.
+고객 중심 기술 솔루션을 설계·개발하는 CX_Tech_Builder입니다.
+
+저는 10년 이상 고객센터, 기술지원, 물류 운영 현장을 직접 구축하며,
+비즈니스의 실전 문제들을 기술로 해결해온 경험을 가지고 있습니다.
+
+이제는 그 경험을 바탕으로,
+소상공인과 스타트업을 위한 맞춤형 웹 기반 프로그램 및 랜딩페이지를 제작해드리고 있습니다.
+
+수백만 원대 외주가 부담스러우셨다면,
+현장에서 검증된 실용형 솔루션을 단 몇십만 원 수준에서 경험해보실 수 있습니다.
+
+해당 가격은 제가 현재도 직장에 재직 중인 상황에서,
+개발에만 몰입하기보다는 사용자 입장에서의 실질적 효율과 커뮤니케이션을 중요시하며,
+현실적인 비용으로 빠르고 정확한 서비스를 제공해드리기 위한 선택입니다.
+
+유지보수와 소통 또한 빈틈없이 지원해드리므로,
+단순 제작이 아닌 지속 가능한 디지털 파트너십을 경험하실 수 있습니다.
+
+작업 사례와 서비스 소개는 아래 링크에서 확인하실 수 있습니다👇
+👉 https://agency8group.github.io/CX_Tech_Builder/
+
+혹시 "우리도 이런 게 하나 필요했는데..." 싶은 생각이 드신다면,
+언제든 편하게 말씀 주세요.
+기획부터 개발, 운영까지, 함께 고민하고 제안드리겠습니다.
+
+감사합니다.
+CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
+
+        navigator.clipboard.writeText(promoText).then(function() {
+            showNotification('✅ 홍보 멘트가 클립보드에 복사되었습니다!', 'success');
+        }).catch(function(err) {
+            console.error('복사 실패:', err);
+            showNotification('❌ 복사에 실패했습니다. 수동으로 복사해주세요.', 'error');
+        });
+    };
+    
     console.log('포트폴리오 웹사이트가 성공적으로 로드되었습니다! 🚀');
 }); 
