@@ -294,6 +294,7 @@ body {
 .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     padding: 18px 35px;
     border-radius: 50px;
@@ -307,6 +308,8 @@ body {
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(10px);
+    text-align: center;
+    min-width: fit-content;
 }
 
 .btn::before {
@@ -867,6 +870,12 @@ body {
 .form-group {
     margin-bottom: 20px;
     position: relative;
+}
+
+.form-group.submit-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
 
 .form-group input,
