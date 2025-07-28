@@ -364,28 +364,8 @@ body {
 
 .hero-visual {
     position: relative;
-    height: 600px;
+    height: 400px;
     animation: slideInRight 1s ease-out 0.3s both;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.lottie-container {
-    position: relative;
-    z-index: 2;
-    margin-bottom: 20px;
-}
-
-.floating-cards {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
 }
 
 @keyframes slideInRight {
@@ -400,22 +380,19 @@ body {
 }
 
 .floating-card {
-    position: relative;
+    position: absolute;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
-    padding: 15px;
+    padding: 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     color: white;
     font-weight: 500;
     animation: float 6s ease-in-out infinite;
     transition: all 0.3s ease;
-    margin: 0;
-    flex: 1;
-    max-width: 180px;
 }
 
 .floating-card:hover {
@@ -424,19 +401,25 @@ body {
 }
 
 .floating-card:nth-child(1) {
+    top: 20px;
+    left: 20px;
     animation-delay: 0s;
 }
 
 .floating-card:nth-child(2) {
+    top: 150px;
+    right: 20px;
     animation-delay: 2s;
 }
 
 .floating-card:nth-child(3) {
+    bottom: 20px;
+    left: 50px;
     animation-delay: 4s;
 }
 
 .floating-card i {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: #38b2ac;
     animation: spin 3s linear infinite;
 }
@@ -1511,35 +1494,7 @@ html {
     }
     
     .hero-visual {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: auto;
-        margin-top: 30px;
-    }
-    
-    .lottie-container {
-        margin-bottom: 20px;
-    }
-    
-    .lottie-container dotlottie-wc {
-        width: 300px !important;
-        height: 300px !important;
-    }
-    
-    .floating-cards {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        max-width: 500px;
-        gap: 10px;
-    }
-    
-    .floating-card {
-        margin: 0;
-        padding: 12px;
-        flex: 1;
-        max-width: 150px;
+        display: none;
     }
     
     /* 섹션 헤더 */
@@ -1888,39 +1843,6 @@ html {
         padding: 10px 16px;
         font-size: 0.85rem;
         min-height: 42px;
-    }
-    
-    .hero-visual {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: auto;
-        margin-top: 20px;
-    }
-    
-    .lottie-container {
-        margin-bottom: 15px;
-    }
-    
-    .lottie-container dotlottie-wc {
-        width: 250px !important;
-        height: 250px !important;
-    }
-    
-    .floating-cards {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        max-width: 400px;
-        gap: 8px;
-    }
-    
-    .floating-card {
-        margin: 0;
-        padding: 10px;
-        font-size: 0.8rem;
-        flex: 1;
-        max-width: 120px;
     }
     
     /* 섹션 헤더 */
