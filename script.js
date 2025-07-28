@@ -18,9 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // 모바일 햄버거 메뉴
-    hamburger.addEventListener('click', function() {
+    hamburger.addEventListener('click', function(e) {
+        e.preventDefault();
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        
+        // 메뉴가 열렸을 때 body 스크롤 방지
+        if (navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
     });
     
     // 네비게이션 링크 클릭 시 모바일 메뉴 닫기
@@ -28,7 +36,17 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function() {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
+            document.body.style.overflow = '';
         });
+    });
+    
+    // 모바일에서 메뉴 외부 클릭 시 닫기
+    document.addEventListener('click', function(e) {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
     
     // 스무스 스크롤
