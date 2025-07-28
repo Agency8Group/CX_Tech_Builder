@@ -182,6 +182,10 @@
                 <div class="project-card">
                     <div class="project-image">
                         <img src="업무TOOL소개/N사_스마트블록_순위체크.png" alt="N사 스마트블록 순위체크">
+                        <video controls style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s ease;">
+                            <source src="업무TOOL소개/N사_스마트블록_순위체크.mp4" type="video/mp4">
+                            브라우저가 비디오를 지원하지 않습니다.
+                        </video>
                     </div>
                     <div class="project-content">
                         <h3>N사 스마트블록 순위체크</h3>
@@ -191,7 +195,10 @@
                             <span class="tech-tag">Selenium</span>
                             <span class="tech-tag">BeautifulSoup</span>
                         </div>
-                        <button class="btn btn-outline">크게보기</button>
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <button class="btn btn-outline" onclick="toggleMedia(this.parentElement.parentElement.parentElement)">이미지보기</button>
+                            <button class="btn btn-outline" onclick="toggleMedia(this.parentElement.parentElement.parentElement)">영상보기</button>
+                        </div>
                     </div>
                 </div>
 
@@ -254,6 +261,40 @@
                             <span class="tech-tag">React</span>
                             <span class="tech-tag">Node.js</span>
                             <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <button class="btn btn-outline">크게보기</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="업무TOOL소개/webai_고객센터_구축_1.png" alt="웹AI 고객센터 구축 - 메인 화면">
+                    </div>
+                    <div class="project-content">
+                        <h3>웹AI 고객센터 구축</h3>
+                        <p>인공지능 기반 고객 응대 자동화 시스템 구축</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">OpenAI API</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">WebSocket</span>
+                        </div>
+                        <button class="btn btn-outline">크게보기</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="업무TOOL소개/webai_고객센터_구축_2.png" alt="웹AI 고객센터 구축 - 대화 인터페이스">
+                    </div>
+                    <div class="project-content">
+                        <h3>웹AI 고객센터 구축</h3>
+                        <p>실시간 AI 챗봇을 통한 고객 문의 자동 응대 시스템</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Socket.io</span>
                         </div>
                         <button class="btn btn-outline">크게보기</button>
                     </div>

@@ -101,6 +101,27 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(updateCounter);
     }
     
+    // 이미지와 영상 토글 함수
+    window.toggleMedia = function(projectCard) {
+        const projectImage = projectCard.querySelector('.project-image');
+        const img = projectImage.querySelector('img');
+        const video = projectImage.querySelector('video');
+        
+        if (img && video) {
+            if (img.style.opacity === '0') {
+                // 이미지로 전환
+                img.style.opacity = '1';
+                video.style.opacity = '0';
+                video.pause();
+            } else {
+                // 영상으로 전환
+                img.style.opacity = '0';
+                video.style.opacity = '1';
+                video.play();
+            }
+        }
+    };
+    
     // 파티클 생성 함수
     function createParticles() {
         const particlesContainer = document.createElement('div');
