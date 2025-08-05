@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // 애니메이션 대상 요소들
-    const animateElements = document.querySelectorAll('.project-card, .service-card, .contact-method, .section-header');
+    // 애니메이션 대상 요소들 (새로운 섹션들 추가)
+    const animateElements = document.querySelectorAll('.project-card, .service-card, .contact-method, .section-header, .strength-item, .achievement-card, .skill-category');
     animateElements.forEach(el => {
         el.classList.add('fade-in');
         observer.observe(el);
@@ -63,9 +63,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     const target = stat.textContent;
                     const isPercentage = target.includes('%');
                     const isYear = target.includes('년');
+                    const isLines = target.includes('줄');
                     const numericValue = parseInt(target.replace(/[^\d]/g, ''));
                     
-                    if (isPercentage || isYear) {
+                    if (isPercentage || isYear || isLines) {
                         animateCounter(stat, 0, numericValue, 2000, target);
                     } else {
                         animateCounter(stat, 0, numericValue, 2000, target);
@@ -80,17 +81,74 @@ document.addEventListener('DOMContentLoaded', function() {
         statsObserver.observe(statsSection);
     }
     
+    // 성과 카드 애니메이션
+    const achievementNumbers = document.querySelectorAll('.achievement-number');
+    const aboutSection = document.querySelector('.about');
+    
+    const achievementObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                achievementNumbers.forEach(achievement => {
+                    const target = achievement.textContent;
+                    const isLines = target.includes('줄');
+                    const numericValue = parseInt(target.replace(/[^\d]/g, ''));
+                    
+                    animateCounter(achievement, 0, numericValue, 2500, target);
+                });
+                achievementObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    if (aboutSection) {
+        achievementObserver.observe(aboutSection);
+    }
+    
+    // 스킬 바 애니메이션
+    const skillBars = document.querySelectorAll('.skill-progress');
+    const skillsSection = document.querySelector('.skills');
+    
+    const skillsObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                skillBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 200);
+                });
+                skillsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    if (skillsSection) {
+        skillsObserver.observe(skillsSection);
+    }
+    
     function animateCounter(element, start, end, duration, originalText) {
         const startTime = performance.now();
         const isPercentage = originalText.includes('%');
         const isYear = originalText.includes('년');
-        const suffix = isPercentage ? '%' : isYear ? '년' : '+';
+        const isLines = originalText.includes('줄');
+        const isPlus = originalText.includes('+');
+        
+        let suffix = '';
+        if (isPercentage) suffix = '%';
+        else if (isYear) suffix = '년';
+        else if (isLines) suffix = '줄';
+        else if (isPlus) suffix = '+';
         
         function updateCounter(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            const current = Math.floor(start + (end - start) * progress);
+            // 이징 함수 적용
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            
+            const current = Math.floor(start + (end - start) * easeOutQuart);
             element.textContent = current + suffix;
             
             if (progress < 1) {
