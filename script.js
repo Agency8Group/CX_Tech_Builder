@@ -244,8 +244,8 @@ document.addEventListener('DOMContentLoaded', function() {
         particle.className = 'particle';
         particle.style.cssText = `
             position: fixed;
-            width: 3px;
-            height: 3px;
+            width: 10px;
+            height: 10px;
             background: rgba(56, 178, 172, 0.6);
             border-radius: 50%;
             pointer-events: none;
@@ -443,10 +443,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalDescription = document.getElementById('modalDescription');
     const closeBtn = document.querySelector('.close');
     
+    // 모든 모달 닫기 함수
+    function closeAllModals() {
+        const imageModal = document.getElementById('imageModal');
+        const galleryModal = document.getElementById('galleryModal');
+        const videoModal = document.getElementById('videoModal');
+        
+        if (imageModal && imageModal.style.display === 'block') {
+            closeModal();
+        }
+        if (galleryModal && galleryModal.style.display === 'block') {
+            closeGallery();
+        }
+        if (videoModal && videoModal.style.display === 'flex') {
+            closeVideo();
+        }
+    }
+    
     // 크게보기 버튼 클릭 이벤트
     const demoButtons = document.querySelectorAll('.btn-outline');
     demoButtons.forEach(button => {
         button.addEventListener('click', function() {
+            // 다른 모달들 먼저 닫기
+            closeAllModals();
+            
             const projectCard = this.closest('.project-card');
             const projectImage = projectCard.querySelector('.project-image img');
             const projectTitle = projectCard.querySelector('h3').textContent;
@@ -481,20 +501,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // ESC 키로 모달 닫기
+    // ESC 키로 모달 닫기 (통합 처리)
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.style.display === 'block') {
-            closeModal();
+        if (e.key === 'Escape') {
+            // 열려있는 모달 확인하고 닫기
+            const imageModal = document.getElementById('imageModal');
+            const galleryModal = document.getElementById('galleryModal');
+            const videoModal = document.getElementById('videoModal');
+            
+            if (videoModal && videoModal.style.display === 'flex') {
+                closeVideo();
+            } else if (galleryModal && galleryModal.style.display === 'block') {
+                closeGallery();
+            } else if (imageModal && imageModal.style.display === 'block') {
+                closeModal();
+            }
         }
     });
     
     // 모달 닫기 함수
     function closeModal() {
-        modal.classList.remove('show');
-        setTimeout(() => {
+        const modal = document.getElementById('imageModal');
+        if (modal) {
+            modal.classList.remove('show');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-        }, 300);
+        }
     }
     
     // 연락처 링크 클릭 이벤트
@@ -670,6 +702,9 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
     // 갤러리 열기 함수
     window.openGallery = function(galleryName) {
         if (galleryData[galleryName]) {
+            // 다른 모달들 먼저 닫기
+            closeAllModals();
+            
             currentGallery = galleryName;
             currentImageIndex = 0;
             updateGalleryImage();
@@ -722,14 +757,16 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
     // 갤러리 닫기 함수
     window.closeGallery = function() {
         const galleryModal = document.getElementById('galleryModal');
-        galleryModal.style.display = 'none';
-        galleryModal.classList.remove('show');
-        
-        // 스크롤 복원
-        document.body.style.overflow = 'auto';
-        
-        currentGallery = null;
-        currentImageIndex = 0;
+        if (galleryModal) {
+            galleryModal.classList.remove('show');
+            galleryModal.style.display = 'none';
+            
+            // 스크롤 복원
+            document.body.style.overflow = 'auto';
+            
+            currentGallery = null;
+            currentImageIndex = 0;
+        }
     };
 
     // 갤러리 모달 외부 클릭 시 닫기
@@ -746,14 +783,16 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
                 changeGalleryImage(-1);
             } else if (e.key === 'ArrowRight') {
                 changeGalleryImage(1);
-            } else if (e.key === 'Escape') {
-                closeGallery();
             }
+            // ESC 키는 상단의 통합 처리에서 처리됨
         }
     });
 
     // 비디오 모달 관련 함수들
     window.openVideo = function(videoSrc, title, description) {
+        // 다른 모달들 먼저 닫기
+        closeAllModals();
+        
         const videoModal = document.getElementById('videoModal');
         const modalVideo = document.getElementById('modalVideo');
         const videoTitle = document.getElementById('videoTitle');
@@ -786,16 +825,18 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
         const videoModal = document.getElementById('videoModal');
         const modalVideo = document.getElementById('modalVideo');
         
-        // 비디오 정지
-        modalVideo.pause();
-        modalVideo.currentTime = 0;
-        
-        // 모달 숨기기
-        videoModal.style.display = 'none';
-        videoModal.classList.remove('show');
-        
-        // body 스크롤 복원
-        document.body.style.overflow = '';
+        if (videoModal && modalVideo) {
+            // 비디오 정지
+            modalVideo.pause();
+            modalVideo.currentTime = 0;
+            
+            // 모달 숨기기
+            videoModal.classList.remove('show');
+            videoModal.style.display = 'none';
+            
+            // body 스크롤 복원
+            document.body.style.overflow = 'auto';
+        }
     };
     
     // 비디오 모달 외부 클릭 시 닫기
@@ -805,13 +846,5 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
         }
     });
     
-    // ESC 키로 비디오 모달 닫기
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            const videoModal = document.getElementById('videoModal');
-            if (videoModal.style.display === 'flex') {
-                closeVideo();
-            }
-        }
-    });
+    // ESC 키는 상단의 통합 처리에서 처리됨 (중복 제거)
 }); 
