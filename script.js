@@ -1,8 +1,10 @@
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 파티클 배경 생성
-    createParticles();
+    // 파티클 배경 생성 (성능을 위해 지연 생성)
+    setTimeout(() => {
+        createParticles();
+    }, 1000);
     
     // 네비게이션 스크롤 효과
     const navbar = document.querySelector('.navbar');
@@ -203,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         particlesContainer.className = 'particles';
         document.body.appendChild(particlesContainer);
         
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 30; i++) { // 파티클 수 줄여서 성능 개선
             const particle = document.createElement('div');
             particle.className = 'particle';
             
@@ -506,15 +508,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 로딩 완료 후 애니메이션 시작
     window.addEventListener('load', function() {
-        document.body.style.opacity = '1';
+        // 로딩 오버레이 제거
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay) {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+                // 오버레이 완전 제거
+                setTimeout(() => {
+                    loadingOverlay.remove();
+                }, 500);
+            }, 300); // 최소 로딩 시간
+        }
         
-        // Hero 섹션 요소들 애니메이션
+        // Hero 섹션 요소들 애니메이션 (더 부드럽게)
         const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-stats, .hero-buttons');
         heroElements.forEach((el, index) => {
             setTimeout(() => {
                 el.style.opacity = '1';
                 el.style.transform = 'translateY(0)';
-            }, index * 200);
+            }, 500 + index * 150); // 로딩 완료 후 시작
         });
         
         // 플로팅 카드 애니메이션
@@ -523,26 +535,23 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 card.style.opacity = '1';
                 card.style.transform = 'translateY(0)';
-            }, 1000 + index * 300);
+            }, 1200 + index * 200);
         });
     });
     
-    // 초기 스타일 설정
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
-    
+    // 초기 스타일 설정 (깜빡임 방지를 위해 더 부드럽게)
     const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-stats, .hero-buttons');
     heroElements.forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        el.style.transform = 'translateY(20px)'; // 더 작은 움직임
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     });
     
     const floatingCards = document.querySelectorAll('.floating-card');
     floatingCards.forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(50px)';
-        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        el.style.transform = 'translateY(30px)'; // 더 작은 움직임
+        el.style.transition = 'opacity 1s ease, transform 1s ease';
     });
     
 

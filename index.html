@@ -29,11 +29,60 @@
     
     <!-- 파비콘 -->
     <link rel="icon" type="image/x-icon" href="img/ac567828-f51f-4b81-9d1b-304b5245c98e.png">
+    
+    <!-- 중요 리소스 프리로드 -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
     <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 로딩 시 깜빡임 방지 -->
+    <style>
+        body { 
+            opacity: 1 !important; 
+            transition: none !important;
+            font-display: swap;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(56, 178, 172, 0.3);
+            border-top: 3px solid #38b2ac;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loaded .loading-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
+    <!-- 로딩 오버레이 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
     <!-- 파티클 배경 -->
     <div class="particles"></div>
     
@@ -496,6 +545,23 @@
                             <span class="tech-tag">Real-time</span>
                         </div>
                         <button class="btn btn-outline" onclick="openVideo('업무TOOL소개/실시간뉴스수집.mp4', '실시간 뉴스 수집 시스템', '다양한 뉴스 사이트에서 실시간으로 뉴스를 수집하고 분석하는 자동화 시스템')">영상보기</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="업무TOOL소개/회의실예약 및 현황체크 시스템.png" alt="회의실예약 및 현황체크 시스템">
+                    </div>
+                    <div class="project-content">
+                        <h3>회의실예약 및 현황체크 시스템</h3>
+                        <p>회의실 예약 관리 및 실시간 현황 모니터링을 위한 통합 관리 시스템</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <button class="btn btn-outline">크게보기</button>
                     </div>
                 </div>
 
