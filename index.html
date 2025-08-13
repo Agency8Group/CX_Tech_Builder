@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://agency8group.github.io/CX_Tech_Builder/">
     <meta property="og:title" content="CX_Tech_Builder - 실무 중심 풀스택 개발자">
     <meta property="og:description" content="10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자. Python, JavaScript, HTML/CSS를 활용한 업무 효율화 솔루션 전문가.">
-    <meta property="og:image" content="https://agency8group.github.io/CX_Tech_Builder/img/ac567828-f51f-4b81-9d1b-304b5245c98e.png">
+    <meta property="og:image" content="https://agency8group.github.io/CX_Tech_Builder/img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="실무 중심 풀스택 개발자 포트폴리오">
@@ -20,7 +20,7 @@
     <meta property="twitter:url" content="https://agency8group.github.io/CX_Tech_Builder/">
     <meta property="twitter:title" content="CX_Tech_Builder - 실무 중심 풀스택 개발자">
     <meta property="twitter:description" content="10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자. Python, JavaScript, HTML/CSS를 활용한 업무 효율화 솔루션 전문가.">
-    <meta property="twitter:image" content="https://agency8group.github.io/CX_Tech_Builder/img/ac567828-f51f-4b81-9d1b-304b5245c98e.png">
+    <meta property="twitter:image" content="https://agency8group.github.io/CX_Tech_Builder/img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png">
     
     <!-- 추가 메타 태그 -->
     <meta name="description" content="10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자. Python, JavaScript, HTML/CSS를 활용한 업무 효율화 솔루션 전문가.">
@@ -28,7 +28,7 @@
     <meta name="author" content="CX_Tech_Builder - 실무 중심 풀스택 개발자">
     
     <!-- 파비콘 -->
-    <link rel="icon" type="image/x-icon" href="img/ac567828-f51f-4b81-9d1b-304b5245c98e.png">
+    <link rel="icon" type="image/x-icon" href="img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png">
     
     <!-- 중요 리소스 프리로드 -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -81,6 +81,46 @@
     <!-- 로딩 오버레이 -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- 공지사항 팝업 -->
+    <div id="noticePopup" class="notice-popup">
+        <div class="notice-content">
+            <div class="notice-header">
+                <h3><i class="fas fa-bullhorn"></i> 공지사항</h3>
+                <button class="notice-close" onclick="closeNoticePopup()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="notice-body">
+                <div class="notice-image">
+                    <img src="img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png" alt="CX_Tech_Builder 대표이미지">
+                </div>
+                <div class="notice-text">
+                    <h4>🎉 새로운 서비스 안내</h4>
+                    <p>안녕하세요! CX_Tech_Builder입니다.</p>
+                    <p>10년간의 실무 경험을 바탕으로 <strong>소상공인과 스타트업</strong>을 위한 맞춤형 웹 기반 프로그램 및 랜딩페이지 제작 서비스를 시작했습니다.</p>
+                    <ul>
+                        <li>✅ 수백만 원대 외주 → 몇십만 원 수준</li>
+                        <li>✅ 현장에서 검증된 실용형 솔루션</li>
+                        <li>✅ 빠르고 정확한 서비스 (평균 2-4주)</li>
+                        <li>✅ 지속적인 유지보수 및 소통 지원</li>
+                    </ul>
+                    <p><strong>지금 바로 문의하시면 특별한 혜택을 드립니다!</strong></p>
+                </div>
+            </div>
+            <div class="notice-footer">
+                <label class="notice-checkbox">
+                    <input type="checkbox" id="dontShowAgain">
+                    <span class="checkmark"></span>
+                    오늘 하루 보지 않기
+                </label>
+                <button class="btn btn-primary" onclick="closeNoticePopup()">
+                    <i class="fas fa-check"></i>
+                    확인
+                </button>
+            </div>
+        </div>
     </div>
     
     <!-- 파티클 배경 -->

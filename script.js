@@ -1,10 +1,60 @@
+// 공지사항 팝업 관련 함수들
+function showNoticePopup() {
+    const popup = document.getElementById('noticePopup');
+    if (popup) {
+        popup.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeNoticePopup() {
+    const popup = document.getElementById('noticePopup');
+    const dontShowAgain = document.getElementById('dontShowAgain');
+    
+    if (popup) {
+        popup.classList.remove('show');
+        document.body.style.overflow = '';
+        
+        // 오늘 하루 보지 않기 체크 시
+        if (dontShowAgain && dontShowAgain.checked) {
+            const today = new Date().toDateString();
+            localStorage.setItem('noticePopupHidden', today);
+        }
+    }
+}
+
+// 공지사항 팝업 표시 여부 확인
+function shouldShowNoticePopup() {
+    const hiddenDate = localStorage.getItem('noticePopupHidden');
+    const today = new Date().toDateString();
+    
+    return hiddenDate !== today;
+}
+
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // 공지사항 팝업 표시 (3초 후)
+    setTimeout(() => {
+        if (shouldShowNoticePopup()) {
+            showNoticePopup();
+        }
+    }, 3000);
     
     // 파티클 배경 생성 (성능을 위해 지연 생성)
     setTimeout(() => {
         createParticles();
     }, 1000);
+    
+    // 공지사항 팝업 외부 클릭 시 닫기
+    const noticePopup = document.getElementById('noticePopup');
+    if (noticePopup) {
+        noticePopup.addEventListener('click', function(e) {
+            if (e.target === noticePopup) {
+                closeNoticePopup();
+            }
+        });
+    }
     
     // 네비게이션 스크롤 효과
     const navbar = document.querySelector('.navbar');
