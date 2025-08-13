@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(mouseParticleStyle);
     
     // Google Apps Script URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweYdsXKFA7VAxqgAqlwzzar3uUDys30NmXJ4XdT5bmHfdnv9bn3Wkh9Awrd1SjqGEg/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuJJo_lxjILCNbKx3bb4xyOvYtUW7aYXEULH7p0aRY_rIVu95BQbJt20-NmsyXhgLq/exec';
     
     // 폼 제출 처리
     const contactForm = document.getElementById('contactForm');
