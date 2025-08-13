@@ -427,7 +427,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(44, 62, 80, 0.9) 0%, rgba(52, 73, 94, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(45, 45, 45, 0.9) 100%);
     z-index: 1;
 }
 
@@ -451,7 +451,7 @@ body {
 .hero-title {
     font-size: 3.5rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-primary);
     margin-bottom: 24px;
     line-height: 1.2;
     animation: slideInLeft 1s ease-out;
@@ -469,7 +469,7 @@ body {
 }
 
 .hero-title .highlight {
-    background: linear-gradient(135deg, #38b2ac, #4fd1c7);
+    background: var(--gradient-gold);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -479,14 +479,14 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(56, 178, 172, 0.2);
-    color: #38b2ac;
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--primary-gold);
     padding: 8px 16px;
     border-radius: 25px;
     font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: 24px;
-    border: 1px solid rgba(56, 178, 172, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.3);
     backdrop-filter: blur(10px);
 }
 
@@ -496,7 +496,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: #e2e8f0;
+    color: var(--text-secondary);
     margin-bottom: 20px;
     line-height: 1.6;
     animation: slideInLeft 1s ease-out 0.2s both;
@@ -504,7 +504,7 @@ body {
 
 .hero-description {
     font-size: 1.1rem;
-    color: #cbd5e0;
+    color: var(--text-secondary);
     margin-bottom: 40px;
     line-height: 1.7;
     animation: slideInLeft 1s ease-out 0.4s both;
@@ -530,7 +530,7 @@ body {
     display: block;
     font-size: 2rem;
     font-weight: 700;
-    color: #38b2ac;
+    color: var(--primary-gold);
     margin-bottom: 8px;
     animation: countUp 2s ease-out;
 }
@@ -548,7 +548,7 @@ body {
 
 .stat-label {
     font-size: 0.9rem;
-    color: #a0aec0;
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
@@ -663,7 +663,7 @@ body {
 }
 
 .scroll-text {
-    color: #38b2ac;
+    color: var(--primary-gold);
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 20px;
@@ -681,7 +681,7 @@ body {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #38b2ac;
+    background: var(--primary-gold);
     animation: dotPulse 1.5s ease-in-out infinite;
     opacity: 0.3;
 }
@@ -734,7 +734,7 @@ body {
     position: relative;
     top: 100%;
     animation: simple-scroll 40s linear infinite;
-    color: #e2e8f0;
+    color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     line-height: 1.6;
@@ -749,7 +749,7 @@ body {
 .crawl .title h2 {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #38b2ac;
+    color: var(--primary-gold);
     margin-bottom: 20px;
 }
 
@@ -1548,12 +1548,18 @@ body {
 }
 
 .contact-form {
-    background: var(--medium-gray);
+    background: var(--white);
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 30px var(--shadow-dark);
     transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--primary-gold);
+}
+
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px var(--shadow-dark);
+    border-color: var(--accent-gold);
 }
 
 .contact-form:hover {
@@ -1564,8 +1570,9 @@ body {
 .contact-form h3 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1a365d;
+    color: var(--primary-gold);
     margin-bottom: 25px;
+    text-align: center;
 }
 
 .form-group {
@@ -1587,22 +1594,24 @@ body {
     border-radius: 10px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: var(--light-gray);
-    color: var(--text-primary);
+    background: var(--white);
+    color: var(--dark-gray);
+    font-weight: 500;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-gold);
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
     transform: translateY(-2px);
-    background: var(--medium-gray);
+    background: var(--white);
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: var(--text-secondary);
+    color: var(--lighter-gray);
+    font-weight: 400;
 }
 
 .form-group textarea {

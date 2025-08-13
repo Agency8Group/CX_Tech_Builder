@@ -59,7 +59,17 @@ function doPost(e) {
     // ===== 3. Google Sheets에 문의 저장 =====
     const result = saveToSheet(data);
     
-    // ===== 4. 성공 응답 반환 =====
+    // ===== 4. 네이트온 팀룸 알림 전송 =====
+    try {
+      sendNateonNotification(data);
+      Logger.log("=== 네이트온 알림 전송 성공 ===");
+    } catch (notificationError) {
+      Logger.log("=== 네이트온 알림 전송 실패 ===");
+      Logger.log("알림 에러: " + notificationError.toString());
+      // 알림 실패는 전체 프로세스를 중단하지 않음
+    }
+    
+    // ===== 5. 성공 응답 반환 =====
     Logger.log("=== 문의 저장 성공 ===");
     return createResponse({
       success: true,
@@ -76,6 +86,76 @@ function doPost(e) {
       success: false,
       message: "문의 저장 중 오류가 발생했습니다: " + error.message
     });
+  }
+}
+
+/**
+ * ===== 네이트온 팀룸 알림 전송 함수 =====
+ * 새로운 문의가 접수되면 네이트온 팀룸으로 알림을 전송합니다.
+ */
+function sendNateonNotification(data) {
+  try {
+    // 네이트온 팀룸 웹훅 URL
+    const webhookUrl = 'https://teamroom.nate.com/api/webhook/d1265c70/x2KdjVCxSjVCzS9LSQzN3Vhc';
+    
+    // 현재 시간 포맷팅
+    const now = new Date();
+    const formattedTime = Utilities.formatDate(now, 'Asia/Seoul', 'yyyy-MM-dd HH:mm:ss');
+    
+    // 알림 메시지 구성
+    const message = {
+      "text": `🎉 **새로운 포트폴리오 문의 수신!**
+      
+📅 **접수 시간**: ${formattedTime}
+👤 **이름**: ${data.name}
+📧 **이메일**: ${data.email}
+🏢 **회사명**: ${data.company || '미입력'}
+💬 **메시지**: ${data.message}
+      
+🔗 **관리**: Google Sheets에서 확인하세요!`,
+      "attachments": [
+        {
+          "color": "#D4AF37",
+          "fields": [
+            {
+              "title": "문의자 정보",
+              "value": `이름: ${data.name}\n이메일: ${data.email}\n회사: ${data.company || '미입력'}`,
+              "short": true
+            },
+            {
+              "title": "접수 시간",
+              "value": formattedTime,
+              "short": true
+            }
+          ]
+        }
+      ]
+    };
+    
+    // HTTP 요청 옵션
+    const options = {
+      'method': 'post',
+      'contentType': 'application/json',
+      'payload': JSON.stringify(message),
+      'muteHttpExceptions': true
+    };
+    
+    // 웹훅 전송
+    const response = UrlFetchApp.fetch(webhookUrl, options);
+    const responseCode = response.getResponseCode();
+    
+    Logger.log("네이트온 알림 응답 코드: " + responseCode);
+    Logger.log("네이트온 알림 응답: " + response.getContentText());
+    
+    if (responseCode !== 200) {
+      throw new Error("네이트온 알림 전송 실패. 응답 코드: " + responseCode);
+    }
+    
+    return true;
+    
+  } catch (error) {
+    Logger.log("네이트온 알림 전송 에러: " + error.toString());
+    throw error;
   }
 }
 
@@ -156,7 +236,7 @@ function doOptions(e) {
 
 /**
  * ===== 테스트용 함수 =====
- * 수동으로 문의 저장을 테스트할 수 있습니다.
+ * 수동으로 문의 저장과 네이트온 알림을 테스트할 수 있습니다.
  */
 function testSaveInquiry() {
   const testData = {
@@ -168,11 +248,40 @@ function testSaveInquiry() {
   };
   
   try {
+    // 1. Google Sheets 저장 테스트
     const result = saveToSheet(testData);
-    Logger.log("테스트 성공: " + result);
-    return result;
+    Logger.log("Google Sheets 저장 테스트 성공: " + result);
+    
+    // 2. 네이트온 알림 테스트
+    const notificationResult = sendNateonNotification(testData);
+    Logger.log("네이트온 알림 테스트 성공: " + notificationResult);
+    
+    return true;
   } catch (error) {
     Logger.log("테스트 실패: " + error.toString());
+    return false;
+  }
+}
+
+/**
+ * ===== 네이트온 알림만 테스트하는 함수 =====
+ * 네이트온 알림 기능만 별도로 테스트할 수 있습니다.
+ */
+function testNateonNotification() {
+  const testData = {
+    name: "네이트온 테스트",
+    email: "nateon@test.com",
+    company: "테스트 회사",
+    message: "네이트온 알림 기능 테스트입니다.",
+    timestamp: new Date().toISOString()
+  };
+  
+  try {
+    const result = sendNateonNotification(testData);
+    Logger.log("네이트온 알림 테스트 성공: " + result);
+    return result;
+  } catch (error) {
+    Logger.log("네이트온 알림 테스트 실패: " + error.toString());
     return false;
   }
 }

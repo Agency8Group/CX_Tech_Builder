@@ -1,3 +1,53 @@
+// 타이핑 효과 관련 함수들
+const loadingMessages = [
+    "기술로 꿈을 현실로 만들어갑니다...",
+    "10년간의 경험을 담아 설계합니다...",
+    "고객 중심의 솔루션을 준비합니다...",
+    "혁신적인 아이디어를 구현합니다...",
+    "완벽한 사용자 경험을 만들어갑니다...",
+    "미래를 위한 기술을 개발합니다...",
+    "창의적인 솔루션을 찾아갑니다...",
+    "품질과 속도를 모두 잡습니다...",
+    "당신의 비즈니스를 성장시킵니다...",
+    "더 나은 내일을 위한 기술을 만듭니다..."
+];
+
+let currentMessageIndex = 0;
+let currentCharIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100;
+
+function typeText() {
+    const typingElement = document.getElementById('typingText');
+    if (!typingElement) return;
+
+    const currentMessage = loadingMessages[currentMessageIndex];
+    
+    if (isDeleting) {
+        // 삭제 모드
+        typingElement.textContent = currentMessage.substring(0, currentCharIndex - 1);
+        currentCharIndex--;
+        typingSpeed = 50;
+    } else {
+        // 타이핑 모드
+        typingElement.textContent = currentMessage.substring(0, currentCharIndex + 1);
+        currentCharIndex++;
+        typingSpeed = 100;
+    }
+
+    // 타이핑 완료 후 잠시 대기
+    if (!isDeleting && currentCharIndex === currentMessage.length) {
+        typingSpeed = 2000; // 2초 대기
+        isDeleting = true;
+    } else if (isDeleting && currentCharIndex === 0) {
+        isDeleting = false;
+        currentMessageIndex = (currentMessageIndex + 1) % loadingMessages.length;
+        typingSpeed = 500; // 다음 메시지로 넘어가기 전 0.5초 대기
+    }
+
+    setTimeout(typeText, typingSpeed);
+}
+
 // 공지사항 팝업 관련 함수들
 function showNoticePopup() {
     const popup = document.getElementById('noticePopup');
@@ -33,6 +83,11 @@ function shouldShowNoticePopup() {
 
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // 타이핑 효과 시작
+    setTimeout(() => {
+        typeText();
+    }, 500);
     
     // 공지사항 팝업 표시 (3초 후)
     setTimeout(() => {
