@@ -881,22 +881,125 @@ body {
 }
 
 .section-header h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 16px;
-    background: linear-gradient(135deg, #38b2ac, #4fd1c7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    color: var(--white);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.section-header h2::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--gradient-gold);
+    border-radius: 2px;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: var(--gradient-gold);
+    border-radius: 1px;
+    opacity: 0.6;
+}
+
+.section-header:hover h2 {
+    transform: scale(1.02);
+    text-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+    transition: all 0.3s ease;
+}
+
+.section-header:hover h2::before {
+    width: 100px;
+    transition: width 0.3s ease;
+}
+
+.section-header:hover h2::after {
+    width: 80px;
+    opacity: 1;
+    transition: all 0.3s ease;
 }
 
 .section-header p {
-    font-size: 1.1rem;
-    color: #a0aec0;
-    max-width: 600px;
+    font-size: 1.2rem;
+    color: var(--lighter-gray);
+    max-width: 700px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.7;
+    text-align: center;
+    position: relative;
+    padding: 20px 0;
+}
+
+.section-header p::before {
+    content: '✦';
+    display: block;
+    font-size: 1.5rem;
+    color: var(--primary-gold);
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.section-header {
+    position: relative;
+    padding: 40px 20px;
+    margin-bottom: 60px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(0, 0, 0, 0.1));
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.section-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.03) 50%, transparent 70%);
+    border-radius: 20px;
+    pointer-events: none;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .section-header h2::before {
+        width: 60px;
+        height: 3px;
+    }
+    
+    .section-header h2::after {
+        width: 40px;
+        height: 2px;
+    }
+    
+    .section-header p {
+        font-size: 1.1rem;
+        padding: 15px 0;
+    }
+    
+    .section-header {
+        padding: 30px 15px;
+        margin-bottom: 40px;
+    }
 }
 
 /* About Section */
