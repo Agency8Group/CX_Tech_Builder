@@ -887,6 +887,46 @@ body {
     background: white;
 }
 
+.project-category {
+    margin-bottom: 60px;
+}
+
+.project-category:last-child {
+    margin-bottom: 0;
+}
+
+.category-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 0;
+    border-bottom: 3px solid #38b2ac;
+    position: relative;
+}
+
+.category-title::before {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #38b2ac, #2c3e50);
+    border-radius: 2px;
+}
+
+.category-title i {
+    font-size: 1.8rem;
+    color: #38b2ac;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -977,6 +1017,16 @@ body {
         /* 작은 화면에서 비디오 크기 조정 */
         object-fit: contain;
         background: #000;
+    }
+    
+    .category-title {
+        font-size: 1.5rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .category-title i {
+        font-size: 1.4rem;
     }
 }
 
