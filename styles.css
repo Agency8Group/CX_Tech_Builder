@@ -1999,6 +1999,52 @@ html {
     }
 }
 
+/* Iframe Modal Styles */
+.iframe-content {
+    width: 95%;
+    max-width: 1400px;
+    height: 95%;
+    padding: 0;
+    background: var(--bg-dark);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.iframe-container {
+    width: 100%;
+    height: calc(100% - 120px);
+    position: relative;
+    background: #000;
+}
+
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+}
+
+.iframe-info {
+    padding: 20px;
+    background: var(--bg-dark);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.iframe-info h3 {
+    color: var(--primary-gold);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.iframe-info p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
 /* Gallery Modal Styles */
 .gallery-content {
     max-width: 90%;
@@ -3481,5 +3527,240 @@ html {
     
     .policy-icon i {
         font-size: 1.2rem;
+    }
+} 
+
+/* 툴박스 엔터프라이즈 대시보드 섹션 스타일 */
+.toolbox-section {
+    margin-bottom: 80px;
+    background: var(--medium-gray);
+    border-radius: 25px;
+    padding: 40px;
+    border: 2px solid var(--primary-gold);
+    box-shadow: 0 20px 60px var(--shadow-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+.toolbox-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(184, 134, 11, 0.1));
+    pointer-events: none;
+}
+
+.toolbox-section .category-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    border-bottom: 4px solid var(--primary-gold);
+    padding-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.toolbox-section .category-title i {
+    font-size: 2.2rem;
+    color: var(--accent-gold);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.toolbox-container {
+    position: relative;
+    z-index: 2;
+}
+
+           .toolbox-iframe-wrapper {
+               position: relative;
+               width: 100%;
+               height: 600px;
+               overflow: hidden;
+               background: #000;
+           }
+
+           .toolbox-iframe {
+               width: 100%;
+               height: 100%;
+               border: none;
+               background: #fff;
+               display: block;
+           }
+
+           .toolbox-overlay {
+               display: none !important;
+           }
+
+.toolbox-info {
+    text-align: center;
+    color: var(--text-primary);
+    padding: 40px;
+    max-width: 500px;
+}
+
+.toolbox-info h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-gold);
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px var(--shadow-dark);
+}
+
+.toolbox-info p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: var(--text-secondary);
+}
+
+.toolbox-info .tech-stack {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.toolbox-info .tech-tag {
+    background: var(--gradient-gold);
+    color: var(--dark-gray);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.toolbox-info .btn-primary {
+    background: var(--gradient-gold);
+    color: var(--dark-gray);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.toolbox-info .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+}
+
+.toolbox-info .btn-primary i {
+    font-size: 1rem;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .toolbox-section {
+        padding: 30px 20px;
+        margin-bottom: 60px;
+    }
+    
+    .toolbox-section .category-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+    }
+    
+    .toolbox-section .category-title i {
+        font-size: 1.8rem;
+    }
+    
+                   .toolbox-iframe-wrapper {
+                   height: 500px;
+               }
+    
+    .toolbox-info {
+        padding: 30px 20px;
+    }
+    
+    .toolbox-info h3 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+    
+    .toolbox-info p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    
+    .toolbox-info .tech-stack {
+        gap: 8px;
+        margin-bottom: 25px;
+    }
+    
+    .toolbox-info .tech-tag {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .toolbox-info .btn-primary {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .toolbox-section {
+        padding: 25px 15px;
+        margin-bottom: 50px;
+    }
+    
+    .toolbox-section .category-title {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+    }
+    
+                   .toolbox-iframe-wrapper {
+                   height: 400px;
+               }
+    
+    .toolbox-info {
+        padding: 25px 15px;
+    }
+    
+    .toolbox-info h3 {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+    }
+    
+    .toolbox-info p {
+        font-size: 0.95rem;
+        margin-bottom: 18px;
+    }
+    
+    .toolbox-info .tech-stack {
+        gap: 6px;
+        margin-bottom: 20px;
+    }
+    
+    .toolbox-info .tech-tag {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .toolbox-info .btn-primary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
     }
 } 

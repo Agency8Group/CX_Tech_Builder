@@ -544,6 +544,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const imageModal = document.getElementById('imageModal');
         const galleryModal = document.getElementById('galleryModal');
         const videoModal = document.getElementById('videoModal');
+        const iframeModal = document.getElementById('iframeModal');
         
         if (imageModal && imageModal.style.display === 'block') {
             closeModal();
@@ -553,6 +554,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (videoModal && videoModal.style.display === 'flex') {
             closeVideo();
+        }
+        if (iframeModal && iframeModal.style.display === 'flex') {
+            closeIframeModal();
         }
     }
     
@@ -604,8 +608,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const imageModal = document.getElementById('imageModal');
             const galleryModal = document.getElementById('galleryModal');
             const videoModal = document.getElementById('videoModal');
+            const iframeModal = document.getElementById('iframeModal');
             
-            if (videoModal && videoModal.style.display === 'flex') {
+            if (iframeModal && iframeModal.style.display === 'flex') {
+                closeIframeModal();
+            } else if (videoModal && videoModal.style.display === 'flex') {
                 closeVideo();
             } else if (galleryModal && galleryModal.style.display === 'block') {
                 closeGallery();
@@ -941,6 +948,73 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
             closeVideo();
         }
     });
+    
+    // iframe 모달 관련 함수들
+    window.openIframeModal = function(iframeSrc, title, description) {
+        // 다른 모달들 먼저 닫기
+        closeAllModals();
+        
+        // iframe 모달이 없으면 생성
+        let iframeModal = document.getElementById('iframeModal');
+        if (!iframeModal) {
+            iframeModal = document.createElement('div');
+            iframeModal.id = 'iframeModal';
+            iframeModal.className = 'modal';
+            iframeModal.innerHTML = `
+                <div class="modal-content iframe-content">
+                    <span class="close" onclick="closeIframeModal()">&times;</span>
+                    <div class="iframe-container">
+                        <iframe id="modalIframe" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="iframe-info">
+                        <h3 id="iframeTitle"></h3>
+                        <p id="iframeDescription"></p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(iframeModal);
+            
+            // iframe 모달 외부 클릭 시 닫기
+            iframeModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeIframeModal();
+                }
+            });
+        }
+        
+        // iframe 소스와 정보 설정
+        const modalIframe = document.getElementById('modalIframe');
+        const iframeTitle = document.getElementById('iframeTitle');
+        const iframeDescription = document.getElementById('iframeDescription');
+        
+        modalIframe.src = iframeSrc;
+        iframeTitle.textContent = title;
+        iframeDescription.textContent = description;
+        
+        // 모달 표시
+        iframeModal.style.display = 'flex';
+        iframeModal.classList.add('show');
+        
+        // body 스크롤 방지
+        document.body.style.overflow = 'hidden';
+    };
+    
+    window.closeIframeModal = function() {
+        const iframeModal = document.getElementById('iframeModal');
+        const modalIframe = document.getElementById('modalIframe');
+        
+        if (iframeModal && modalIframe) {
+            // iframe 소스 제거 (보안상)
+            modalIframe.src = '';
+            
+            // 모달 숨기기
+            iframeModal.classList.remove('show');
+            iframeModal.style.display = 'none';
+            
+            // body 스크롤 복원
+            document.body.style.overflow = 'auto';
+        }
+    };
     
     // ESC 키는 상단의 통합 처리에서 처리됨 (중복 제거)
 }); 
