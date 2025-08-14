@@ -3666,15 +3666,35 @@ html {
 
 
 
+
+
            .toolbox-overlay {
-               display: none !important;
+               position: absolute;
+               top: 0;
+               left: 0;
+               right: 0;
+               bottom: 0;
+               background: rgba(0, 0, 0, 0.7);
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               opacity: 0;
+               transition: opacity 0.3s ease;
+               pointer-events: none;
+           }
+
+           .toolbox-iframe-wrapper:hover .toolbox-overlay {
+               opacity: 1;
+               pointer-events: auto;
            }
 
 .toolbox-info {
     text-align: center;
     color: var(--text-primary);
     padding: 40px;
-    max-width: 500px;
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
 }
 
 .toolbox-info h3 {
