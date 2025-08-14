@@ -72,54 +72,6 @@ function shouldShowNoticePopup() {
     return hiddenDate !== today;
 }
 
-// iframe 스크롤바 스타일링 함수
-function styleIframeScrollbar() {
-    const iframe = document.querySelector('.toolbox-iframe');
-    if (!iframe) return;
-    
-    try {
-        // iframe이 로드된 후 스타일 적용 시도
-        iframe.addEventListener('load', function() {
-            try {
-                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                if (iframeDoc) {
-                    // iframe 내부에 스타일 주입
-                    const style = iframeDoc.createElement('style');
-                    style.textContent = `
-                        ::-webkit-scrollbar {
-                            width: 12px !important;
-                        }
-                        ::-webkit-scrollbar-track {
-                            background: #333 !important;
-                            border-radius: 6px !important;
-                        }
-                        ::-webkit-scrollbar-thumb {
-                            background: #666 !important;
-                            border-radius: 6px !important;
-                            border: 2px solid #333 !important;
-                        }
-                        ::-webkit-scrollbar-thumb:hover {
-                            background: #888 !important;
-                        }
-                        ::-webkit-scrollbar-corner {
-                            background: #333 !important;
-                        }
-                        * {
-                            scrollbar-width: thin !important;
-                            scrollbar-color: #333 #666 !important;
-                        }
-                    `;
-                    iframeDoc.head.appendChild(style);
-                }
-            } catch (e) {
-                console.log('iframe 스타일링 실패 (Same-Origin Policy):', e.message);
-            }
-        });
-    } catch (e) {
-        console.log('iframe 접근 실패:', e.message);
-    }
-}
-
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -139,11 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         createParticles();
     }, 1000);
-    
-    // iframe 스크롤바 스타일링 (3초 후 시도)
-    setTimeout(() => {
-        styleIframeScrollbar();
-    }, 3000);
     
     // 공지사항 팝업 외부 클릭 시 닫기
     const noticePopup = document.getElementById('noticePopup');
