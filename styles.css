@@ -3611,14 +3611,15 @@ html {
            .toolbox-iframe-wrapper {
                position: relative;
                width: 100%;
-               height: 80vh;
+               height: 95vh;
                overflow: hidden;
-               background: #000;
+               background: transparent;
                border: none !important;
                outline: none !important;
                margin: 0 !important;
                padding: 0 !important;
                box-shadow: none !important;
+               border-radius: 0;
            }
 
            .toolbox-iframe {
@@ -3626,36 +3627,18 @@ html {
                height: 100%;
                border: none !important;
                outline: none !important;
-               background: #fff;
+               background: transparent;
                display: block;
                margin: 0 !important;
                padding: 0 !important;
                box-sizing: border-box !important;
+               overflow: hidden !important;
+               scrolling: no !important;
+               border-radius: 0;
            }
 
-           /* Custom Scrollbar for Toolbox Iframe */
-           .toolbox-iframe::-webkit-scrollbar {
-               width: 12px !important;
-           }
-
-           .toolbox-iframe::-webkit-scrollbar-track {
-               background: var(--dark-gray) !important;
-               border-radius: 6px !important;
-           }
-
-           .toolbox-iframe::-webkit-scrollbar-thumb {
-               background: linear-gradient(135deg, var(--primary-gold), var(--accent-gold)) !important;
-               border-radius: 6px !important;
-               border: 2px solid var(--dark-gray) !important;
-           }
-
-           .toolbox-iframe::-webkit-scrollbar-thumb:hover {
-               background: var(--accent-gold) !important;
-           }
-
-           .toolbox-iframe::-webkit-scrollbar-corner {
-               background: var(--dark-gray) !important;
-           }
+           /* Note: iframe scrollbar styling doesn't work due to cross-origin restrictions */
+           /* The iframe content is from a different domain, so we cannot style its scrollbar */
 
            /* Additional iframe border removal */
            .toolbox-iframe-wrapper iframe {
@@ -3663,6 +3646,8 @@ html {
                outline: none !important;
                margin: 0 !important;
                padding: 0 !important;
+               border-radius: 0 !important;
+               box-shadow: none !important;
            }
 
            /* Force remove any default iframe styling */
@@ -3675,34 +3660,11 @@ html {
                -webkit-appearance: none !important;
                -moz-appearance: none !important;
                appearance: none !important;
+               border-radius: 0 !important;
+               box-shadow: none !important;
            }
 
-           /* Additional scrollbar styling for iframe content */
-           .toolbox-iframe::-webkit-scrollbar {
-               width: 12px !important;
-               background: var(--dark-gray) !important;
-           }
 
-           .toolbox-iframe::-webkit-scrollbar-track {
-               background: var(--dark-gray) !important;
-               border-radius: 6px !important;
-           }
-
-           .toolbox-iframe::-webkit-scrollbar-thumb {
-               background: linear-gradient(135deg, var(--primary-gold), var(--accent-gold)) !important;
-               border-radius: 6px !important;
-               border: 2px solid var(--dark-gray) !important;
-               box-shadow: inset 0 0 6px rgba(0,0,0,0.3) !important;
-           }
-
-           .toolbox-iframe::-webkit-scrollbar-thumb:hover {
-               background: var(--accent-gold) !important;
-               box-shadow: inset 0 0 6px rgba(0,0,0,0.5) !important;
-           }
-
-           .toolbox-iframe::-webkit-scrollbar-corner {
-               background: var(--dark-gray) !important;
-           }
 
            .toolbox-overlay {
                display: none !important;
