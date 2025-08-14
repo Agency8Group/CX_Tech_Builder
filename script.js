@@ -893,6 +893,8 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
 
     // 비디오 모달 관련 함수들
     window.openVideo = function(videoSrc, title, description) {
+        console.log('openVideo 호출됨:', videoSrc, title, description);
+        
         // 다른 모달들 먼저 닫기
         closeAllModals();
         
@@ -901,27 +903,63 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
         const videoTitle = document.getElementById('videoTitle');
         const videoDescription = document.getElementById('videoDescription');
         
+        console.log('모달 요소들:', { videoModal, modalVideo, videoTitle, videoDescription });
+        
         // 비디오 소스 설정
         modalVideo.querySelector('source').src = videoSrc;
-        modalVideo.load(); // 비디오 다시 로드
+        modalVideo.src = videoSrc; // 직접 src도 설정
         
         // 제목과 설명 설정
         videoTitle.textContent = title;
         videoDescription.textContent = description;
         
         // 모달 표시
-        videoModal.style.display = 'flex';
         videoModal.classList.add('show');
+        console.log('모달 표시됨, 클래스:', videoModal.className);
         
         // body 스크롤 방지
         document.body.style.overflow = 'hidden';
         
-        // 비디오 자동 재생 시도
+        // 비디오 로드 및 재생
+        console.log('비디오 로드 시작');
+        modalVideo.load();
+        
+        // 비디오가 로드된 후 재생 시도
+        modalVideo.addEventListener('loadeddata', function() {
+            console.log('비디오 로드 완료');
+            console.log('비디오 크기:', modalVideo.videoWidth, 'x', modalVideo.videoHeight);
+            console.log('비디오 표시 상태:', modalVideo.style.display, modalVideo.offsetWidth, modalVideo.offsetHeight);
+            
+            setTimeout(() => {
+                modalVideo.muted = true; // 음소거 상태로 재생 시도
+                modalVideo.play().then(() => {
+                    console.log('비디오 재생 성공');
+                    // 성공하면 음소거 해제
+                    modalVideo.muted = false;
+                }).catch(error => {
+                    console.log('비디오 자동 재생 실패:', error);
+                    // 사용자 상호작용 후 재생 시도
+                    modalVideo.addEventListener('click', function() {
+                        modalVideo.play().catch(e => console.log('재생 실패:', e));
+                    }, { once: true });
+                });
+            }, 100);
+        }, { once: true });
+        
+        // 비디오 로드 실패 시 처리
+        modalVideo.addEventListener('error', function(e) {
+            console.log('비디오 로드 실패:', e);
+            console.log('비디오 에러:', modalVideo.error);
+        });
+        
+        // 추가 안전장치: 1초 후에도 모달이 보이지 않으면 강제로 표시
         setTimeout(() => {
-            modalVideo.play().catch(error => {
-                console.log('비디오 자동 재생 실패:', error);
-            });
-        }, 100);
+            if (videoModal.style.display !== 'flex' && !videoModal.classList.contains('show')) {
+                console.log('모달 강제 표시');
+                videoModal.style.display = 'flex';
+                videoModal.classList.add('show');
+            }
+        }, 1000);
     };
     
     window.closeVideo = function() {
@@ -929,13 +967,14 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
         const modalVideo = document.getElementById('modalVideo');
         
         if (videoModal && modalVideo) {
-            // 비디오 정지
+            // 비디오 정지 및 초기화
             modalVideo.pause();
             modalVideo.currentTime = 0;
+            modalVideo.src = '';
+            modalVideo.load();
             
             // 모달 숨기기
             videoModal.classList.remove('show');
-            videoModal.style.display = 'none';
             
             // body 스크롤 복원
             document.body.style.overflow = 'auto';
