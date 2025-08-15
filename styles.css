@@ -3363,6 +3363,83 @@ html {
     box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 
+/* 서비스 구조 안내 스타일 */
+.service-structure-info {
+    margin-bottom: 60px;
+    padding: 40px;
+    background: var(--medium-gray);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 30px var(--shadow-dark);
+}
+
+.structure-card {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.structure-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 25px;
+    background: var(--light-gray);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px var(--shadow-dark);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.structure-step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #3b82f6, #1e40af);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    margin: 0 0 10px 0;
+    color: var(--primary-gold);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.step-content p {
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.structure-summary {
+    margin-top: 30px;
+    padding: 25px;
+    background: var(--medium-gray);
+    border-radius: 15px;
+    border: 1px solid var(--primary-gold);
+    box-shadow: 0 4px 20px var(--shadow-dark);
+}
+
+.structure-summary p {
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
 .pricing-card.subscription-card {
     background: linear-gradient(
         135deg,
@@ -3655,6 +3732,28 @@ html {
     .pricing-card.subscription-card .btn {
         width: 100%;
         margin-top: 20px;
+    }
+
+    .service-structure-info {
+        padding: 25px 20px;
+        margin-bottom: 40px;
+    }
+
+    .structure-step {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .structure-summary {
+        padding: 20px;
     }
 
     .pricing-header h3 {
