@@ -1,1124 +1,1606 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>실무 중심 풀스택 개발진_CX_Tech_Builder</title>
-    
-    <!-- Open Graph / Facebook / 카카오톡 메타 태그 -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://agency8group.github.io/CX_Tech_Builder/">
-    <meta property="og:title" content="CX_Tech_Builder - 실무 중심 풀스택 개발자">
-    <meta property="og:description" content="10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자. Python, JavaScript, HTML/CSS를 활용한 업무 효율화 솔루션 전문가.">
-    <meta property="og:image" content="https://agency8group.github.io/CX_Tech_Builder/img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="실무 중심 풀스택 개발자 포트폴리오">
-    
-    <!-- Twitter 메타 태그 -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://agency8group.github.io/CX_Tech_Builder/">
-    <meta property="twitter:title" content="CX_Tech_Builder - 실무 중심 풀스택 개발자">
-    <meta property="twitter:description" content="10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자. Python, JavaScript, HTML/CSS를 활용한 업무 효율화 솔루션 전문가.">
-    <meta property="twitter:image" content="https://agency8group.github.io/CX_Tech_Builder/img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png">
-    
-    <!-- 추가 메타 태그 -->
-    <meta name="description" content="10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자. Python, JavaScript, HTML/CSS를 활용한 업무 효율화 솔루션 전문가.">
-    <meta name="keywords" content="풀스택 개발자, Python, JavaScript, HTML/CSS, 업무 자동화, 웹 개발, 포트폴리오, 실무 개발자">
-    <meta name="author" content="CX_Tech_Builder - 실무 중심 풀스택 개발자">
-    
-    <!-- 파비콘 -->
-    <link rel="icon" type="image/x-icon" href="img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png">
-    
-    <!-- 중요 리소스 프리로드 -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
-    
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
-    
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- 로딩 시 깜빡임 방지 -->
-    <style>
-        body { 
-            opacity: 1 !important; 
-            transition: none !important;
-            font-display: swap;
-        }
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-dark);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease;
-        }
-        .loading-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-        }
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(212, 175, 55, 0.3);
-            border-top: 3px solid var(--primary-gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        .typing-text {
-            color: var(--primary-gold);
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-align: center;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Inter', sans-serif;
-        }
-        .typing-text::after {
-            content: '|';
-            animation: blink 1s infinite;
-            color: var(--accent-gold);
-        }
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .loaded .loading-overlay {
-            opacity: 0;
-            pointer-events: none;
-        }
-    </style>
-</head>
-<body>
-    <!-- 로딩 오버레이 -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <div class="typing-text" id="typingText"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>실무 중심 풀스택 개발진_CX_Tech_Builder</title>
+
+        <!-- Open Graph / Facebook / 카카오톡 메타 태그 -->
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://agency8group.github.io/CX_Tech_Builder/"
+        />
+        <meta
+            property="og:title"
+            content="CX_Tech_Builder - 실무 중심 풀스택 개발자"
+        />
+        <meta
+            property="og:description"
+            content="10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자. Python, JavaScript, HTML/CSS를 활용한 업무 효율화 솔루션 전문가."
+        />
+        <meta
+            property="og:image"
+            content="https://agency8group.github.io/CX_Tech_Builder/img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+            property="og:image:alt"
+            content="실무 중심 풀스택 개발자 포트폴리오"
+        />
+
+        <!-- Twitter 메타 태그 -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:url"
+            content="https://agency8group.github.io/CX_Tech_Builder/"
+        />
+        <meta
+            property="twitter:title"
+            content="CX_Tech_Builder - 실무 중심 풀스택 개발자"
+        />
+        <meta
+            property="twitter:description"
+            content="10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자. Python, JavaScript, HTML/CSS를 활용한 업무 효율화 솔루션 전문가."
+        />
+        <meta
+            property="twitter:image"
+            content="https://agency8group.github.io/CX_Tech_Builder/img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png"
+        />
+
+        <!-- 추가 메타 태그 -->
+        <meta
+            name="description"
+            content="10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자. Python, JavaScript, HTML/CSS를 활용한 업무 효율화 솔루션 전문가."
+        />
+        <meta
+            name="keywords"
+            content="풀스택 개발자, Python, JavaScript, HTML/CSS, 업무 자동화, 웹 개발, 포트폴리오, 실무 개발자"
+        />
+        <meta
+            name="author"
+            content="CX_Tech_Builder - 실무 중심 풀스택 개발자"
+        />
+
+        <!-- 파비콘 -->
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png"
+        />
+
+        <!-- 중요 리소스 프리로드 -->
+        <link
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript
+            ><link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        /></noscript>
+
+        <link
+            rel="preload"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript
+            ><link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        /></noscript>
+
+        <link rel="stylesheet" href="styles.css" />
+
+        <!-- 로딩 시 깜빡임 방지 -->
+        <style>
+            body {
+                opacity: 1 !important;
+                transition: none !important;
+                font-display: swap;
+            }
+            .loading-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--gradient-dark);
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: opacity 0.5s ease;
+            }
+            .loading-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            .loading-spinner {
+                width: 50px;
+                height: 50px;
+                border: 3px solid rgba(212, 175, 55, 0.3);
+                border-top: 3px solid var(--primary-gold);
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+            .typing-text {
+                color: var(--primary-gold);
+                font-size: 1.2rem;
+                font-weight: 500;
+                text-align: center;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: "Inter", sans-serif;
+            }
+            .typing-text::after {
+                content: "|";
+                animation: blink 1s infinite;
+                color: var(--accent-gold);
+            }
+            @keyframes blink {
+                0%,
+                50% {
+                    opacity: 1;
+                }
+                51%,
+                100% {
+                    opacity: 0;
+                }
+            }
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            .loaded .loading-overlay {
+                opacity: 0;
+                pointer-events: none;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 로딩 오버레이 -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <div class="typing-text" id="typingText"></div>
+            </div>
         </div>
-    </div>
-    
-    <!-- 공지사항 팝업 -->
-    <div id="noticePopup" class="notice-popup">
-        <div class="notice-content">
-            <div class="notice-header">
-                <h3><i class="fas fa-bullhorn"></i> 공지사항</h3>
-                <button class="notice-close" onclick="closeNoticePopup()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="notice-body">
-                <div class="notice-image">
-                    <img src="img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png" alt="CX_Tech_Builder 대표이미지">
-                </div>
-                <div class="notice-text">
-                    <h4>새로운 서비스 안내</h4>
-                    <p>안녕하세요! CX_Tech_Builder입니다.</p>
-                    <p>10년간의 실무 경험을 바탕으로 <strong>소상공인과 스타트업</strong>을 위한 맞춤형 웹 기반 프로그램 및 랜딩페이지 제작 서비스를 시작했습니다.</p>
-                    <ul>
-                        <li>✅ 수백만 원대 외주 → 몇십만 원 수준</li>
-                        <li>✅ 현장에서 검증된 실용형 솔루션</li>
-                        <li>✅ 빠르고 정확한 서비스 (평균 2-4주)</li>
-                        <li>✅ 지속적인 유지보수 및 소통 지원</li>
-                    </ul>
-                    <p><strong>지금 바로 문의하시면 특별한 혜택을 드립니다!</strong></p>
-                </div>
-            </div>
-            <div class="notice-footer">
-                <label class="notice-checkbox">
-                    <input type="checkbox" id="dontShowAgain">
-                    <span class="checkmark"></span>
-                    오늘 하루 보지 않기
-                </label>
-                <button class="btn btn-primary" onclick="closeNoticePopup()">
-                    <i class="fas fa-check"></i>
-                    확인
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 파티클 배경 -->
-    <div class="particles"></div>
-    
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-code"></i>
-                <span>CX_Tech_Builder</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home">홈</a></li>
-                <li><a href="#about">소개</a></li>
-                <li><a href="#skills">기술스택</a></li>
-                <li><a href="#projects">프로젝트</a></li>
-                <li><a href="#services">서비스</a></li>
-                <li><a href="#pricing">가격표</a></li>
-                <li><a href="#contact">연락처</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="developer-badge">
-                    <i class="fas fa-user-tie"></i>
-                    <span>실무 중심 풀스택 개발자</span>
+        <!-- 공지사항 팝업 -->
+        <div id="noticePopup" class="notice-popup">
+            <div class="notice-content">
+                <div class="notice-header">
+                    <h3><i class="fas fa-bullhorn"></i> 공지사항</h3>
+                    <button class="notice-close" onclick="closeNoticePopup()">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <h1 class="hero-title">
-                    실무에서 검증된<br>
-                    <span class="highlight">업무 효율화 솔루션</span>
-                </h1>
-                <p class="hero-subtitle">
-                    10년간 고객 중심의 실전 문제해결 경험을 바탕으로<br>
-                    <strong>Python, JavaScript, HTML/CSS</strong> 풀스택 개발
-                </p>
-                <p class="hero-description">
-                    몇 시간씩 걸리던 엑셀 작업, 반복적인 CS 응대,<br>
-                    복잡한 데이터 분석을 <strong>버튼 하나만으로</strong><br>
-                    단축할 수 있도록 도와드립니다.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">3,542줄</span>
-                        <span class="stat-label">CS 상담원 시스템</span>
+                <div class="notice-body">
+                    <div class="notice-image">
+                        <img
+                            src="img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png"
+                            alt="CX_Tech_Builder 대표이미지"
+                        />
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">1,649줄</span>
-                        <span class="stat-label">웹 애플리케이션</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">50+</span>
-                        <span class="stat-label">자동화 프로젝트</span>
-                    </div>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="fas fa-cogs"></i>
-                        프로젝트 보기
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-clock"></i>
-                        협업 문의
-                    </a>
-                </div>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="starwars-scroll">
-                    <div class="scroll-indicator">
-                        <div class="scroll-text">경력 연혁</div>
-                        <div class="scroll-dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                    <div class="crawl">
-                        <div class="title">
-                            <h2>경력 연혁</h2>
-                        </div>
-                        
-                        <div class="episode">
-                            <p><strong>I사 – 전략기획실 과장</strong> (2025.03 ~ 현재)<br>
-                            해외제품 유통사, '로봇청소기'·'분유'·'캐리어'·'매트리스' 공식 대행 판매</p>
-                            
-                            <p>• 신설 부서 창립 멤버로서 조직 구조·업무 프로세스 제로베이스 설계<br>
-                            • 회의실 실시간 예약·현황 시스템 자체 개발<br>
-                            • 상태 표시(예약/진행/가능), 네이트온 자동 알림, 실시간 현황 반영<br>
-                            • 브랜드 확장 전략 기획<br>
-                            • 다부서 통합 프로젝트 리딩 (물류·CS·개발·마케팅 연계)</p>
-                            
-                            <p><strong>D사 – 총괄 책임</strong> (2020.11 ~ 2024.02)<br>
-                            생활가전·인테리어 제조·유통사, 자체 쇼핑몰 및 온라인 플랫폼 운영</p>
-                            
-                            <p>• AS센터·물류센터·CS센터 통합 구축·운영 총괄<br>
-                            • 기술 트러블슈팅 – 하드웨어·소프트웨어 문제 실시간 해결<br>
-                            • UX 개선 기획 – 고객 여정 분석을 통한 온라인 쇼핑몰 개선<br>
-                            • 재고·배송 자동화 프로세스 설계</p>
-                            
-                            <p><strong>S사 – CS운영 팀장</strong> (2018.05 ~ 2020.10)<br>
-                            • 대규모 VOC 개선 프로젝트 주도<br>
-                            • 대외기관(공정위·소보원) 대응 프로세스 표준화<br>
-                            • 팀원 교육·성과 관리, CS 품질 지표 향상</p>
-                            
-                            <p><strong>H사 – 영업지원</strong> (2017.03 ~ 2018.04)<br>
-                            • 고객·보험사 간 커뮤니케이션 및 행정 업무 지원<br>
-                            • 계약·보상 서류 관리</p>
-                            
-                            <div class="skills-section">
-                                <p><strong>핵심 기술·도구</strong></p>
-                                <p>• 개발: HTML5, CSS3, JavaScript, Node.js, Three.js<br>
-                                • 기획: Figma, Notion, Gamma, GitHub<br>
-                                • 운영: VOC 관리, CS 운영·교육, 물류·AS센터 설계·운영<br>
-
-
-                                
-                                • 자동화: 예약 시스템, 데이터 수집·분석, 협업툴 최적화</p>
-                            </div>
-                        </div>
+                    <div class="notice-text">
+                        <h4>새로운 서비스 안내</h4>
+                        <p>안녕하세요! CX_Tech_Builder입니다.</p>
+                        <p>
+                            10년간의 실무 경험을 바탕으로
+                            <strong>소상공인과 스타트업</strong>을 위한 맞춤형
+                            웹 기반 프로그램 및 랜딩페이지 제작 서비스를
+                            시작했습니다.
+                        </p>
+                        <ul>
+                            <li>✅ 수백만 원대 외주 → 몇십만 원 수준</li>
+                            <li>✅ 현장에서 검증된 실용형 솔루션</li>
+                            <li>✅ 빠르고 정확한 서비스 (평균 2-4주)</li>
+                            <li>✅ 지속적인 유지보수 및 소통 지원</li>
+                        </ul>
+                        <p>
+                            <strong
+                                >지금 바로 문의하시면 특별한 혜택을
+                                드립니다!</strong
+                            >
+                        </p>
                     </div>
                 </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2>개발자 소개</h2>
-                <p>실무 중심의 개발자로서 업무 효율화와 사용자 경험 개선에 특화</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>실무에서 검증된 개발 역량</h3>
-                    <p>Python, JavaScript, HTML/CSS를 활용한 풀스택 개발 경험을 바탕으로 실제 업무 환경에서 활용되는 다양한 도구와 시스템을 구축했습니다.</p>
-                    
-                    <div class="developer-strengths">
-                        <div class="strength-item">
-                            <div class="strength-icon">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <div class="strength-content">
-                                <h4>풀스택 개발</h4>
-                                <p>Frontend + Backend + Desktop 개발 경험</p>
-                            </div>
-                        </div>
-                        <div class="strength-item">
-                            <div class="strength-icon">
-                                <i class="fas fa-briefcase"></i>
-                            </div>
-                            <div class="strength-content">
-                                <h4>실무 중심</h4>
-                                <p>실제 업무에 필요한 도구 개발 전문</p>
-                            </div>
-                        </div>
-                        <div class="strength-item">
-                            <div class="strength-icon">
-                                <i class="fas fa-plug"></i>
-                            </div>
-                            <div class="strength-content">
-                                <h4>API 연동</h4>
-                                <p>다양한 외부 서비스 통합 경험</p>
-                            </div>
-                        </div>
-                        <div class="strength-item">
-                            <div class="strength-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="strength-content">
-                                <h4>보안 고려</h4>
-                                <p>IP 제한, 데이터 검증 등 보안 기능</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual">
-                    <div class="achievement-cards">
-                        <div class="achievement-card">
-                            <div class="achievement-number">3,542줄</div>
-                            <div class="achievement-label">CS 상담원 시스템</div>
-                            <div class="achievement-desc">AI 기반 고객 응대 자동화 플랫폼</div>
-                        </div>
-                        <div class="achievement-card">
-                            <div class="achievement-number">1,649줄</div>
-                            <div class="achievement-label">웹 애플리케이션</div>
-                            <div class="achievement-desc">TeamScheduler - 전사 공용 캘린더</div>
-                        </div>
-                        <div class="achievement-card">
-                            <div class="achievement-number">1,376줄</div>
-                            <div class="achievement-label">Python 애플리케이션</div>
-                            <div class="achievement-desc">ToolBox Dashboard - 업무 자동화 도구</div>
-                        </div>
-                    </div>
+                <div class="notice-footer">
+                    <label class="notice-checkbox">
+                        <input type="checkbox" id="dontShowAgain" />
+                        <span class="checkmark"></span>
+                        오늘 하루 보지 않기
+                    </label>
+                    <button
+                        class="btn btn-primary"
+                        onclick="closeNoticePopup()"
+                    >
+                        <i class="fas fa-check"></i>
+                        확인
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2>기술 스택</h2>
-                <p>다양한 기술을 활용한 풀스택 개발 역량</p>
+        <!-- 파티클 배경 -->
+        <div class="particles"></div>
+
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-code"></i>
+                    <span>CX_Tech_Builder</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">홈</a></li>
+                    <li><a href="#about">소개</a></li>
+                    <li><a href="#skills">기술스택</a></li>
+                    <li><a href="#projects">프로젝트</a></li>
+                    <li><a href="#services">서비스</a></li>
+                    <li><a href="#pricing">가격표</a></li>
+                    <li><a href="#contact">연락처</a></li>
+                </ul>
             </div>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fab fa-python"></i> Desktop Application (Python)</h3>
-                    <div class="skill-level">고급</div>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">CustomTkinter</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="developer-badge">
+                        <i class="fas fa-user-tie"></i>
+                        <span>실무 중심 풀스택 개발자</span>
+                    </div>
+                    <h1 class="hero-title">
+                        실무에서 검증된<br />
+                        <span class="highlight">업무 효율화 솔루션</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        10년간 고객 중심의 실전 문제해결 경험을 바탕으로<br />
+                        <strong>Python, JavaScript, HTML/CSS</strong> 풀스택
+                        개발
+                    </p>
+                    <p class="hero-description">
+                        몇 시간씩 걸리던 엑셀 작업, 반복적인 CS 응대,<br />
+                        복잡한 데이터 분석을 <strong>버튼 하나만으로</strong
+                        ><br />
+                        단축할 수 있도록 도와드립니다.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">3,542줄</span>
+                            <span class="stat-label">CS 상담원 시스템</span>
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">PyInstaller</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1,649줄</span>
+                            <span class="stat-label">웹 애플리케이션</span>
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Socket Programming</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">자동화 프로젝트</span>
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Threading</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-cogs"></i>
+                            프로젝트 보기
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-clock"></i>
+                            협업 문의
+                        </a>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <h3><i class="fab fa-html5"></i> Web Development (Frontend)</h3>
-                    <div class="skill-level">고급</div>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">HTML5</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
+                <div class="hero-visual">
+                    <div class="starwars-scroll">
+                        <div class="scroll-indicator">
+                            <div class="scroll-text">경력 연혁</div>
+                            <div class="scroll-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
                             </div>
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">CSS3</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 92%"></div>
+                        <div class="crawl">
+                            <div class="title">
+                                <h2>경력 연혁</h2>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">JavaScript (ES6+)</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Tailwind CSS</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-server"></i> Backend & APIs</h3>
-                    <div class="skill-level">중급</div>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Google Apps Script</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Webhook Integration</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Google Sheets API</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 82%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="episode">
+                                <p>
+                                    <strong>I사 – 전략기획실 과장</strong>
+                                    (2025.03 ~ 현재)<br />
+                                    해외제품 유통사,
+                                    '로봇청소기'·'분유'·'캐리어'·'매트리스' 공식
+                                    대행 판매
+                                </p>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> Data & Storage</h3>
-                    <div class="skill-level">고급</div>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">JSON</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Excel/Spreadsheet</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">CSV Processing</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                                <p>
+                                    • 신설 부서 창립 멤버로서 조직 구조·업무
+                                    프로세스 제로베이스 설계<br />
+                                    • 회의실 실시간 예약·현황 시스템 자체
+                                    개발<br />
+                                    • 상태 표시(예약/진행/가능), 네이트온 자동
+                                    알림, 실시간 현황 반영<br />
+                                    • 브랜드 확장 전략 기획<br />
+                                    • 다부서 통합 프로젝트 리딩
+                                    (물류·CS·개발·마케팅 연계)
+                                </p>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2>대표 프로젝트</h2>
-                <p>실무에서 바로 활용 가능한 Desktop Application과 Web Service 솔루션들</p>
-            </div>
-            
-            <!-- Desktop Application Projects -->
-            <div class="project-category">
-                <h3 class="category-title">
-                    <i class="fas fa-desktop"></i>
-                    Desktop Application
-                </h3>
-                <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/세일즈_분석도구_Desktop Application.png" alt="세일즈 분석도구">
-                    </div>
-                    <div class="project-content">
-                        <h3>세일즈 분석도구</h3>
-                        <p>실시간 매출 데이터 분석 및 예측 시스템</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">CustomTkinter</span>
-                            <span class="tech-tag">Chart.js</span>
-                        </div>
-                        <button class="btn btn-outline">크게보기</button>
-                    </div>
-                </div>
+                                <p>
+                                    <strong>D사 – 총괄 책임</strong> (2020.11 ~
+                                    2024.02)<br />
+                                    생활가전·인테리어 제조·유통사, 자체 쇼핑몰
+                                    및 온라인 플랫폼 운영
+                                </p>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/수수료_순이익_계산기_Desktop Application.png" alt="수수료 순이익 계산기">
-                    </div>
-                    <div class="project-content">
-                        <h3>수수료 순이익 계산기</h3>
-                        <p>복잡한 수수료 구조를 자동으로 계산하는 도구</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">CustomTkinter</span>
-                            <span class="tech-tag">Excel API</span>
-                        </div>
-                        <button class="btn btn-outline">크게보기</button>
-                    </div>
-                </div>
+                                <p>
+                                    • AS센터·물류센터·CS센터 통합 구축·운영
+                                    총괄<br />
+                                    • 기술 트러블슈팅 – 하드웨어·소프트웨어 문제
+                                    실시간 해결<br />
+                                    • UX 개선 기획 – 고객 여정 분석을 통한
+                                    온라인 쇼핑몰 개선<br />
+                                    • 재고·배송 자동화 프로세스 설계
+                                </p>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/라이브방송_호응_매크로_Desktop Application.png" alt="라이브방송 호응 매크로">
-                    </div>
-                    <div class="project-content">
-                        <h3>라이브방송 호응 매크로</h3>
-                        <p>라이브 스트리밍 시청자 참여도 향상 도구</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Selenium</span>
-                            <span class="tech-tag">PyAutoGUI</span>
-                        </div>
-                        <button class="btn btn-outline">크게보기</button>
-                    </div>
-                </div>
+                                <p>
+                                    <strong>S사 – CS운영 팀장</strong> (2018.05
+                                    ~ 2020.10)<br />
+                                    • 대규모 VOC 개선 프로젝트 주도<br />
+                                    • 대외기관(공정위·소보원) 대응 프로세스
+                                    표준화<br />
+                                    • 팀원 교육·성과 관리, CS 품질 지표 향상
+                                </p>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/엑셀_파일_취합_프로그램_Desktop application.png" alt="엑셀 파일 취합 프로그램">
-                    </div>
-                    <div class="project-content">
-                        <h3>엑셀 파일 취합 프로그램</h3>
-                        <p>대용량 엑셀 파일 자동 처리 및 통합 시스템</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Pandas</span>
-                            <span class="tech-tag">CustomTkinter</span>
-                        </div>
-                        <button class="btn btn-outline">크게보기</button>
-                    </div>
-                </div>
+                                <p>
+                                    <strong>H사 – 영업지원</strong> (2017.03 ~
+                                    2018.04)<br />
+                                    • 고객·보험사 간 커뮤니케이션 및 행정 업무
+                                    지원<br />
+                                    • 계약·보상 서류 관리
+                                </p>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/네이버_블로그_순위체커_Desktop Application.png" alt="네이버 블로그 순위체커">
-                    </div>
-                    <div class="project-content">
-                        <h3>네이버 블로그 순위체커</h3>
-                        <p>네이버 블로그 검색 순위 실시간 체크 시스템</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Selenium</span>
-                            <span class="tech-tag">BeautifulSoup</span>
-                        </div>
-                        <button class="btn btn-outline">크게보기</button>
-                    </div>
-                </div>
+                                <div class="skills-section">
+                                    <p><strong>핵심 기술·도구</strong></p>
+                                    <p>
+                                        • 개발: HTML5, CSS3, JavaScript,
+                                        Node.js, Three.js<br />
+                                        • 기획: Figma, Notion, Gamma, GitHub<br />
+                                        • 운영: VOC 관리, CS 운영·교육,
+                                        물류·AS센터 설계·운영<br />
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <video controls preload="metadata" playsinline webkit-playsinline muted style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0; opacity: 1; transition: opacity 0.3s ease; z-index: 1; background: #000;">
-                            <source src="업무TOOL소개/N사_스마트블록_순위체크_Desktop Application.mp4" type="video/mp4">
-                            브라우저가 비디오를 지원하지 않습니다.
-                        </video>
-                    </div>
-                    <div class="project-content">
-                        <h3>N사 스마트블록 순위체크</h3>
-                        <p>네이버 스마트블록 순위 모니터링 및 분석 도구</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Selenium</span>
-                            <span class="tech-tag">BeautifulSoup</span>
-                        </div>
-                        <button class="btn btn-outline" onclick="openVideo('업무TOOL소개/N사_스마트블록_순위체크_Desktop Application.mp4', 'N사 스마트블록 순위체크', '네이버 스마트블록 순위 모니터링 및 분석 도구')">영상보기</button>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <video controls preload="metadata" playsinline webkit-playsinline muted style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0; opacity: 1; transition: opacity 0.3s ease; z-index: 1; background: #000;">
-                            <source src="업무TOOL소개/실시간뉴스수집_Desktop Application.mp4" type="video/mp4">
-                            브라우저가 비디오를 지원하지 않습니다.
-                        </video>
-                    </div>
-                    <div class="project-content">
-                        <h3>실시간 뉴스 수집 시스템</h3>
-                        <p>다양한 뉴스 사이트에서 실시간으로 뉴스를 수집하고 분석하는 자동화 시스템</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">BeautifulSoup</span>
-                            <span class="tech-tag">Selenium</span>
-                            <span class="tech-tag">Real-time</span>
-                        </div>
-                        <button class="btn btn-outline" onclick="openVideo('업무TOOL소개/실시간뉴스수집_Desktop Application.mp4', '실시간 뉴스 수집 시스템', '다양한 뉴스 사이트에서 실시간으로 뉴스를 수집하고 분석하는 자동화 시스템')">영상보기</button>
-                    </div>
-                </div>
-
-                </div>
-            </div>
-
-            <!-- Toolbox Enterprise Dashboard 섹션 -->
-            <div class="project-category toolbox-section">
-                <div class="toolbox-container">
-                    <div class="toolbox-iframe-wrapper">
-                        <iframe 
-                            src="https://agency8group.github.io/tool-box/" 
-                            class="toolbox-iframe"
-                            title="Toolbox Enterprise Dashboard"
-                            loading="lazy">
-                        </iframe>
-                        <div class="toolbox-overlay">
-                            <div class="toolbox-info">
-                                <h3>Toolbox Enterprise Dashboard</h3>
-                                <p>엔터프라이즈급 보안과 통합 관리 시스템을 갖춘 업무 자동화 대시보드</p>
-                                <div class="tech-stack">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">CustomTkinter</span>
-                                    <span class="tech-tag">Enterprise</span>
-                                    <span class="tech-tag">Security</span>
+                                        • 자동화: 예약 시스템, 데이터 수집·분석,
+                                        협업툴 최적화
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Web Service Projects -->
-            <div class="project-category">
-                <h3 class="category-title">
-                    <i class="fas fa-globe"></i>
-                    Web Service
-                </h3>
-                <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/뉴스수집_Web Service.png" alt="웹 뉴스 수집 도구">
-                    </div>
-                    <div class="project-content">
-                        <h3>웹 뉴스 수집 도구</h3>
-                        <p>다양한 뉴스 사이트에서 실시간 뉴스 수집 및 분석 시스템</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <button class="btn btn-outline">크게보기</button>
-                    </div>
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>개발자 소개</h2>
+                    <p>
+                        실무 중심의 개발자로서 업무 효율화와 사용자 경험 개선에
+                        특화
+                    </p>
                 </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>실무에서 검증된 개발 역량</h3>
+                        <p>
+                            Python, JavaScript, HTML/CSS를 활용한 풀스택 개발
+                            경험을 바탕으로 실제 업무 환경에서 활용되는 다양한
+                            도구와 시스템을 구축했습니다.
+                        </p>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/스케쥴러_Web Service.png" alt="웹 스케줄러">
-                    </div>
-                    <div class="project-content">
-                        <h3>웹 스케줄러</h3>
-                        <p>웹 기반 작업 스케줄링 및 자동화 관리 시스템</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">JavaScript</span>
+                        <div class="developer-strengths">
+                            <div class="strength-item">
+                                <div class="strength-icon">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <div class="strength-content">
+                                    <h4>풀스택 개발</h4>
+                                    <p>
+                                        Frontend + Backend + Desktop 개발 경험
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="strength-item">
+                                <div class="strength-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="strength-content">
+                                    <h4>실무 중심</h4>
+                                    <p>실제 업무에 필요한 도구 개발 전문</p>
+                                </div>
+                            </div>
+                            <div class="strength-item">
+                                <div class="strength-icon">
+                                    <i class="fas fa-plug"></i>
+                                </div>
+                                <div class="strength-content">
+                                    <h4>API 연동</h4>
+                                    <p>다양한 외부 서비스 통합 경험</p>
+                                </div>
+                            </div>
+                            <div class="strength-item">
+                                <div class="strength-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="strength-content">
+                                    <h4>보안 고려</h4>
+                                    <p>IP 제한, 데이터 검증 등 보안 기능</p>
+                                </div>
+                            </div>
                         </div>
-                        <button class="btn btn-outline">크게보기</button>
                     </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/설문조사_Web Service.png" alt="웹 설문조사 시스템">
-                    </div>
-                    <div class="project-content">
-                        <h3>웹 설문조사 시스템</h3>
-                        <p>온라인 설문조사 생성 및 응답 데이터 분석 도구</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">JavaScript</span>
+                    <div class="about-visual">
+                        <div class="achievement-cards">
+                            <div class="achievement-card">
+                                <div class="achievement-number">3,542줄</div>
+                                <div class="achievement-label">
+                                    CS 상담원 시스템
+                                </div>
+                                <div class="achievement-desc">
+                                    AI 기반 고객 응대 자동화 플랫폼
+                                </div>
+                            </div>
+                            <div class="achievement-card">
+                                <div class="achievement-number">1,649줄</div>
+                                <div class="achievement-label">
+                                    웹 애플리케이션
+                                </div>
+                                <div class="achievement-desc">
+                                    TeamScheduler - 전사 공용 캘린더
+                                </div>
+                            </div>
+                            <div class="achievement-card">
+                                <div class="achievement-number">1,376줄</div>
+                                <div class="achievement-label">
+                                    Python 애플리케이션
+                                </div>
+                                <div class="achievement-desc">
+                                    ToolBox Dashboard - 업무 자동화 도구
+                                </div>
+                            </div>
                         </div>
-                        <button class="btn btn-outline">크게보기</button>
                     </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/web고객센터(1)_Web Service.png" alt="웹AI 고객센터 구축 - 메인 화면">
-                    </div>
-                    <div class="project-content">
-                        <h3>웹AI 고객센터 구축</h3>
-                        <p>인공지능 기반 고객 응대 자동화 시스템 - 메인 화면 및 대화 인터페이스</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">AI API</span>
-                        </div>
-                        <button class="btn btn-outline" onclick="openGallery('고객센터')">크게보기</button>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="업무TOOL소개/회의실예약 및 현황체크 시스템_Web Service.png" alt="회의실예약 및 현황체크 시스템">
-                    </div>
-                    <div class="project-content">
-                        <h3>회의실예약 및 현황체크 시스템</h3>
-                        <p>회의실 예약 관리 및 실시간 현황 모니터링을 위한 통합 관리 시스템</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Google Apps Script</span>
-                        </div>
-                        <button class="btn btn-outline">크게보기</button>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <video controls preload="metadata" playsinline webkit-playsinline muted style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0; opacity: 1; transition: opacity 0.3s ease; z-index: 1; background: #000;">
-                            <source src="업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4" type="video/mp4">
-                            브라우저가 비디오를 지원하지 않습니다.
-                        </video>
-                    </div>
-                    <div class="project-content">
-                        <h3>임직원 주문 접수 시스템</h3>
-                        <p>임직원 주문을 효율적으로 관리하는 단일 페이지 웹 애플리케이션 - 주문수집원 클릭 기능 포함</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">반응형 웹</span>
-                        </div>
-                        <button class="btn btn-outline" onclick="openVideo('업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4', '임직원 주문 접수 시스템', '임직원 주문을 효율적으로 관리하는 단일 페이지 웹 애플리케이션 - 주문수집원 클릭 기능 포함')">영상보기</button>
-                    </div>
-                </div>
                 </div>
             </div>
-    </section>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>서비스 소개</h2>
-                <p>고객의 비즈니스 성장을 위한 맞춤형 솔루션</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>커스터마이징 가능 웹툴</h3>
-                    <p>기존 웹사이트나 시스템을 고객 요구사항에 맞게 완전히 커스터마이징하여 제공합니다.</p>
-                    <ul class="service-features">
-                        <li>반응형 디자인 적용</li>
-                        <li>사용자 경험 최적화</li>
-                        <li>브랜드 아이덴티티 반영</li>
-                    </ul>
+        <!-- Skills Section -->
+        <section id="skills" class="skills">
+            <div class="container">
+                <div class="section-header">
+                    <h2>기술 스택</h2>
+                    <p>다양한 기술을 활용한 풀스택 개발 역량</p>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>실무 자동화 시스템</h3>
-                    <p>고객 문의 응대를 자동화하여 업무 효율성을 극대화하는 시스템을 구축합니다.</p>
-                    <ul class="service-features">
-                        <li>내 직원의 아까운 시간 감축</li>
-                        <li>스마트 라우팅</li>
-                        <li>고객 만족도 분석</li>
-                    </ul>
-                </div>
-
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>UI/UX 개선</h3>
-                    <p>사용자 중심의 직관적인 인터페이스로 전환율과 사용자 만족도를 향상시킵니다.</p>
-                    <ul class="service-features">
-                        <li>사용자 테스트 기반 설계</li>
-                        <li>접근성 개선</li>
-                        <li>성능 최적화</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2>서비스 가격표</h2>
-                <p>합리적인 가격으로 업무 효율을 극대화하세요</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>스타트업 패키지</h3>
-                        <div class="price">
-                            <span class="amount">₩200,000</span>
-                            <span class="period">~ 400,000</span>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>
+                            <i class="fab fa-python"></i> Desktop Application
+                            (Python)
+                        </h3>
+                        <div class="skill-level">고급</div>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span class="skill-name">CustomTkinter</span>
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 95%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">PyInstaller</span>
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 90%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name"
+                                    >Socket Programming</span
+                                >
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 85%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Threading</span>
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 88%"
+                                    ></div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="pricing-subtitle">소규모 팀을 위한 기본 자동화</p>
                     </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> 기본 업무 자동화</li>
-                        <li><i class="fas fa-check"></i> 엑셀 데이터 처리</li>
-                        <li><i class="fas fa-check"></i> 간단한 웹툴 개발</li>
-                        <li><i class="fas fa-check"></i> 1개월 무료 유지보수</li>
-                        <li><i class="fas fa-check"></i> 기본 문서화</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-secondary">문의하기</a>
-                </div>
 
-                <div class="pricing-card featured">
-                    <div class="featured-badge">인기</div>
-                    <div class="pricing-header">
-                        <h3>기본 자동화 패키지</h3>
-                        <div class="price">
-                            <span class="amount">₩300,000</span>
-                            <span class="period">~ 500,000</span>
+                    <div class="skill-category">
+                        <h3>
+                            <i class="fab fa-html5"></i> Web Development
+                            (Frontend)
+                        </h3>
+                        <div class="skill-level">고급</div>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span class="skill-name">HTML5</span>
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 95%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">CSS3</span>
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 92%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name"
+                                    >JavaScript (ES6+)</span
+                                >
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 88%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Tailwind CSS</span>
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 85%"
+                                    ></div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="pricing-subtitle">대부분의 업무에 적합한 표준 패키지</p>
                     </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> 고급 업무 자동화</li>
-                        <li><i class="fas fa-check"></i> 데이터 분석 시스템</li>
-                        <li><i class="fas fa-check"></i> 맞춤형 웹 애플리케이션</li>
-                        <li><i class="fas fa-check"></i> 3개월 무료 유지보수</li>
-                        <li><i class="fas fa-check"></i> 상세한 사용자 가이드</li>
-                        <li><i class="fas fa-check"></i> 성능 최적화</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary">문의하기</a>
-                </div>
 
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>고급 자동화 패키지</h3>
-                        <div class="price">
-                            <span class="amount">₩800,000</span>
-                            <span class="period">~ 1,200,000</span>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-server"></i> Backend & APIs</h3>
+                        <div class="skill-level">중급</div>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span class="skill-name"
+                                    >Google Apps Script</span
+                                >
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 80%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name"
+                                    >Webhook Integration</span
+                                >
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 75%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name"
+                                    >Google Sheets API</span
+                                >
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 82%"
+                                    ></div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="pricing-subtitle">복잡한 업무 프로세스 통합 자동화</p>
                     </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> 완전 자동화 시스템</li>
-                        <li><i class="fas fa-check"></i> 상담원 내부 FAQ AI화</li>
-                        <li><i class="fas fa-check"></i> 실시간 데이터 대시보드</li>
-                        <li><i class="fas fa-check"></i> 6개월 무료 유지보수</li>
-                        <li><i class="fas fa-check"></i> 24/7 기술 지원</li>
-                        <li><i class="fas fa-check"></i> 보안 강화</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-secondary">문의하기</a>
+
+                    <div class="skill-category">
+                        <h3><i class="fas fa-database"></i> Data & Storage</h3>
+                        <div class="skill-level">고급</div>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span class="skill-name">JSON</span>
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 95%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name"
+                                    >Excel/Spreadsheet</span
+                                >
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 85%"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">CSV Processing</span>
+                                <div class="skill-bar">
+                                    <div
+                                        class="skill-progress"
+                                        style="width: 90%"
+                                    ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="additional-services">
-                <h3>추가 서비스</h3>
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2>대표 프로젝트</h2>
+                    <p>
+                        실무에서 바로 활용 가능한 Desktop Application과 Web
+                        Service 솔루션들
+                    </p>
+                </div>
+
+                <!-- Desktop Application Projects -->
+                <div class="project-category">
+                    <h3 class="category-title">
+                        <i class="fas fa-desktop"></i>
+                        Desktop Application
+                    </h3>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/세일즈_분석도구_Desktop Application.png"
+                                    alt="세일즈 분석도구"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>세일즈 분석도구</h3>
+                                <p>실시간 매출 데이터 분석 및 예측 시스템</p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">CustomTkinter</span>
+                                    <span class="tech-tag">Chart.js</span>
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/수수료_순이익_계산기_Desktop Application.png"
+                                    alt="수수료 순이익 계산기"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>수수료 순이익 계산기</h3>
+                                <p>
+                                    복잡한 수수료 구조를 자동으로 계산하는 도구
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">CustomTkinter</span>
+                                    <span class="tech-tag">Excel API</span>
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/라이브방송_호응_매크로_Desktop Application.png"
+                                    alt="라이브방송 호응 매크로"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>라이브방송 호응 매크로</h3>
+                                <p>라이브 스트리밍 시청자 참여도 향상 도구</p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Selenium</span>
+                                    <span class="tech-tag">PyAutoGUI</span>
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/엑셀_파일_취합_프로그램_Desktop application.png"
+                                    alt="엑셀 파일 취합 프로그램"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>엑셀 파일 취합 프로그램</h3>
+                                <p>대용량 엑셀 파일 자동 처리 및 통합 시스템</p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Pandas</span>
+                                    <span class="tech-tag">CustomTkinter</span>
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/네이버_블로그_순위체커_Desktop Application.png"
+                                    alt="네이버 블로그 순위체커"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>네이버 블로그 순위체커</h3>
+                                <p>
+                                    네이버 블로그 검색 순위 실시간 체크 시스템
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Selenium</span>
+                                    <span class="tech-tag">BeautifulSoup</span>
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <video
+                                    controls
+                                    preload="metadata"
+                                    playsinline
+                                    webkit-playsinline
+                                    muted
+                                    style="
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: contain;
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        opacity: 1;
+                                        transition: opacity 0.3s ease;
+                                        z-index: 1;
+                                        background: #000;
+                                    "
+                                >
+                                    <source
+                                        src="업무TOOL소개/N사_스마트블록_순위체크_Desktop Application.mp4"
+                                        type="video/mp4"
+                                    />
+                                    브라우저가 비디오를 지원하지 않습니다.
+                                </video>
+                            </div>
+                            <div class="project-content">
+                                <h3>N사 스마트블록 순위체크</h3>
+                                <p>
+                                    네이버 스마트블록 순위 모니터링 및 분석 도구
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Selenium</span>
+                                    <span class="tech-tag">BeautifulSoup</span>
+                                </div>
+                                <button
+                                    class="btn btn-outline"
+                                    onclick="openVideo('업무TOOL소개/N사_스마트블록_순위체크_Desktop Application.mp4', 'N사 스마트블록 순위체크', '네이버 스마트블록 순위 모니터링 및 분석 도구')"
+                                >
+                                    영상보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <video
+                                    controls
+                                    preload="metadata"
+                                    playsinline
+                                    webkit-playsinline
+                                    muted
+                                    style="
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: contain;
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        opacity: 1;
+                                        transition: opacity 0.3s ease;
+                                        z-index: 1;
+                                        background: #000;
+                                    "
+                                >
+                                    <source
+                                        src="업무TOOL소개/실시간뉴스수집_Desktop Application.mp4"
+                                        type="video/mp4"
+                                    />
+                                    브라우저가 비디오를 지원하지 않습니다.
+                                </video>
+                            </div>
+                            <div class="project-content">
+                                <h3>실시간 뉴스 수집 시스템</h3>
+                                <p>
+                                    다양한 뉴스 사이트에서 실시간으로 뉴스를
+                                    수집하고 분석하는 자동화 시스템
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">BeautifulSoup</span>
+                                    <span class="tech-tag">Selenium</span>
+                                    <span class="tech-tag">Real-time</span>
+                                </div>
+                                <button
+                                    class="btn btn-outline"
+                                    onclick="openVideo('업무TOOL소개/실시간뉴스수집_Desktop Application.mp4', '실시간 뉴스 수집 시스템', '다양한 뉴스 사이트에서 실시간으로 뉴스를 수집하고 분석하는 자동화 시스템')"
+                                >
+                                    영상보기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toolbox Enterprise Dashboard 섹션 -->
+                <div class="project-category toolbox-section">
+                    <div class="toolbox-container">
+                        <div class="toolbox-iframe-wrapper">
+                            <iframe
+                                src="https://agency8group.github.io/tool-box/"
+                                class="toolbox-iframe"
+                                title="Toolbox Enterprise Dashboard"
+                                loading="lazy"
+                            >
+                            </iframe>
+                            <div class="toolbox-overlay">
+                                <div class="toolbox-info">
+                                    <h3>Toolbox Enterprise Dashboard</h3>
+                                    <p>
+                                        엔터프라이즈급 보안과 통합 관리 시스템을
+                                        갖춘 업무 자동화 대시보드
+                                    </p>
+                                    <div class="tech-stack">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag"
+                                            >CustomTkinter</span
+                                        >
+                                        <span class="tech-tag">Enterprise</span>
+                                        <span class="tech-tag">Security</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Service Projects -->
+                <div class="project-category">
+                    <h3 class="category-title">
+                        <i class="fas fa-globe"></i>
+                        Web Service
+                    </h3>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/뉴스수집_Web Service.png"
+                                    alt="웹 뉴스 수집 도구"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>웹 뉴스 수집 도구</h3>
+                                <p>
+                                    다양한 뉴스 사이트에서 실시간 뉴스 수집 및
+                                    분석 시스템
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/스케쥴러_Web Service.png"
+                                    alt="웹 스케줄러"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>웹 스케줄러</h3>
+                                <p>
+                                    웹 기반 작업 스케줄링 및 자동화 관리 시스템
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/설문조사_Web Service.png"
+                                    alt="웹 설문조사 시스템"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>웹 설문조사 시스템</h3>
+                                <p>
+                                    온라인 설문조사 생성 및 응답 데이터 분석
+                                    도구
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/web고객센터(1)_Web Service.png"
+                                    alt="웹AI 고객센터 구축 - 메인 화면"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>웹AI 고객센터 구축</h3>
+                                <p>
+                                    인공지능 기반 고객 응대 자동화 시스템 - 메인
+                                    화면 및 대화 인터페이스
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">AI API</span>
+                                </div>
+                                <button
+                                    class="btn btn-outline"
+                                    onclick="openGallery('고객센터')"
+                                >
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/회의실예약 및 현황체크 시스템_Web Service.png"
+                                    alt="회의실예약 및 현황체크 시스템"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>회의실예약 및 현황체크 시스템</h3>
+                                <p>
+                                    회의실 예약 관리 및 실시간 현황 모니터링을
+                                    위한 통합 관리 시스템
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag"
+                                        >Google Apps Script</span
+                                    >
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-image">
+                                <video
+                                    controls
+                                    preload="metadata"
+                                    playsinline
+                                    webkit-playsinline
+                                    muted
+                                    style="
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: contain;
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        opacity: 1;
+                                        transition: opacity 0.3s ease;
+                                        z-index: 1;
+                                        background: #000;
+                                    "
+                                >
+                                    <source
+                                        src="업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4"
+                                        type="video/mp4"
+                                    />
+                                    브라우저가 비디오를 지원하지 않습니다.
+                                </video>
+                            </div>
+                            <div class="project-content">
+                                <h3>임직원 주문 접수 시스템</h3>
+                                <p>
+                                    임직원 주문을 효율적으로 관리하는 단일
+                                    페이지 웹 애플리케이션 - 주문수집원 클릭
+                                    기능 포함
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">반응형 웹</span>
+                                </div>
+                                <button
+                                    class="btn btn-outline"
+                                    onclick="openVideo('업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4', '임직원 주문 접수 시스템', '임직원 주문을 효율적으로 관리하는 단일 페이지 웹 애플리케이션 - 주문수집원 클릭 기능 포함')"
+                                >
+                                    영상보기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>서비스 소개</h2>
+                    <p>고객의 비즈니스 성장을 위한 맞춤형 솔루션</p>
+                </div>
                 <div class="services-grid">
-                    <div class="service-item">
+                    <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-robot"></i>
+                            <i class="fas fa-palette"></i>
                         </div>
-                        <div class="service-content">
-                            <h4>상담원 내부 FAQ AI화</h4>
-                            <p>상담원 업무 효율화를 위한 내부 FAQ 자동화 시스템</p>
-                            <span class="service-price">₩150,000 ~ 300,000</span>
-                        </div>
+                        <h3>커스터마이징 가능 웹툴</h3>
+                        <p>
+                            기존 웹사이트나 시스템을 고객 요구사항에 맞게 완전히
+                            커스터마이징하여 제공합니다.
+                        </p>
+                        <ul class="service-features">
+                            <li>반응형 디자인 적용</li>
+                            <li>사용자 경험 최적화</li>
+                            <li>브랜드 아이덴티티 반영</li>
+                        </ul>
                     </div>
-                    <div class="service-item">
+
+                    <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-chart-line"></i>
+                            <i class="fas fa-headset"></i>
                         </div>
-                        <div class="service-content">
-                            <h4>데이터 분석 시스템</h4>
-                            <p>비즈니스 인사이트를 위한 데이터 분석 도구</p>
-                            <span class="service-price">₩200,000 ~ 400,000</span>
-                        </div>
+                        <h3>실무 자동화 시스템</h3>
+                        <p>
+                            고객 문의 응대를 자동화하여 업무 효율성을 극대화하는
+                            시스템을 구축합니다.
+                        </p>
+                        <ul class="service-features">
+                            <li>내 직원의 아까운 시간 감축</li>
+                            <li>스마트 라우팅</li>
+                            <li>고객 만족도 분석</li>
+                        </ul>
                     </div>
-                    <div class="service-item">
+
+                    <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-shield-alt"></i>
+                            <i class="fas fa-mobile-alt"></i>
                         </div>
-                        <div class="service-content">
-                            <h4>보안 강화</h4>
-                            <p>데이터 보안 및 시스템 안정성 강화</p>
-                            <span class="service-price">₩100,000 ~ 200,000</span>
+                        <h3>UI/UX 개선</h3>
+                        <p>
+                            사용자 중심의 직관적인 인터페이스로 전환율과 사용자
+                            만족도를 향상시킵니다.
+                        </p>
+                        <ul class="service-features">
+                            <li>사용자 테스트 기반 설계</li>
+                            <li>접근성 개선</li>
+                            <li>성능 최적화</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2>서비스 가격표</h2>
+                    <p>합리적인 가격으로 업무 효율을 극대화하세요</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>스타트업 패키지</h3>
+                            <div class="price">
+                                <span class="amount">₩200,000</span>
+                                <span class="period">~ 400,000</span>
+                            </div>
+                            <p class="pricing-subtitle">
+                                소규모 팀을 위한 기본 자동화
+                            </p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>
+                                <i class="fas fa-check"></i> 기본 업무 자동화
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 엑셀 데이터 처리
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 간단한 웹툴 개발
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 1개월 무료 유지보수
+                            </li>
+                            <li><i class="fas fa-check"></i> 기본 문서화</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary"
+                            >문의하기</a
+                        >
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="featured-badge">인기</div>
+                        <div class="pricing-header">
+                            <h3>기본 자동화 패키지</h3>
+                            <div class="price">
+                                <span class="amount">₩300,000</span>
+                                <span class="period">~ 500,000</span>
+                            </div>
+                            <p class="pricing-subtitle">
+                                대부분의 업무에 적합한 표준 패키지
+                            </p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>
+                                <i class="fas fa-check"></i> 고급 업무 자동화
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 데이터 분석 시스템
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 맞춤형 웹
+                                애플리케이션
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 3개월 무료 유지보수
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 상세한 사용자
+                                가이드
+                            </li>
+                            <li><i class="fas fa-check"></i> 성능 최적화</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">문의하기</a>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>고급 자동화 패키지</h3>
+                            <div class="price">
+                                <span class="amount">₩800,000</span>
+                                <span class="period">~ 1,200,000</span>
+                            </div>
+                            <p class="pricing-subtitle">
+                                복잡한 업무 프로세스 통합 자동화
+                            </p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>
+                                <i class="fas fa-check"></i> 완전 자동화 시스템
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 상담원 내부 FAQ
+                                AI화
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 실시간 데이터
+                                대시보드
+                            </li>
+                            <li>
+                                <i class="fas fa-check"></i> 6개월 무료 유지보수
+                            </li>
+                            <li><i class="fas fa-check"></i> 24/7 기술 지원</li>
+                            <li><i class="fas fa-check"></i> 보안 강화</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary"
+                            >문의하기</a
+                        >
+                    </div>
+                </div>
+
+                <div class="additional-services">
+                    <h3>추가 서비스</h3>
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>상담원 내부 FAQ AI화</h4>
+                                <p>
+                                    상담원 업무 효율화를 위한 내부 FAQ 자동화
+                                    시스템
+                                </p>
+                                <span class="service-price"
+                                    >₩150,000 ~ 300,000</span
+                                >
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>데이터 분석 시스템</h4>
+                                <p>비즈니스 인사이트를 위한 데이터 분석 도구</p>
+                                <span class="service-price"
+                                    >₩200,000 ~ 400,000</span
+                                >
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>보안 강화</h4>
+                                <p>데이터 보안 및 시스템 안정성 강화</p>
+                                <span class="service-price"
+                                    >₩100,000 ~ 200,000</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-policy">
+                    <h3>투명한 가격 정책</h3>
+                    <div class="policy-grid">
+                        <div class="policy-item">
+                            <div class="policy-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="policy-content">
+                                <h4>분할 결제</h4>
+                                <p>프로젝트 진행 단계별 분할 결제 가능</p>
+                            </div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="policy-content">
+                                <h4>숨겨진 비용 없음</h4>
+                                <p>모든 비용을 투명하게 안내해드립니다</p>
+                            </div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="policy-content">
+                                <h4>무료 유지보수</h4>
+                                <p>패키지별 무료 유지보수 기간 제공</p>
+                            </div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="policy-content">
+                                <h4>빠른 납기</h4>
+                                <p>평균 2-4주 내 완성 및 배포</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="pricing-policy">
-                <h3>투명한 가격 정책</h3>
-                <div class="policy-grid">
-                    <div class="policy-item">
-                        <div class="policy-icon">
-                            <i class="fas fa-credit-card"></i>
-                        </div>
-                        <div class="policy-content">
-                            <h4>분할 결제</h4>
-                            <p>프로젝트 진행 단계별 분할 결제 가능</p>
-                        </div>
-                    </div>
-                    <div class="policy-item">
-                        <div class="policy-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="policy-content">
-                            <h4>숨겨진 비용 없음</h4>
-                            <p>모든 비용을 투명하게 안내해드립니다</p>
-                        </div>
-                    </div>
-                    <div class="policy-item">
-                        <div class="policy-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <div class="policy-content">
-                            <h4>무료 유지보수</h4>
-                            <p>패키지별 무료 유지보수 기간 제공</p>
-                        </div>
-                    </div>
-                    <div class="policy-item">
-                        <div class="policy-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="policy-content">
-                            <h4>빠른 납기</h4>
-                            <p>평균 2-4주 내 완성 및 배포</p>
-                        </div>
-                    </div>
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>협업 제안</h2>
+                    <p>프로젝트를 함께 만들어가실 파트너를 찾고 있습니다</p>
                 </div>
-            </div>
-        </div>
-    </section>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>지금 바로 연락하세요</h3>
+                        <p>
+                            10년간의 실무 경험을 바탕으로 고객의 비즈니스 성장을
+                            위한 최적의 솔루션을 제공합니다.
+                        </p>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>협업 제안</h2>
-                <p>프로젝트를 함께 만들어가실 파트너를 찾고 있습니다</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>지금 바로 연락하세요</h3>
-                    <p>10년간의 실무 경험을 바탕으로 고객의 비즈니스 성장을 위한 최적의 솔루션을 제공합니다.</p>
-                    
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>이메일</h4>
+                                    <a href="mailto:yoonwhan0@naver.com"
+                                        >yoonwhan0@naver.com</a
+                                    >
+                                </div>
                             </div>
-                            <div class="contact-details">
-                                <h4>이메일</h4>
-                                <a href="mailto:yoonwhan0@naver.com">yoonwhan0@naver.com</a>
-                            </div>
-                        </div>
-                        
 
-                        
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fab fa-kickstarter-k"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>카카오톡 오픈채팅</h4>
+                                    <a
+                                        href="https://open.kakao.com/o/s2Y0oHMh"
+                                        target="_blank"
+                                        >1대1 오픈채팅 참여하기</a
+                                    >
+                                </div>
                             </div>
-                            <div class="contact-details">
-                                <h4>전화</h4>
-                                <a href="tel:+82-10-5871-7232">010-5871-7232</a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-clipboard-list"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>상세 개발 접수양식</h4>
-                                <a href="https://agency8group.github.io/Development-request/" target="_blank" class="btn btn-secondary" style="margin-top: 10px; display: inline-block; padding: 8px 16px; font-size: 0.9rem;">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    개발요청서 작성
-                                </a>
+
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>상세 개발 접수양식</h4>
+                                    <a
+                                        href="https://agency8group.github.io/Development-request/"
+                                        target="_blank"
+                                        class="btn btn-secondary"
+                                        style="
+                                            margin-top: 10px;
+                                            display: inline-block;
+                                            padding: 8px 16px;
+                                            font-size: 0.9rem;
+                                        "
+                                    >
+                                        <i class="fas fa-external-link-alt"></i>
+                                        개발요청서 작성
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="contact-form">
-                    <h3>간편 프로젝트 문의</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="이름" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="이메일" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="company" name="company" placeholder="회사명">
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="프로젝트 요구사항을 자세히 설명해주세요" rows="5" required></textarea>
-                        </div>
-                        <div class="form-group submit-group">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-paper-plane"></i>
-                                문의하기
-                            </button>
-                        </div>
-                    </form>
-                    
 
+                    <div class="contact-form">
+                        <h3>간편 프로젝트 문의</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="이름"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="이메일"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    id="company"
+                                    name="company"
+                                    placeholder="회사명"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    placeholder="프로젝트 요구사항을 자세히 설명해주세요"
+                                    rows="5"
+                                    required
+                                ></textarea>
+                            </div>
+                            <div class="form-group submit-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i>
+                                    문의하기
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>DevPortfolio</h4>
+                        <p>
+                            웹 기반 프로그램 제작자<br />10년간 고객 중심의 실전
+                            문제해결
+                        </p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>서비스</h4>
+                        <ul>
+                            <li><a href="#services">웹툴 개발</a></li>
+                            <li><a href="#services">자동화</a></li>
+
+                            <li><a href="#services">UI/UX 개선</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>연락처</h4>
+                        <ul>
+                            <li>
+                                <a href="mailto:yoonwhan0@naver.com">이메일</a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://open.kakao.com/o/s2Y0oHMh"
+                                    target="_blank"
+                                    >카카오톡 오픈채팅</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 DevPortfolio. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Image Modal -->
+        <div id="imageModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <img id="modalImage" src="" alt="프로젝트 이미지" />
+                <div class="modal-info">
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalDescription"></p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>DevPortfolio</h4>
-                    <p>웹 기반 프로그램 제작자<br>10년간 고객 중심의 실전 문제해결</p>
+        <!-- Gallery Modal -->
+        <div id="galleryModal" class="modal">
+            <div class="modal-content gallery-content">
+                <span class="close" onclick="closeGallery()">&times;</span>
+                <div class="gallery-container">
+                    <button
+                        class="gallery-nav prev"
+                        onclick="changeGalleryImage(-1)"
+                    >
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="gallery-image-container">
+                        <img id="galleryImage" src="" alt="갤러리 이미지" />
+                    </div>
+                    <button
+                        class="gallery-nav next"
+                        onclick="changeGalleryImage(1)"
+                    >
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
-                <div class="footer-section">
-                    <h4>서비스</h4>
-                    <ul>
-                        <li><a href="#services">웹툴 개발</a></li>
-                        <li><a href="#services">자동화</a></li>
-                        
-                        <li><a href="#services">UI/UX 개선</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>연락처</h4>
-                    <ul>
-                        <li><a href="mailto:yoonwhan0@naver.com">이메일</a></li>
-                        <li><a href="tel:+82-10-5871-7232">전화</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 DevPortfolio. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Image Modal -->
-    <div id="imageModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <img id="modalImage" src="" alt="프로젝트 이미지">
-            <div class="modal-info">
-                <h3 id="modalTitle"></h3>
-                <p id="modalDescription"></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gallery Modal -->
-    <div id="galleryModal" class="modal">
-        <div class="modal-content gallery-content">
-            <span class="close" onclick="closeGallery()">&times;</span>
-            <div class="gallery-container">
-                <button class="gallery-nav prev" onclick="changeGalleryImage(-1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="gallery-image-container">
-                    <img id="galleryImage" src="" alt="갤러리 이미지">
-                </div>
-                <button class="gallery-nav next" onclick="changeGalleryImage(1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-            <div class="gallery-info">
-                <h3 id="galleryTitle"></h3>
-                <p id="galleryDescription"></p>
-                <div class="gallery-indicators">
-                    <span id="galleryCounter"></span>
+                <div class="gallery-info">
+                    <h3 id="galleryTitle"></h3>
+                    <p id="galleryDescription"></p>
+                    <div class="gallery-indicators">
+                        <span id="galleryCounter"></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Video Modal -->
-    <div id="videoModal" class="modal">
-        <div class="modal-content video-content">
-            <span class="close" onclick="closeVideo()">&times;</span>
-            <div class="video-container">
-                <video id="modalVideo" controls preload="metadata" playsinline webkit-playsinline>
-                    <source src="" type="video/mp4">
-                    브라우저가 비디오를 지원하지 않습니다.
-                </video>
-            </div>
-            <div class="video-info">
-                <h3 id="videoTitle"></h3>
-                <p id="videoDescription"></p>
+        <!-- Video Modal -->
+        <div id="videoModal" class="modal">
+            <div class="modal-content video-content">
+                <span class="close" onclick="closeVideo()">&times;</span>
+                <div class="video-container">
+                    <video
+                        id="modalVideo"
+                        controls
+                        preload="metadata"
+                        playsinline
+                        webkit-playsinline
+                    >
+                        <source src="" type="video/mp4" />
+                        브라우저가 비디오를 지원하지 않습니다.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 id="videoTitle"></h3>
+                    <p id="videoDescription"></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script src="script.js"></script>
-</body>
-</html> 
+        <script src="script.js"></script>
+    </body>
+</html>
