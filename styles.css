@@ -1733,7 +1733,7 @@ body {
 }
 
 .contact-form {
-    background: var(--white);
+    background: var(--medium-gray);
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 30px var(--shadow-dark);
@@ -1779,8 +1779,8 @@ body {
     border-radius: 10px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: var(--white);
-    color: var(--dark-gray);
+    background: var(--light-gray);
+    color: var(--text-primary);
     font-weight: 500;
 }
 
@@ -1790,7 +1790,7 @@ body {
     border-color: var(--primary-gold);
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
     transform: translateY(-2px);
-    background: var(--white);
+    background: var(--light-gray);
 }
 
 .form-group input::placeholder,
