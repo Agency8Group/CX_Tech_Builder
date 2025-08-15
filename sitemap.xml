@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    
+    <!-- 메인 페이지 -->
+    <url>
+        <loc>https://agency8group.github.io/CX_Tech_Builder/</loc>
+        <lastmod>2024-12-19T00:00:00+09:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://agency8group.github.io/CX_Tech_Builder/img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png</image:loc>
+            <image:title>CX_Tech_Builder - 실무 중심 풀스택 개발자</image:title>
+            <image:caption>10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- 섹션별 페이지 -->
+    <url>
+        <loc>https://agency8group.github.io/CX_Tech_Builder/#about</loc>
+        <lastmod>2024-12-19T00:00:00+09:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://agency8group.github.io/CX_Tech_Builder/#skills</loc>
+        <lastmod>2024-12-19T00:00:00+09:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://agency8group.github.io/CX_Tech_Builder/#projects</loc>
+        <lastmod>2024-12-19T00:00:00+09:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <url>
+        <loc>https://agency8group.github.io/CX_Tech_Builder/#services</loc>
+        <lastmod>2024-12-19T00:00:00+09:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://agency8group.github.io/CX_Tech_Builder/#pricing</loc>
+        <lastmod>2024-12-19T00:00:00+09:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://agency8group.github.io/CX_Tech_Builder/#contact</loc>
+        <lastmod>2024-12-19T00:00:00+09:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- 외부 링크 -->
+    <url>
+        <loc>https://agency8group.github.io/Development-request/</loc>
+        <lastmod>2024-12-19T00:00:00+09:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://agency8group.github.io/tool-box/</loc>
+        <lastmod>2024-12-19T00:00:00+09:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+</urlset>
