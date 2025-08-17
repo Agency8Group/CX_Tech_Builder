@@ -1733,6 +1733,46 @@ body {
     text-decoration: underline;
 }
 
+/* 입금 계좌 정보 스타일 */
+.bank-info {
+    margin-top: 10px;
+}
+
+.bank-info p {
+    margin: 5px 0;
+    color: var(--text-primary);
+}
+
+.bank-info .account-number {
+    font-family: "Courier New", monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary-gold);
+    background: var(--dark-gray);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+.copy-btn {
+    background: var(--gradient-gold) !important;
+    color: var(--dark-gray) !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.copy-btn:hover {
+    background: linear-gradient(
+        135deg,
+        var(--accent-gold),
+        var(--primary-gold)
+    ) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3) !important;
+}
+
 .contact-form {
     background: var(--medium-gray);
     padding: 40px;

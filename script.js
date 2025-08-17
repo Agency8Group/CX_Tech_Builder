@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(mouseParticleStyle);
     
     // Google Apps Script URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuJJo_lxjILCNbKx3bb4xyOvYtUW7aYXEULH7p0aRY_rIVu95BQbJt20-NmsyXhgLq/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzx-D4RMTsnn5WRUqzftWLtBJ_DsF-a0SyX3sGooWLIuBMIcSTstNvKt2vf9S8mNt8c/exec';
     
     // 폼 제출 처리
     const contactForm = document.getElementById('contactForm');
@@ -391,21 +391,24 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 전송 중...';
             
             try {
-                // 폼 데이터 수집
-                const formData = new FormData(this);
-                const data = {
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    company: formData.get('company'),
-                    message: formData.get('message'),
-                    timestamp: new Date().toISOString()
-                };
-                
-                // 유효성 검사
-                if (!data.name || !data.email || !data.message) {
-                    showNotification('모든 필수 항목을 입력해주세요.', 'error');
-                    return;
-                }
+                                 // 폼 데이터 수집
+                 const formData = new FormData(this);
+                 const data = {
+                     name: formData.get('name'),
+                     email: formData.get('email'),
+                     phone: formData.get('phone'),
+                     referrer: formData.get('referrer'),
+                     programName: formData.get('programName'),
+                     ipAddress: formData.get('ipAddress'),
+                     paymentDate: formData.get('paymentDate'),
+                     timestamp: new Date().toISOString()
+                 };
+                 
+                 // 유효성 검사
+                 if (!data.name || !data.email) {
+                     showNotification('이름과 이메일은 필수 항목입니다.', 'error');
+                     return;
+                 }
                 
                 if (!isValidEmail(data.email)) {
                     showNotification('올바른 이메일 주소를 입력해주세요.', 'error');
@@ -424,8 +427,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: JSON.stringify(data)
                 });
                 
-                // 성공 처리
-                showNotification('✅ 문의가 성공적으로 전송되었습니다! 빠른 시일 내에 연락드리겠습니다.', 'success');
+                                 // 성공 처리
+                 showNotification('✅ 기존 프로그램 사용 요청이 성공적으로 전송되었습니다! 빠른 시일 내에 연락드리겠습니다.', 'success');
                 this.reset();
                 
             } catch (error) {
@@ -1055,5 +1058,17 @@ CX_Tech_Builder – 경험을 기술로, 고객을 중심에.`;
         }
     };
     
-    // ESC 키는 상단의 통합 처리에서 처리됨 (중복 제거)
-}); 
+         // ESC 키는 상단의 통합 처리에서 처리됨 (중복 제거)
+     
+     // 계좌번호 복사 함수
+     window.copyAccountNumber = function() {
+         const accountNumber = '3333-05-7624-154';
+         
+         navigator.clipboard.writeText(accountNumber).then(function() {
+             showNotification('✅ 계좌번호가 클립보드에 복사되었습니다!', 'success');
+         }).catch(function(err) {
+             console.error('복사 실패:', err);
+             showNotification('❌ 복사에 실패했습니다. 수동으로 복사해주세요.', 'error');
+         });
+     };
+ });  

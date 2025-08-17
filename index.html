@@ -1733,7 +1733,7 @@
                                     <i class="fas fa-clipboard-list"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <h4>상세 개발 접수양식</h4>
+                                    <h4>신규 추가개발 요청 양식</h4>
                                     <a
                                         href="https://agency8group.github.io/Development-request/"
                                         target="_blank"
@@ -1750,11 +1750,39 @@
                                     </a>
                                 </div>
                             </div>
+
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>입금 계좌 정보</h4>
+                                    <div class="bank-info">
+                                        <p><strong>카카오뱅크</strong></p>
+                                        <p class="account-number">
+                                            3333-05-7624-154
+                                        </p>
+                                        <button
+                                            class="btn btn-secondary copy-btn"
+                                            onclick="copyAccountNumber()"
+                                            style="
+                                                margin-top: 10px;
+                                                display: inline-block;
+                                                padding: 8px 16px;
+                                                font-size: 0.9rem;
+                                            "
+                                        >
+                                            <i class="fas fa-copy"></i>
+                                            계좌번호 복사
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="contact-form">
-                        <h3>간편 프로젝트 문의</h3>
+                        <h3>완성된<br />프로그램 사용 요청</h3>
                         <form id="contactForm">
                             <div class="form-group">
                                 <input
@@ -1777,24 +1805,47 @@
                             <div class="form-group">
                                 <input
                                     type="text"
-                                    id="company"
-                                    name="company"
-                                    placeholder="회사명"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="연락처"
                                 />
                             </div>
                             <div class="form-group">
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    placeholder="프로젝트 요구사항을 자세히 설명해주세요"
-                                    rows="5"
-                                    required
-                                ></textarea>
+                                <input
+                                    type="text"
+                                    id="referrer"
+                                    name="referrer"
+                                    placeholder="추천인명"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    id="programName"
+                                    name="programName"
+                                    placeholder="사용할 프로그램명"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    id="ipAddress"
+                                    name="ipAddress"
+                                    placeholder="사용할 컴퓨터 IP 주소"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    id="paymentDate"
+                                    name="paymentDate"
+                                    placeholder="매월결제일"
+                                />
                             </div>
                             <div class="form-group submit-group">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-paper-plane"></i>
-                                    접수하기
+                                    요청하기
                                 </button>
                             </div>
                         </form>
