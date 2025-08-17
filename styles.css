@@ -3404,6 +3404,18 @@ html {
     box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 
+.discount {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 10px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+}
+
 /* 서비스 구조 안내 스타일 */
 .service-structure-info {
     margin-bottom: 60px;
@@ -3556,6 +3568,18 @@ html {
     color: rgba(255, 255, 255, 0.7);
     font-size: 1rem;
     font-weight: 400;
+}
+
+.price .discount {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 10px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
 }
 
 .pricing-subtitle {
