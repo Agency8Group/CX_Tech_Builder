@@ -53,6 +53,15 @@
     animation: popupSlideIn 0.5s ease-out;
 }
 
+/* Hide scrollbar for notice popup while keeping content scrollable */
+.notice-content {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.notice-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
 @keyframes popupSlideIn {
     0% {
         transform: translateY(-50px) scale(0.9);
@@ -1354,11 +1363,13 @@ body {
 }
 
 .project-card.popular-marketing {
-    box-shadow: 0 22px 55px rgba(239, 68, 68, 0.25), 0 10px 30px rgba(245, 158, 11, 0.2);
+    box-shadow: 0 22px 55px rgba(239, 68, 68, 0.25),
+        0 10px 30px rgba(245, 158, 11, 0.2);
 }
 
 .project-card.popular-planning {
-    box-shadow: 0 22px 55px rgba(59, 130, 246, 0.25), 0 10px 30px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 22px 55px rgba(59, 130, 246, 0.25),
+        0 10px 30px rgba(139, 92, 246, 0.2);
 }
 
 .pop-badge {
