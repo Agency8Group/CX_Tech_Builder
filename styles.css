@@ -1372,6 +1372,11 @@ body {
         0 10px 30px rgba(139, 92, 246, 0.2);
 }
 
+.project-card.popular-office {
+    box-shadow: 0 22px 55px rgba(16, 185, 129, 0.25),
+        0 10px 30px rgba(20, 184, 166, 0.2);
+}
+
 .pop-badge {
     position: absolute;
     top: 12px;
@@ -1393,6 +1398,19 @@ body {
 
 .pop-badge.planning {
     background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+}
+
+/* 기본 추천 배지 (비인기 카드용) */
+.pop-badge.basic {
+    background: linear-gradient(
+        135deg,
+        var(--primary-gold),
+        var(--secondary-gold)
+    );
+}
+
+.pop-badge.office {
+    background: linear-gradient(135deg, #10b981, #14b8a6);
 }
 
 .project-image {
