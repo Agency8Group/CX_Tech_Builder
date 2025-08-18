@@ -1333,6 +1333,7 @@ body {
     border: 1px solid var(--border-color);
     opacity: 0;
     transform: translateY(50px);
+    position: relative;
 }
 
 .project-card.visible {
@@ -1344,6 +1345,43 @@ body {
     transform: translateY(-15px) scale(1.02);
     box-shadow: 0 25px 50px var(--shadow-dark);
     border-color: var(--primary-gold);
+}
+
+/* 인기 강조 스타일 */
+.project-card.popular {
+    border-color: var(--primary-gold);
+    box-shadow: 0 20px 50px rgba(212, 175, 55, 0.25);
+}
+
+.project-card.popular-marketing {
+    box-shadow: 0 22px 55px rgba(239, 68, 68, 0.25), 0 10px 30px rgba(245, 158, 11, 0.2);
+}
+
+.project-card.popular-planning {
+    box-shadow: 0 22px 55px rgba(59, 130, 246, 0.25), 0 10px 30px rgba(139, 92, 246, 0.2);
+}
+
+.pop-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 3;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.3px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    user-select: none;
+}
+
+.pop-badge.marketing {
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+}
+
+.pop-badge.planning {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
 }
 
 .project-image {
