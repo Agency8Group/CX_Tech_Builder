@@ -14,12 +14,11 @@
 
 /**
  * ===== 웹 앱 배포용 함수 (절대 지우지 마세요!) =====
- * HTML 페이지를 반환합니다.
+ * 현재는 외부 웹사이트에서 직접 호출하므로 간단한 응답만 반환합니다.
  */
 function doGet() {
-  return HtmlService.createHtmlOutputFromFile('index.html')
-    .setTitle('포트폴리오 문의')
-    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+  return ContentService.createTextOutput('Google Apps Script is running')
+    .setMimeType(ContentService.MimeType.TEXT);
 }
 
 /**
@@ -46,9 +45,7 @@ function doPost(e) {
     if (!data.email) {
       throw new Error("이메일이 누락되었습니다.");
     }
-    if (!data.message) {
-      throw new Error("메시지가 누락되었습니다.");
-    }
+    // referrer와 paymentDate는 선택사항이므로 검사하지 않음
     
     // 이메일 형식 검사
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,7 +53,7 @@ function doPost(e) {
       throw new Error("올바른 이메일 형식이 아닙니다.");
     }
     
-    // ===== 3. Google Sheets에 문의 저장 =====
+    // ===== 3. Google Sheets에 기존 프로그램 사용 요청 저장 =====
     const result = saveToSheet(data);
     
     // ===== 4. 네이트온 팀룸 알림 전송 =====
@@ -70,10 +67,10 @@ function doPost(e) {
     }
     
     // ===== 5. 성공 응답 반환 =====
-    Logger.log("=== 문의 저장 성공 ===");
+    Logger.log("=== 기존 프로그램 사용 요청 저장 성공 ===");
     return createResponse({
       success: true,
-      message: "문의가 성공적으로 저장되었습니다.",
+      message: "기존 프로그램 사용 요청이 성공적으로 저장되었습니다.",
       timestamp: new Date().toISOString()
     });
     
@@ -84,7 +81,7 @@ function doPost(e) {
     
     return createResponse({
       success: false,
-      message: "문의 저장 중 오류가 발생했습니다: " + error.message
+      message: "기존 프로그램 사용 요청 저장 중 오류가 발생했습니다: " + error.message
     });
   }
 }
@@ -102,29 +99,32 @@ function sendNateonNotification(data) {
     const now = new Date();
     const formattedTime = Utilities.formatDate(now, 'Asia/Seoul', 'yyyy-MM-dd HH:mm:ss');
     
-    // 알림 메시지 구성
-    const message = {
-      "text": `🎉 **새로운 포트폴리오 문의 수신!**
-      
-📅 **접수 시간**: ${formattedTime}
-👤 **이름**: ${data.name}
-📧 **이메일**: ${data.email}
-🏢 **회사명**: ${data.company || '미입력'}
-💬 **메시지**: ${data.message}
-      
-🔗 **관리**: Google Sheets에서 확인하세요!`,
+         // 알림 메시지 구성
+     const message = {
+       "text": `🎉 **새로운 기존 프로그램 사용 요청 수신!**
+       
+ 📅 **접수 시간**: ${formattedTime}
+ 👤 **이름**: ${data.name}
+ 📧 **이메일**: ${data.email}
+ 📞 **연락처**: ${data.phone || '미입력'}
+ 👥 **추천인명**: ${data.referrer || '미입력'}
+ 💻 **사용할 프로그램명**: ${data.programName || '미입력'}
+ 🌐 **사용할 컴퓨터 IP주소**: ${data.ipAddress || '미입력'}
+ 📅 **매월결제일**: ${data.paymentDate || '미입력'}
+       
+ 🔗 **관리**: Google Sheets에서 확인하세요!`,
       "attachments": [
         {
           "color": "#D4AF37",
           "fields": [
+                         {
+               "title": "요청자 정보",
+               "value": `이름: ${data.name}\n이메일: ${data.email}\n연락처: ${data.phone || '미입력'}\n추천인: ${data.referrer || '미입력'}`,
+               "short": true
+             },
             {
-              "title": "문의자 정보",
-              "value": `이름: ${data.name}\n이메일: ${data.email}\n회사: ${data.company || '미입력'}`,
-              "short": true
-            },
-            {
-              "title": "접수 시간",
-              "value": formattedTime,
+              "title": "결제일",
+              "value": data.paymentDate || '미입력',
               "short": true
             }
           ]
@@ -169,15 +169,15 @@ function saveToSheet(data) {
     const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
     
     // ===== 시트 이름 설정 =====
-    const sheetName = '포트폴리오_문의';
+    const sheetName = '기존프로그램_사용요청';
     
     // 시트 가져오기 (없으면 생성)
     let sheet = spreadsheet.getSheetByName(sheetName);
     if (!sheet) {
       sheet = spreadsheet.insertSheet(sheetName);
       
-      // ===== 헤더 설정 =====
-      const headers = ['타임스탬프', '이름', '이메일', '회사명', '메시지'];
+           // ===== 헤더 설정 =====
+     const headers = ['타임스탬프', '이름', '이메일', '연락처', '추천인명', '사용할 프로그램명', '사용할 컴퓨터 IP주소', '매월결제일'];
       
       sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
       
@@ -190,18 +190,21 @@ function saveToSheet(data) {
       sheet.autoResizeColumns(1, headers.length);
     }
     
-    // ===== 데이터 행 구성 =====
-    const rowData = [
-      new Date(),           // A열: 타임스탬프
-      data.name || '',      // B열: 이름
-      data.email || '',     // C열: 이메일
-      data.company || '',   // D열: 회사명
-      data.message || ''    // E열: 메시지
-    ];
+         // ===== 데이터 행 구성 =====
+     const rowData = [
+       new Date(),           // A열: 타임스탬프
+       data.name || '',      // B열: 이름
+       data.email || '',     // C열: 이메일
+       data.phone || '',     // D열: 연락처
+       data.referrer || '',  // E열: 추천인명
+       data.programName || '', // F열: 사용할 프로그램명
+       data.ipAddress || '', // G열: 사용할 컴퓨터 IP주소
+       data.paymentDate || '' // H열: 매월결제일
+     ];
     
     sheet.appendRow(rowData);
     
-    Logger.log("문의 저장 완료: " + JSON.stringify(rowData));
+    Logger.log("기존 프로그램 사용 요청 저장 완료: " + JSON.stringify(rowData));
     return true;
     
   } catch (error) {
@@ -238,12 +241,15 @@ function doOptions(e) {
  * ===== 테스트용 함수 =====
  * 수동으로 문의 저장과 네이트온 알림을 테스트할 수 있습니다.
  */
-function testSaveInquiry() {
+ function testSaveInquiry() {
   const testData = {
     name: "테스트 사용자",
     email: "test@example.com",
-    company: "테스트 회사",
-    message: "포트폴리오 문의 테스트입니다.",
+    phone: "010-1234-5678",
+    referrer: "테스트 추천인",
+    programName: "테스트 프로그램",
+    ipAddress: "192.168.1.100",
+    paymentDate: "15일",
     timestamp: new Date().toISOString()
   };
   
@@ -267,12 +273,15 @@ function testSaveInquiry() {
  * ===== 네이트온 알림만 테스트하는 함수 =====
  * 네이트온 알림 기능만 별도로 테스트할 수 있습니다.
  */
-function testNateonNotification() {
+ function testNateonNotification() {
   const testData = {
     name: "네이트온 테스트",
     email: "nateon@test.com",
-    company: "테스트 회사",
-    message: "네이트온 알림 기능 테스트입니다.",
+    phone: "010-9876-5432",
+    referrer: "테스트 추천인",
+    programName: "테스트 프로그램",
+    ipAddress: "192.168.1.200",
+    paymentDate: "20일",
     timestamp: new Date().toISOString()
   };
   
@@ -293,7 +302,7 @@ function testNateonNotification() {
 function checkSheetStatus() {
   try {
     const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    const sheetName = '포트폴리오_문의';
+    const sheetName = '기존프로그램_사용요청';
     const sheet = spreadsheet.getSheetByName(sheetName);
     
     if (!sheet) {
@@ -302,12 +311,12 @@ function checkSheetStatus() {
     }
     
     const lastRow = sheet.getLastRow();
-    Logger.log("현재 문의 수: " + (lastRow - 1)); // 헤더 제외
+    Logger.log("현재 기존 프로그램 사용 요청 수: " + (lastRow - 1)); // 헤더 제외
     
-    if (lastRow > 0) {
-      const headers = sheet.getRange('A1:E1').getValues()[0];
-      Logger.log("헤더: " + headers.join(', '));
-    }
+         if (lastRow > 0) {
+       const headers = sheet.getRange('A1:H1').getValues()[0];
+       Logger.log("헤더: " + headers.join(', '));
+     }
     
     return true;
   } catch (error) {
