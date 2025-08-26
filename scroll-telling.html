@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CX Tech Builder - 인터랙티브 스크롤 텔링</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: #000;
+            overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            padding: 4rem 0;
+        }
+
+        .section-content {
+            text-align: center;
+            max-width: 1200px;
+            padding: 2rem;
+            opacity: 0;
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+        }
+
+        .hero .section-content {
+            transform: translateY(100px);
+        }
+
+        .experience .section-content {
+            transform: translateX(-100px);
+        }
+
+        .skills .section-content {
+            transform: translateX(100px);
+        }
+
+        .projects .section-content {
+            transform: translateY(-100px);
+        }
+
+        .services .section-content {
+            transform: scale(0.5) rotate(10deg);
+        }
+
+        .contact .section-content {
+            transform: translateY(100px) scale(0.8);
+        }
+
+        .section.active .section-content {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) rotate(0deg);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('img/메인이미지.png') center center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero .section-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #ffd700, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            color: #ccc;
+        }
+
+        .stats {
+            display: flex;
+            gap: 4rem;
+            justify-content: center;
+            margin-top: 4rem;
+        }
+
+        .stat {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+            transition-delay: calc(var(--delay) * 0.2s);
+        }
+
+        .section.active .stat {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            display: block;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            color: #ccc;
+        }
+
+        .experience {
+            background: linear-gradient(135deg, #111 0%, #000 100%);
+        }
+
+        .experience h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1s ease;
+            transition-delay: calc(var(--delay) * 0.3s);
+        }
+
+        .section.active .timeline-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            transform: translateX(100px);
+        }
+
+        .timeline-year {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            min-width: 120px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .timeline-content p {
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        .skills {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+        }
+
+        .skills h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: scale(0.5) rotateY(90deg);
+            transition: all 1s ease;
+            transition-delay: calc(var(--delay) * 0.2s);
+        }
+
+        .section.active .skill-category {
+            opacity: 1;
+            transform: scale(1) rotateY(0deg);
+        }
+
+        .skill-category h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.6rem;
+            opacity: 0.9;
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        .projects {
+            background: linear-gradient(135deg, #111 0%, #000 100%);
+        }
+
+        .projects h2 {
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        .project-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(100px) rotateX(45deg);
+            transition: all 1s ease;
+            transition-delay: calc(var(--delay) * 0.2s);
+        }
+
+        .section.active .project-card {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg);
+        }
+
+        .project-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+        }
+
+        .project-card p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .tech-tag {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .services {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+        }
+
+        .services h2 {
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            opacity: 0;
+            transform: rotateY(180deg) scale(0.5);
+            transition: all 1s ease;
+            transition-delay: calc(var(--delay) * 0.2s);
+        }
+
+        .section.active .service-card {
+            opacity: 1;
+            transform: rotateY(0deg) scale(1);
+        }
+
+        .service-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+        }
+
+        .service-card p {
+            opacity: 0.9;
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #000 0%, #111 100%);
+        }
+
+        .contact h2 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            font-size: 1.4rem;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+            transition-delay: calc(var(--delay) * 0.2s);
+        }
+
+        .section.active .contact-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffd700;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 6px;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            z-index: 1001;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .timeline-year {
+                min-width: auto;
+            }
+
+            .section-content {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 2rem 0;
+            }
+
+            .experience h2,
+            .skills h2 {
+                font-size: 2.5rem;
+            }
+
+            .timeline-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .skill-category h3 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="scroll-indicator" id="scrollIndicator">섹션 1/6</div>
+
+    <section class="section hero" id="hero">
+        <div class="floating-elements" id="floatingElements"></div>
+        <div class="section-content">
+            <h1>CX Tech Builder</h1>
+            <p>실무에서 검증된 업무 효율화 솔루션</p>
+            <div class="stats">
+                <div class="stat" style="--delay: 1">
+                    <span class="stat-number">10년</span>
+                    <span class="stat-label">실무 경험</span>
+                </div>
+                <div class="stat" style="--delay: 2">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">자동화 프로젝트</span>
+                </div>
+                <div class="stat" style="--delay: 3">
+                    <span class="stat-number">3,542줄</span>
+                    <span class="stat-label">CS 시스템</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section experience" id="experience">
+        <div class="section-content">
+            <h2>경력 연혁</h2>
+            <div class="timeline">
+                <div class="timeline-item" style="--delay: 1">
+                    <div class="timeline-year">2025.03</div>
+                    <div class="timeline-content">
+                        <h3>I사 - 전략기획실 과장</h3>
+                        <p>해외제품 유통사, 신설 부서 창립 멤버로서 조직 구조·업무 프로세스 제로베이스 설계</p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="--delay: 2">
+                    <div class="timeline-year">2020.11</div>
+                    <div class="timeline-content">
+                        <h3>D사 - 총괄 책임</h3>
+                        <p>AS센터·물류센터·CS센터 통합 구축·운영 총괄, 기술 트러블슈팅 전문</p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="--delay: 3">
+                    <div class="timeline-year">2018.05</div>
+                    <div class="timeline-content">
+                        <h3>S사 - CS운영 팀장</h3>
+                        <p>대규모 VOC 개선 프로젝트 주도, 대외기관 대응 프로세스 표준화</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section skills" id="skills">
+        <div class="section-content">
+            <h2>핵심 기술 스택</h2>
+            <div class="skills-grid">
+                <div class="skill-category" style="--delay: 1">
+                    <h3>Desktop Application</h3>
+                    <ul class="skill-list">
+                        <li>Python</li>
+                        <li>CustomTkinter</li>
+                        <li>PyInstaller</li>
+                        <li>Socket Programming</li>
+                    </ul>
+                </div>
+                <div class="skill-category" style="--delay: 2">
+                    <h3>Web Development</h3>
+                    <ul class="skill-list">
+                        <li>HTML5 / CSS3</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>Tailwind CSS</li>
+                        <li>React / Vue</li>
+                    </ul>
+                </div>
+                <div class="skill-category" style="--delay: 3">
+                    <h3>Backend & APIs</h3>
+                    <ul class="skill-list">
+                        <li>Google Apps Script</li>
+                        <li>Webhook Integration</li>
+                        <li>Google Sheets API</li>
+                        <li>Node.js</li>
+                    </ul>
+                </div>
+                <div class="skill-category" style="--delay: 4">
+                    <h3>Data & Storage</h3>
+                    <ul class="skill-list">
+                        <li>JSON</li>
+                        <li>Excel/Spreadsheet</li>
+                        <li>CSV Processing</li>
+                        <li>데이터 분석</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section projects" id="projects">
+        <div class="section-content">
+            <h2>대표 프로젝트</h2>
+            <div class="project-cards">
+                <div class="project-card" style="--delay: 1">
+                    <h3>N사 카페 DB 채굴기</h3>
+                    <p>카페 내 공개 데이터를 고속 수집·정리하는 자동화 채굴 도구</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Selenium</span>
+                        <span class="tech-tag">BeautifulSoup</span>
+                    </div>
+                </div>
+                <div class="project-card" style="--delay: 2">
+                    <h3>웹AI 고객센터 구축</h3>
+                    <p>고객센터 직원 적응률 증가, 퇴사율 감소를 위한 AI 기반 FAQ 시스템</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">AI API</span>
+                    </div>
+                </div>
+                <div class="project-card" style="--delay: 3">
+                    <h3>엑셀 파일 취합 프로그램</h3>
+                    <p>막내 공수 3~4시간 줄이는 커스텀화 가능한 자동 처리 시스템</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">CustomTkinter</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section services" id="services">
+        <div class="section-content">
+            <h2>서비스 소개</h2>
+            <div class="service-cards">
+                <div class="service-card" style="--delay: 1">
+                    <h3>커스터마이징 가능 웹툴</h3>
+                    <p>기존 웹사이트나 시스템을 고객 요구사항에 맞게 완전히 커스터마이징하여 제공</p>
+                </div>
+                <div class="service-card" style="--delay: 2">
+                    <h3>실무 자동화 시스템</h3>
+                    <p>고객 문의 응대를 자동화하여 업무 효율성을 극대화하는 시스템 구축</p>
+                </div>
+                <div class="service-card" style="--delay: 3">
+                    <h3>UI/UX 개선</h3>
+                    <p>사용자 중심의 직관적인 인터페이스로 전환율과 사용자 만족도를 향상</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact" id="contact">
+        <div class="section-content">
+            <h2>협업 제안</h2>
+            <p>프로젝트를 함께 만들어가실 파트너를 찾고 있습니다</p>
+            <div class="contact-info">
+                <div class="contact-item" style="--delay: 1">
+                    <div class="contact-icon">💬</div>
+                    <div>
+                        <strong>카카오톡 오픈채팅</strong><br>
+                        <a href="https://open.kakao.com/o/s2Y0oHMh" target="_blank" style="color: #ffd700;">1대1 오픈채팅 참여하기</a>
+                    </div>
+                </div>
+                <div class="contact-item" style="--delay: 2">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <strong>이메일</strong><br>
+                        yoonwhan0@naver.com
+                    </div>
+                </div>
+                <div class="contact-item" style="--delay: 3">
+                    <div class="contact-icon">💰</div>
+                    <div>
+                        <strong>구독 서비스</strong><br>
+                        월 28만원부터 시작하는 맞춤형 구독 서비스
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 스크롤 감지 및 애니메이션 제어
+        const sections = document.querySelectorAll('.section');
+        const progressBar = document.getElementById('progressBar');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+
+        // 플로팅 요소 생성
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.style.left = Math.random() * 100 + '%';
+                element.style.top = Math.random() * 100 + '%';
+                element.style.animationDelay = Math.random() * 6 + 's';
+                element.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                container.appendChild(element);
+            }
+        }
+
+        function updateProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        }
+
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            const currentSection = Math.floor(scrollTop / windowHeight) + 1;
+            scrollIndicator.textContent = `섹션 ${currentSection}/${sections.length}`;
+        }
+
+        function checkSectionVisibility() {
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // 섹션이 화면에 50% 이상 보일 때 활성화
+                if (rect.top < windowHeight * 0.5 && rect.bottom > windowHeight * 0.5) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }
+
+        // 스크롤 이벤트 리스너
+        window.addEventListener('scroll', () => {
+            updateProgress();
+            updateScrollIndicator();
+            checkSectionVisibility();
+        });
+
+        // 초기 로드 시 첫 번째 섹션 활성화
+        window.addEventListener('load', () => {
+            sections[0].classList.add('active');
+            updateProgress();
+            updateScrollIndicator();
+            createFloatingElements();
+        });
+
+        // 부드러운 스크롤 (선택사항)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 키보드 네비게이션
+        document.addEventListener('keydown', (e) => {
+            const currentSection = Math.floor(window.pageYOffset / window.innerHeight);
+            
+            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                e.preventDefault();
+                if (currentSection < sections.length - 1) {
+                    sections[currentSection + 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                if (currentSection > 0) {
+                    sections[currentSection - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // 터치 스와이프 지원 (모바일)
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+            const currentSection = Math.floor(window.pageYOffset / window.innerHeight);
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentSection < sections.length - 1) {
+                    // 위로 스와이프 (다음 섹션)
+                    sections[currentSection + 1].scrollIntoView({ behavior: 'smooth' });
+                } else if (diff < 0 && currentSection > 0) {
+                    // 아래로 스와이프 (이전 섹션)
+                    sections[currentSection - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+    </script>
+</body>
+</html>
