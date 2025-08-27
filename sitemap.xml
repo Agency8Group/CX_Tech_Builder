@@ -5,12 +5,12 @@
     
     <!-- 메인 페이지 -->
     <url>
-        <loc>https://agency8group.github.io/CX_Tech_Builder/</loc>
+        <loc>https://cx-tech-builder.netlify.app/</loc>
         <lastmod>2024-12-19T00:00:00+09:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
-            <image:loc>https://agency8group.github.io/CX_Tech_Builder/img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png</image:loc>
+            <image:loc>https://cx-tech-builder.netlify.app/img/b6798c1d-50fb-4540-8acc-37f81f0e77b0.png</image:loc>
             <image:title>CX_Tech_Builder - 실무 중심 풀스택 개발자</image:title>
             <image:caption>10년간 고객 중심의 실전 문제해결 경험을 바탕으로 한 풀스택 개발자</image:caption>
         </image:image>
@@ -18,42 +18,42 @@
     
     <!-- 섹션별 페이지 -->
     <url>
-        <loc>https://agency8group.github.io/CX_Tech_Builder/#about</loc>
+        <loc>https://cx-tech-builder.netlify.app/#about</loc>
         <lastmod>2024-12-19T00:00:00+09:00</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <url>
-        <loc>https://agency8group.github.io/CX_Tech_Builder/#skills</loc>
+        <loc>https://cx-tech-builder.netlify.app/#skills</loc>
         <lastmod>2024-12-19T00:00:00+09:00</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <url>
-        <loc>https://agency8group.github.io/CX_Tech_Builder/#projects</loc>
+        <loc>https://cx-tech-builder.netlify.app/#projects</loc>
         <lastmod>2024-12-19T00:00:00+09:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     
     <url>
-        <loc>https://agency8group.github.io/CX_Tech_Builder/#services</loc>
+        <loc>https://cx-tech-builder.netlify.app/#services</loc>
         <lastmod>2024-12-19T00:00:00+09:00</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <url>
-        <loc>https://agency8group.github.io/CX_Tech_Builder/#pricing</loc>
+        <loc>https://cx-tech-builder.netlify.app/#pricing</loc>
         <lastmod>2024-12-19T00:00:00+09:00</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <url>
-        <loc>https://agency8group.github.io/CX_Tech_Builder/#contact</loc>
+        <loc>https://cx-tech-builder.netlify.app/#contact</loc>
         <lastmod>2024-12-19T00:00:00+09:00</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
