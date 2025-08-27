@@ -1196,46 +1196,10 @@ body {
 
 .pop-badge.marketing {
     background: linear-gradient(135deg, #f59e0b, #ef4444);
-    position: relative;
-    overflow: hidden;
-}
-
-.pop-badge.marketing::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
-    animation: shimmer 2s infinite;
 }
 
 .pop-badge.planning {
     background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    position: relative;
-    overflow: hidden;
-}
-
-.pop-badge.planning::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
-    animation: shimmer 2s infinite;
 }
 
 /* 기본 추천 배지 (비인기 카드용) */
@@ -1245,46 +1209,10 @@ body {
         var(--primary-gold),
         var(--secondary-gold)
     );
-    position: relative;
-    overflow: hidden;
-}
-
-.pop-badge.basic::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
-    animation: shimmer 2s infinite;
 }
 
 .pop-badge.office {
     background: linear-gradient(135deg, #10b981, #14b8a6);
-    position: relative;
-    overflow: hidden;
-}
-
-.pop-badge.office::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
-    animation: shimmer 2s infinite;
 }
 
 .project-image {
