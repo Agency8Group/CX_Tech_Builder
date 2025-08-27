@@ -1,6 +1,9 @@
 // 타이핑 효과 관련 함수들
 const loadingMessages = [
-    "고객 중심의 솔루션을 준비합니다."
+    "실무 중심 솔루션을 준비합니다...",
+    "업무 자동화 시스템을 로딩합니다...",
+    "최적화된 개발 환경을 구축합니다...",
+    "고객 맞춤형 서비스를 준비합니다..."
 ];
 
 let currentMessageIndex = 0;
@@ -15,62 +18,53 @@ function typeText() {
     const currentMessage = loadingMessages[currentMessageIndex];
     
     if (isDeleting) {
-        // 삭제 모드
-        typingElement.textContent = currentMessage.substring(0, currentCharIndex - 1);
-        currentCharIndex--;
-        typingSpeed = 50;
+        // 삭제 모드 - 한 글자씩 제거
+        if (currentCharIndex > 0) {
+            const chars = typingElement.querySelectorAll('.char');
+            if (chars[currentCharIndex - 1]) {
+                chars[currentCharIndex - 1].style.animation = 'charDisappear 0.1s ease-in forwards';
+                setTimeout(() => {
+                    chars[currentCharIndex - 1].remove();
+                }, 100);
+            }
+            currentCharIndex--;
+            typingSpeed = 80;
+        } else {
+            isDeleting = false;
+            currentMessageIndex = (currentMessageIndex + 1) % loadingMessages.length;
+            typingSpeed = 800; // 다음 메시지로 넘어가기 전 0.8초 대기
+        }
     } else {
-        // 타이핑 모드
-        typingElement.textContent = currentMessage.substring(0, currentCharIndex + 1);
-        currentCharIndex++;
-        typingSpeed = 100;
-    }
-
-    // 타이핑 완료 후 잠시 대기
-    if (!isDeleting && currentCharIndex === currentMessage.length) {
-        typingSpeed = 2000; // 2초 대기
-        isDeleting = true;
-    } else if (isDeleting && currentCharIndex === 0) {
-        isDeleting = false;
-        currentMessageIndex = (currentMessageIndex + 1) % loadingMessages.length;
-        typingSpeed = 500; // 다음 메시지로 넘어가기 전 0.5초 대기
+        // 타이핑 모드 - 한 글자씩 추가
+        if (currentCharIndex < currentMessage.length) {
+            const char = document.createElement('span');
+            char.className = 'char';
+            char.textContent = currentMessage[currentCharIndex];
+            
+            // 특정 키워드 하이라이트
+            if (currentMessage[currentCharIndex] === '자동화' || 
+                currentMessage[currentCharIndex] === '시스템' ||
+                currentMessage[currentCharIndex] === '솔루션' ||
+                currentMessage[currentCharIndex] === '개발') {
+                char.classList.add('highlight');
+            }
+            
+            typingElement.appendChild(char);
+            currentCharIndex++;
+            
+            // 타이핑 속도 변화 (자연스러운 느낌)
+            typingSpeed = Math.random() * 50 + 80; // 80-130ms
+        } else {
+            // 타이핑 완료 후 잠시 대기
+            typingSpeed = 2500; // 2.5초 대기
+            isDeleting = true;
+        }
     }
 
     setTimeout(typeText, typingSpeed);
 }
 
-// 공지사항 팝업 관련 함수들
-function showNoticePopup() {
-    const popup = document.getElementById('noticePopup');
-    if (popup) {
-        popup.classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-}
 
-function closeNoticePopup() {
-    const popup = document.getElementById('noticePopup');
-    const dontShowAgain = document.getElementById('dontShowAgain');
-    
-    if (popup) {
-        popup.classList.remove('show');
-        document.body.style.overflow = '';
-        
-        // 오늘 하루 보지 않기 체크 시
-        if (dontShowAgain && dontShowAgain.checked) {
-            const today = new Date().toDateString();
-            localStorage.setItem('noticePopupHidden', today);
-        }
-    }
-}
-
-// 공지사항 팝업 표시 여부 확인
-function shouldShowNoticePopup() {
-    const hiddenDate = localStorage.getItem('noticePopupHidden');
-    const today = new Date().toDateString();
-    
-    return hiddenDate !== today;
-}
 
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
@@ -80,27 +74,14 @@ document.addEventListener('DOMContentLoaded', function() {
         typeText();
     }, 500);
     
-    // 공지사항 팝업 표시 (3초 후)
-    setTimeout(() => {
-        if (shouldShowNoticePopup()) {
-            showNoticePopup();
-        }
-    }, 3000);
+
     
     // 파티클 배경 생성 (성능을 위해 지연 생성)
     setTimeout(() => {
         createParticles();
     }, 1000);
     
-    // 공지사항 팝업 외부 클릭 시 닫기
-    const noticePopup = document.getElementById('noticePopup');
-    if (noticePopup) {
-        noticePopup.addEventListener('click', function(e) {
-            if (e.target === noticePopup) {
-                closeNoticePopup();
-            }
-        });
-    }
+
     
     // 네비게이션 스크롤 효과
     const navbar = document.querySelector('.navbar');

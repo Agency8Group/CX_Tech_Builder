@@ -278,12 +278,45 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: var(--gradient-dark);
+                background: linear-gradient(
+                    135deg,
+                    #1a1a1a 0%,
+                    #2d2d2d 50%,
+                    #1a1a1a 100%
+                );
                 z-index: 9999;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 transition: opacity 0.5s ease;
+                overflow: hidden;
+            }
+
+            .loading-overlay::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(
+                    circle at 50% 50%,
+                    rgba(212, 175, 55, 0.1) 0%,
+                    transparent 70%
+                );
+                animation: backgroundPulse 3s ease-in-out infinite;
+            }
+
+            @keyframes backgroundPulse {
+                0%,
+                100% {
+                    opacity: 0.3;
+                    transform: scale(1);
+                }
+                50% {
+                    opacity: 0.6;
+                    transform: scale(1.1);
+                }
             }
             .loading-content {
                 display: flex;
@@ -292,40 +325,151 @@
                 gap: 30px;
             }
             .loading-spinner {
-                width: 50px;
-                height: 50px;
-                border: 3px solid rgba(212, 175, 55, 0.3);
-                border-top: 3px solid var(--primary-gold);
+                position: relative;
+                width: 80px;
+                height: 80px;
+            }
+
+            .loading-spinner::before,
+            .loading-spinner::after {
+                content: "";
+                position: absolute;
                 border-radius: 50%;
-                animation: spin 1s linear infinite;
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+            .loading-spinner::before {
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    45deg,
+                    var(--primary-gold),
+                    var(--accent-gold)
+                );
+                animation-delay: 0s;
+            }
+
+            .loading-spinner::after {
+                width: 60%;
+                height: 60%;
+                background: var(--dark-gray);
+                top: 20%;
+                left: 20%;
+                animation-delay: 0.5s;
+            }
+
+            .loading-spinner .inner-circle {
+                position: absolute;
+                width: 40%;
+                height: 40%;
+                background: var(--primary-gold);
+                border-radius: 50%;
+                top: 30%;
+                left: 30%;
+                animation: rotate 1.5s linear infinite;
+            }
+
+            .loading-spinner .inner-circle::before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border: 2px solid transparent;
+                border-top: 2px solid var(--dark-gray);
+                border-radius: 50%;
+                animation: rotate 1s linear infinite reverse;
             }
             .typing-text {
                 color: var(--primary-gold);
-                font-size: 1.2rem;
-                font-weight: 500;
+                font-size: 1.3rem;
+                font-weight: 600;
                 text-align: center;
-                min-height: 60px;
+                min-height: 80px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 font-family: "Inter", sans-serif;
+                position: relative;
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
             }
-            .typing-text::after {
-                content: "|";
-                animation: blink 1s infinite;
-                color: var(--accent-gold);
+
+            .typing-text .char {
+                display: inline-block;
+                opacity: 0;
+                transform: translateY(20px);
+                animation: charAppear 0.1s ease-out forwards;
             }
-            @keyframes blink {
+
+            .typing-text .cursor {
+                display: inline-block;
+                width: 3px;
+                height: 1.5em;
+                background: linear-gradient(
+                    45deg,
+                    var(--primary-gold),
+                    var(--accent-gold)
+                );
+                margin-left: 2px;
+                border-radius: 2px;
+                animation: cursorBlink 1.2s ease-in-out infinite;
+                box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+            }
+
+            @keyframes charAppear {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes cursorBlink {
                 0%,
                 50% {
                     opacity: 1;
+                    transform: scaleY(1);
                 }
                 51%,
                 100% {
-                    opacity: 0;
+                    opacity: 0.3;
+                    transform: scaleY(0.8);
                 }
             }
-            @keyframes spin {
+
+            .typing-text .char.highlight {
+                color: var(--accent-gold);
+                text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+                animation: charGlow 2s ease-in-out infinite;
+            }
+
+            @keyframes charGlow {
+                0%,
+                100% {
+                    text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+                }
+                50% {
+                    text-shadow: 0 0 25px rgba(212, 175, 55, 1);
+                }
+            }
+
+            @keyframes charDisappear {
+                to {
+                    opacity: 0;
+                    transform: translateY(-20px) scale(0.8);
+                }
+            }
+            @keyframes pulse {
+                0%,
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                50% {
+                    transform: scale(1.1);
+                    opacity: 0.8;
+                }
+            }
+
+            @keyframes rotate {
                 0% {
                     transform: rotate(0deg);
                 }
@@ -343,72 +487,11 @@
         <!-- 로딩 오버레이 -->
         <div class="loading-overlay" id="loadingOverlay">
             <div class="loading-content">
-                <div class="loading-spinner"></div>
-                <div class="typing-text" id="typingText"></div>
-            </div>
-        </div>
-
-        <!-- 공지사항 팝업 -->
-        <div id="noticePopup" class="notice-popup">
-            <div class="notice-content">
-                <div class="notice-header">
-                    <h3><i class="fas fa-bullhorn"></i> 공지사항</h3>
-                    <button class="notice-close" onclick="closeNoticePopup()">
-                        <i class="fas fa-times"></i>
-                    </button>
+                <div class="loading-spinner">
+                    <div class="inner-circle"></div>
                 </div>
-                <div class="notice-body">
-                    <div class="notice-image">
-                        <img
-                            src="img/메인이미지.png"
-                            alt="CX_Tech_Builder 대표이미지"
-                        />
-                    </div>
-                    <div class="notice-text">
-                        <h4>구독 서비스 시작 & 무료 교육 기부 활동</h4>
-                        <p>안녕하세요! CX_Tech_Builder입니다.</p>
-                        <p>
-                            10년간의 실무 경험을 바탕으로
-                            <strong>월 28만원부터 시작하는 구독 서비스</strong
-                            >로 업무 효율화 솔루션을 제공합니다.
-                        </p>
-                        <ul>
-                            <li>
-                                ✅ 월 28만원부터 시작하는 맞춤형 구독 서비스
-                            </li>
-                            <li>✅ 3/6/12개월 구독 시 최대 15% 할인 혜택</li>
-                            <li>✅ 지속적인 업데이트 및 기술 지원</li>
-                            <li>✅ 개인 및 대학생 대상 무료 교육 기부 활동</li>
-                        </ul>
-                        <p>
-                            <strong style="color: #ff6b6b"
-                                >🎓 무료 교육 기부 활동</strong
-                            ><br />
-                            개인 학습자와 대학생을 대상으로 프로그래밍 기초부터
-                            실무 활용까지 무료로 교육을 제공합니다. 지식 공유를
-                            통한 사회 기여를 목표로 합니다.
-                        </p>
-                        <p>
-                            <strong
-                                >지금 바로 문의하시면 구독 서비스 혜택을
-                                드립니다!</strong
-                            >
-                        </p>
-                    </div>
-                </div>
-                <div class="notice-footer">
-                    <label class="notice-checkbox">
-                        <input type="checkbox" id="dontShowAgain" />
-                        <span class="checkmark"></span>
-                        오늘 하루 보지 않기
-                    </label>
-                    <button
-                        class="btn btn-primary"
-                        onclick="closeNoticePopup()"
-                    >
-                        <i class="fas fa-check"></i>
-                        확인
-                    </button>
+                <div class="typing-text" id="typingText">
+                    <div class="cursor"></div>
                 </div>
             </div>
         </div>
@@ -1076,9 +1159,14 @@
                             <div class="project-content">
                                 <h3>스마트 셀러 AI 매칭 프로그램</h3>
                                 <p>
-                                    <strong>아직도 비정형데이터 손으로 처리해?</strong>
-                                    <br />직원 시간이 아깝다. AI로 셀러·상품·문의
-                                    <strong>자동 매칭</strong>하여 응대·분류·전달 시간을
+                                    <strong
+                                        >아직도 비정형데이터 손으로
+                                        처리해?</strong
+                                    >
+                                    <br />직원 시간이 아깝다. AI로
+                                    셀러·상품·문의
+                                    <strong>자동 매칭</strong>하여
+                                    응대·분류·전달 시간을
                                     <strong>대폭 단축</strong>.
                                 </p>
                                 <div class="tech-stack">
@@ -1406,20 +1494,6 @@
                 <!-- Toolbox Enterprise Dashboard 섹션 -->
                 <div id="toolbox" class="project-category toolbox-section">
                     <div class="toolbox-container">
-                        <div class="toolbox-notice">
-                            <p>
-                                ⚡ 본 프로그램은 별도 설치 없이 즉시 실행 가능한
-                                데스크톱형(웹 구동) 도구입니다.
-                            </p>
-                            <p>
-                                🔒 모든 파일은 최신 백신으로 사전 검사를
-                                완료하였으며, 안전하게 제공됩니다.
-                            </p>
-                            <p>
-                                🛠 사용 중 문의사항이 있다면 언제든 고객센터로
-                                연락해 주세요.
-                            </p>
-                        </div>
                         <div class="toolbox-iframe-wrapper">
                             <iframe
                                 src="https://agency8group.github.io/ToolBox_Enterprise/"
@@ -1438,117 +1512,120 @@
                         <i class="fas fa-globe"></i>
                         Web Service
                     </h3>
-                                         <div class="projects-grid">
+                    <div class="projects-grid">
+                        <div class="project-card popular popular-marketing">
+                            <div class="pop-badge marketing">인기 · 웹</div>
+                            <div class="project-image">
+                                <img
+                                    src="업무TOOL소개/설문조사_Web Service.png"
+                                    alt="웹 설문조사 시스템"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>웹 설문조사 시스템</h3>
+                                <p>
+                                    요즘 구글폼 대신 대세인 설문 시스템.
+                                    백데이터 가공·전송까지 가능.
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                                <button class="btn btn-outline">
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
 
+                        <div class="project-card popular popular-marketing">
+                            <div class="project-image">
+                                <div class="pop-badge marketing">인기 · 웹</div>
+                                <img
+                                    src="업무TOOL소개/web고객센터(1)_Web Service.png"
+                                    alt="웹AI 고객센터 구축 - 메인 화면"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <h3>웹AI 고객센터 구축</h3>
+                                <p>
+                                    고객센터 직원 <strong>적응률 증가</strong>,
+                                    <strong>퇴사율 감소</strong>. 요즘 누가 FAQ
+                                    외워요? <strong>AI</strong>가 대신 FAQ를
+                                    정리·가공해
+                                    <strong>복붙 가능한 형태</strong>로
+                                    마련해드립니다.
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">AI API</span>
+                                </div>
+                                <button
+                                    class="btn btn-outline"
+                                    onclick="openGallery('고객센터')"
+                                >
+                                    크게보기
+                                </button>
+                            </div>
+                        </div>
 
-                         <div class="project-card popular popular-marketing">
-                             <div class="pop-badge marketing">인기 · 웹</div>
-                             <div class="project-image">
-                                 <img
-                                     src="업무TOOL소개/설문조사_Web Service.png"
-                                     alt="웹 설문조사 시스템"
-                                 />
-                             </div>
-                             <div class="project-content">
-                                 <h3>웹 설문조사 시스템</h3>
-                                 <p>
-                                     요즘 구글폼 대신 대세인 설문 시스템.
-                                     백데이터 가공·전송까지 가능.
-                                 </p>
-                                 <div class="tech-stack">
-                                     <span class="tech-tag">HTML5</span>
-                                     <span class="tech-tag">CSS3</span>
-                                     <span class="tech-tag">JavaScript</span>
-                                 </div>
-                                 <button class="btn btn-outline">
-                                     크게보기
-                                 </button>
-                             </div>
-                         </div>
-
-                                                 <div class="project-card popular popular-marketing">
-                             <div class="project-image">
-                                 <div class="pop-badge marketing">인기 · 웹</div>
-                                 <img
-                                     src="업무TOOL소개/web고객센터(1)_Web Service.png"
-                                     alt="웹AI 고객센터 구축 - 메인 화면"
-                                 />
-                             </div>
-                             <div class="project-content">
-                                 <h3>웹AI 고객센터 구축</h3>
-                                 <p>
-                                     고객센터 직원 <strong>적응률 증가</strong>,
-                                     <strong>퇴사율 감소</strong>. 요즘 누가 FAQ
-                                     외워요? <strong>AI</strong>가 대신 FAQ를
-                                     정리·가공해
-                                     <strong>복붙 가능한 형태</strong>로
-                                     마련해드립니다.
-                                 </p>
-                                 <div class="tech-stack">
-                                     <span class="tech-tag">HTML5</span>
-                                     <span class="tech-tag">CSS3</span>
-                                     <span class="tech-tag">JavaScript</span>
-                                     <span class="tech-tag">AI API</span>
-                                 </div>
-                                 <button
-                                     class="btn btn-outline"
-                                     onclick="openGallery('고객센터')"
-                                 >
-                                     크게보기
-                                 </button>
-                             </div>
-                         </div>
-
-                         <div class="project-card popular popular-office">
-                             <div class="project-image">
-                                 <div class="pop-badge office">인기 · 사무직</div>
-                                 <video
-                                     controls
-                                     preload="metadata"
-                                     playsinline
-                                     webkit-playsinline
-                                     muted
-                                     style="
-                                         width: 100%;
-                                         height: 100%;
-                                         object-fit: contain;
-                                         position: absolute;
-                                         top: 0;
-                                         left: 0;
-                                         opacity: 1;
-                                         transition: opacity 0.3s ease;
-                                         z-index: 1;
-                                         background: #000;
-                                     "
-                                 >
-                                     <source
-                                         src="업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4"
-                                         type="video/mp4"
-                                     />
-                                     브라우저가 비디오를 지원하지 않습니다.
-                                 </video>
-                             </div>
-                             <div class="project-content">
-                                 <h3>임직원 주문접수 시스템</h3>
-                                 <p>
-                                     임직원을 위한 <strong>단일 페이지 주문접수</strong> 시스템. 
-                                     주문수집원 클릭 방식으로 <strong>간편한 주문 처리</strong>가 가능하며, 
-                                     실시간 주문 현황 모니터링 및 관리 기능 제공
-                                 </p>
-                                 <div class="tech-stack">
-                                     <span class="tech-tag">HTML5</span>
-                                     <span class="tech-tag">CSS3</span>
-                                     <span class="tech-tag">JavaScript</span>
-                                     <span class="tech-tag">실시간처리</span>
-                                 </div>
-                                 <button
-                                     class="btn btn-outline"
-                                     onclick="openVideo('업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4', '임직원 주문접수 시스템', '임직원을 위한 단일 페이지 주문접수 시스템, 주문수집원 클릭 방식으로 간편한 주문 처리 가능')"
-                                 >
-                                     영상보기
-                                 </button>
-                             </div>
-                         </div>
+                        <div class="project-card popular popular-office">
+                            <div class="project-image">
+                                <div class="pop-badge office">
+                                    인기 · 사무직
+                                </div>
+                                <video
+                                    controls
+                                    preload="metadata"
+                                    playsinline
+                                    webkit-playsinline
+                                    muted
+                                    style="
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: contain;
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        opacity: 1;
+                                        transition: opacity 0.3s ease;
+                                        z-index: 1;
+                                        background: #000;
+                                    "
+                                >
+                                    <source
+                                        src="업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4"
+                                        type="video/mp4"
+                                    />
+                                    브라우저가 비디오를 지원하지 않습니다.
+                                </video>
+                            </div>
+                            <div class="project-content">
+                                <h3>임직원 주문접수 시스템</h3>
+                                <p>
+                                    임직원을 위한
+                                    <strong>단일 페이지 주문접수</strong>
+                                    시스템. 주문수집원 클릭 방식으로
+                                    <strong>간편한 주문 처리</strong>가
+                                    가능하며, 실시간 주문 현황 모니터링 및 관리
+                                    기능 제공
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">실시간처리</span>
+                                </div>
+                                <button
+                                    class="btn btn-outline"
+                                    onclick="openVideo('업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4', '임직원 주문접수 시스템', '임직원을 위한 단일 페이지 주문접수 시스템, 주문수집원 클릭 방식으로 간편한 주문 처리 가능')"
+                                >
+                                    영상보기
+                                </button>
+                            </div>
+                        </div>
 
                         <div class="project-card">
                             <div class="project-image">
@@ -1676,8 +1753,6 @@
                                 </button>
                             </div>
                         </div>
-
-                        
                     </div>
                 </div>
             </div>
@@ -2084,20 +2159,39 @@
                     <h2>협업 제안</h2>
                     <p>프로젝트를 함께 만들어가실 파트너를 찾고 있습니다</p>
                 </div>
-                <div class="contact-content" style="display: block; width: 100%;">
-                    <div class="contact-info" style="width: 100%; max-width: none;">
+                <div
+                    class="contact-content"
+                    style="display: block; width: 100%"
+                >
+                    <div
+                        class="contact-info"
+                        style="width: 100%; max-width: none"
+                    >
                         <h3>지금 바로 연락하세요</h3>
                         <p>
                             10년간의 실무 경험을 바탕으로 고객의 비즈니스 성장을
                             위한 최적의 솔루션을 제공합니다.
                         </p>
 
-                        <div class="contact-methods" style="width: 100%; max-width: none;">
-                            <div class="contact-method" style="width: 100%; max-width: none; min-width: 100%;">
+                        <div
+                            class="contact-methods"
+                            style="width: 100%; max-width: none"
+                        >
+                            <div
+                                class="contact-method"
+                                style="
+                                    width: 100%;
+                                    max-width: none;
+                                    min-width: 100%;
+                                "
+                            >
                                 <div class="contact-icon">
                                     <i class="fab fa-kickstarter-k"></i>
                                 </div>
-                                <div class="contact-details" style="flex: 1; width: 100%; min-width: 0;">
+                                <div
+                                    class="contact-details"
+                                    style="flex: 1; width: 100%; min-width: 0"
+                                >
                                     <h4>카카오톡 오픈채팅</h4>
                                     <a
                                         href="https://open.kakao.com/o/s2Y0oHMh"
@@ -2107,11 +2201,21 @@
                                 </div>
                             </div>
 
-                            <div class="contact-method" style="width: 100%; max-width: none; min-width: 100%;">
+                            <div
+                                class="contact-method"
+                                style="
+                                    width: 100%;
+                                    max-width: none;
+                                    min-width: 100%;
+                                "
+                            >
                                 <div class="contact-icon">
                                     <i class="fas fa-clipboard-list"></i>
                                 </div>
-                                <div class="contact-details" style="flex: 1; width: 100%; min-width: 0;">
+                                <div
+                                    class="contact-details"
+                                    style="flex: 1; width: 100%; min-width: 0"
+                                >
                                     <h4>신규 추가개발 요청 양식</h4>
                                     <a
                                         href="https://agency8group.github.io/Development-request/"
@@ -2130,15 +2234,31 @@
                                 </div>
                             </div>
 
-                            <div class="contact-method" style="width: 100%; max-width: none; min-width: 100%;">
+                            <div
+                                class="contact-method"
+                                style="
+                                    width: 100%;
+                                    max-width: none;
+                                    min-width: 100%;
+                                "
+                            >
                                 <div class="contact-icon">
                                     <i class="fas fa-university"></i>
                                 </div>
-                                <div class="contact-details" style="flex: 1; width: 100%; min-width: 0;">
+                                <div
+                                    class="contact-details"
+                                    style="flex: 1; width: 100%; min-width: 0"
+                                >
                                     <h4>입금 계좌 정보</h4>
                                     <div class="bank-info">
                                         <p><strong>카카오뱅크</strong></p>
-                                        <p class="account-number" style="word-break: keep-all; white-space: nowrap;">
+                                        <p
+                                            class="account-number"
+                                            style="
+                                                word-break: keep-all;
+                                                white-space: nowrap;
+                                            "
+                                        >
                                             3333-05-7624-154
                                         </p>
                                         <button
@@ -2158,26 +2278,66 @@
                                 </div>
                             </div>
 
-                            <div class="contact-method" style="width: 100%; max-width: none; min-width: 100%;">
+                            <div
+                                class="contact-method"
+                                style="
+                                    width: 100%;
+                                    max-width: none;
+                                    min-width: 100%;
+                                "
+                            >
                                 <div class="contact-icon">
                                     <i class="fas fa-briefcase"></i>
                                 </div>
-                                <div class="contact-details" style="flex: 1; width: 100%; min-width: 0;">
+                                <div
+                                    class="contact-details"
+                                    style="flex: 1; width: 100%; min-width: 0"
+                                >
                                     <h4>크몽</h4>
-                                    <a href="https://kmong.com/@CXTechBuilder" target="_blank" class="btn btn-secondary" style="margin-top: 10px; display: inline-block; padding: 8px 16px; font-size: 0.9rem;">
+                                    <a
+                                        href="https://kmong.com/@CXTechBuilder"
+                                        target="_blank"
+                                        class="btn btn-secondary"
+                                        style="
+                                            margin-top: 10px;
+                                            display: inline-block;
+                                            padding: 8px 16px;
+                                            font-size: 0.9rem;
+                                        "
+                                    >
                                         <i class="fas fa-external-link-alt"></i>
                                         크몽 프로필 보기
                                     </a>
                                 </div>
                             </div>
 
-                            <div class="contact-method" style="width: 100%; max-width: none; min-width: 100%;">
+                            <div
+                                class="contact-method"
+                                style="
+                                    width: 100%;
+                                    max-width: none;
+                                    min-width: 100%;
+                                "
+                            >
                                 <div class="contact-icon">
                                     <i class="fas fa-briefcase"></i>
                                 </div>
-                                <div class="contact-details" style="flex: 1; width: 100%; min-width: 0;">
+                                <div
+                                    class="contact-details"
+                                    style="flex: 1; width: 100%; min-width: 0"
+                                >
                                     <h4>숨고</h4>
-                                    <a href="https://soomgo.com/profile/users/16850535?from=global_search&prev=searchPro" target="_blank" class="btn btn-secondary" style="margin-top: 10px; display: inline-block; padding: 8px 16px; font-size: 0.9rem;">
+                                    <a
+                                        href="https://soomgo.com/profile/users/16850535?from=global_search&prev=searchPro"
+                                        target="_blank"
+                                        class="btn btn-secondary"
+                                        style="
+                                            margin-top: 10px;
+                                            display: inline-block;
+                                            padding: 8px 16px;
+                                            font-size: 0.9rem;
+                                        "
+                                    >
                                         <i class="fas fa-external-link-alt"></i>
                                         숨고 프로필 보기
                                     </a>
@@ -2186,7 +2346,10 @@
                         </div>
                     </div>
 
-                    <div class="contact-form" style="width: 100%; max-width: none; margin-top: 40px;">
+                    <div
+                        class="contact-form"
+                        style="width: 100%; max-width: none; margin-top: 40px"
+                    >
                         <h3>완성된<br />프로그램 사용 요청</h3>
                         <form id="contactForm">
                             <div class="form-group">
