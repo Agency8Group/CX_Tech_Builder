@@ -4097,6 +4097,20 @@ iframe.toolbox-iframe {
     overflow: hidden;
 }
 
+/* 대표 아키텍처 설계자 강조 스타일 */
+.team-member:first-child .member-info h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.team-member:first-child .member-info h3::before {
+    content: "대표 ";
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+}
+
 .team-member::before {
     content: "";
     position: absolute;
@@ -4164,7 +4178,7 @@ iframe.toolbox-iframe {
 }
 
 .member-info h3 {
-    color: var(--primary-gold);
+    color: var(--text-primary);
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 8px;
