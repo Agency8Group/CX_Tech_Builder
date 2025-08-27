@@ -81,6 +81,46 @@ document.addEventListener('DOMContentLoaded', function() {
         createParticles();
     }, 1000);
     
+    // 숫자 애니메이션 초기화 함수 (메인 통계만)
+    function initializeNumberAnimations() {
+        // 메인 통계 카운터 애니메이션만 (hero-stats)
+        const statNumbers = document.querySelectorAll('.hero-stats .stat-number');
+        
+        statNumbers.forEach(stat => {
+            const target = stat.textContent;
+            const isPercentage = target.includes('%');
+            const isYear = target.includes('년');
+            const isLines = target.includes('줄');
+            const isPlus = target.includes('+');
+            const numericValue = parseInt(target.replace(/[^\d]/g, ''));
+            
+            // 먼저 0으로 초기화
+            stat.textContent = '0' + (isPlus ? '+' : '') + (isLines ? '줄' : '') + (isPercentage ? '%' : '') + (isYear ? '년' : '');
+            
+            if (isPercentage || isYear || isLines || isPlus) {
+                animateCounter(stat, 0, numericValue, 3000, target);
+            } else {
+                animateCounter(stat, 0, numericValue, 3000, target);
+            }
+        });
+    }
+    
+    // 로딩 완료 후 숫자 애니메이션 시작
+    setTimeout(() => {
+        // 로딩 오버레이 숨기기
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay) {
+            loadingOverlay.style.opacity = '0';
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                document.body.classList.add('loaded');
+            }, 500);
+        }
+        
+        // 숫자들을 0으로 초기화하고 애니메이션 시작
+        initializeNumberAnimations();
+    }, 3000); // 3초 후 로딩 완료
+    
 
     
     // 네비게이션 스크롤 효과
@@ -131,36 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    // 통계 카운터 애니메이션
-    const statNumbers = document.querySelectorAll('.stat-number');
-    const statsSection = document.querySelector('.hero-stats');
-    
-    const statsObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                statNumbers.forEach(stat => {
-                    const target = stat.textContent;
-                    const isPercentage = target.includes('%');
-                    const isYear = target.includes('년');
-                    const isLines = target.includes('줄');
-                    const numericValue = parseInt(target.replace(/[^\d]/g, ''));
-                    
-                    if (isPercentage || isYear || isLines) {
-                        animateCounter(stat, 0, numericValue, 2000, target);
-                    } else {
-                        animateCounter(stat, 0, numericValue, 2000, target);
-                    }
-                });
-                statsObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    if (statsSection) {
-        statsObserver.observe(statsSection);
-    }
-    
-    // 성과 카드 애니메이션
+    // 성과 카드 애니메이션 (스크롤 시에만)
     const achievementNumbers = document.querySelectorAll('.achievement-number');
     const aboutSection = document.querySelector('.about');
     
@@ -170,7 +181,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 achievementNumbers.forEach(achievement => {
                     const target = achievement.textContent;
                     const isLines = target.includes('줄');
+                    const isPlus = target.includes('+');
                     const numericValue = parseInt(target.replace(/[^\d]/g, ''));
+                    
+                    // 먼저 0으로 초기화
+                    achievement.textContent = '0' + (isPlus ? '+' : '') + (isLines ? '줄' : '');
                     
                     animateCounter(achievement, 0, numericValue, 2500, target);
                 });
@@ -183,20 +198,22 @@ document.addEventListener('DOMContentLoaded', function() {
         achievementObserver.observe(aboutSection);
     }
     
-    // 스킬 바 애니메이션
+
+    
+    // 스킬 바 애니메이션 (스크롤 시에만)
     const skillBars = document.querySelectorAll('.skill-progress');
     const skillsSection = document.querySelector('.skills');
     
     const skillsObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                skillBars.forEach(bar => {
+                skillBars.forEach((bar, index) => {
                     const width = bar.style.width;
                     bar.style.width = '0';
                     
                     setTimeout(() => {
                         bar.style.width = width;
-                    }, 200);
+                    }, index * 200); // 각 스킬 바마다 200ms씩 지연
                 });
                 skillsObserver.unobserve(entry.target);
             }
@@ -228,7 +245,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const easeOutQuart = 1 - Math.pow(1 - progress, 4);
             
             const current = Math.floor(start + (end - start) * easeOutQuart);
-            element.textContent = current + suffix;
+            
+            // 콤마 추가
+            const formattedCurrent = current.toLocaleString();
+            element.textContent = formattedCurrent + suffix;
             
             if (progress < 1) {
                 requestAnimationFrame(updateCounter);
@@ -238,6 +258,31 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(updateCounter);
     }
     
+    // 모달 함수들
+    window.openRequestForm = function() {
+        const modal = document.getElementById('requestModal');
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    window.closeRequestForm = function() {
+        const modal = document.getElementById('requestModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    };
+
+    // 모달 외부 클릭 시 닫기
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('requestModal');
+        if (event.target === modal) {
+            closeRequestForm();
+        }
+    });
+
     // 이미지와 영상 토글 함수
     window.toggleMedia = function(projectCard) {
         const projectImage = projectCard.querySelector('.project-image');
