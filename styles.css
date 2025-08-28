@@ -4055,7 +4055,7 @@ html {
 .toolbox-iframe-wrapper {
     position: relative;
     width: 100%;
-    height: 80vh;
+    height: 100vh;
     background: #fff;
     border-radius: 15px;
     overflow: hidden;
@@ -4083,7 +4083,7 @@ html {
     }
 
     .toolbox-iframe-wrapper {
-        height: 70vh;
+        height: 56vh;
         border-radius: 12px;
     }
 }
@@ -4095,7 +4095,7 @@ html {
     }
 
     .toolbox-iframe-wrapper {
-        height: 60vh;
+        height: 48vh;
         border-radius: 10px;
     }
 }
