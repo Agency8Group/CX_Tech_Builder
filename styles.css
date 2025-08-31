@@ -4467,3 +4467,150 @@ html {
         font-size: 0.8rem;
     }
 }
+
+/* 구독료 안내 섹션 스타일 */
+.subscription-notice {
+    margin-top: 80px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+.notice-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.notice-header i {
+    color: var(--primary-gold);
+    font-size: 2rem;
+}
+
+.notice-header h3 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.notice-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.notice-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: all 0.3s ease;
+}
+
+.notice-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-gold);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.1);
+}
+
+.notice-icon {
+    background: linear-gradient(
+        135deg,
+        var(--primary-gold),
+        var(--accent-gold)
+    );
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.notice-icon i {
+    font-size: 1.3rem;
+}
+
+.notice-text h4 {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.notice-text p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.notice-text strong {
+    color: var(--primary-gold);
+    font-weight: 600;
+}
+
+/* 구독료 안내 섹션 반응형 디자인 */
+@media (max-width: 768px) {
+    .subscription-notice {
+        margin-top: 60px;
+        padding: 30px 20px;
+    }
+
+    .notice-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .notice-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .notice-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .notice-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .notice-icon {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .subscription-notice {
+        padding: 25px 15px;
+    }
+
+    .notice-header h3 {
+        font-size: 1.3rem;
+    }
+
+    .notice-card {
+        padding: 20px;
+    }
+
+    .notice-text h4 {
+        font-size: 1rem;
+    }
+
+    .notice-text p {
+        font-size: 0.85rem;
+    }
+}
