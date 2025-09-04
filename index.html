@@ -1137,8 +1137,109 @@
                         Desktop Application
                     </h3>
                     <div class="projects-grid">
-                        <div class="project-card popular popular-ai">
-                            <div class="pop-badge planning">인기 · AI</div>
+                        <!-- 스마트 셀러 AI 매칭 프로그램 - 특별 카드 -->
+                        <div class="project-card featured-card" style="
+                            background: var(--medium-gray);
+                            border: 2px solid var(--primary-gold);
+                            box-shadow: 0 10px 30px rgba(244, 196, 48, 0.2);
+                            position: relative;
+                            overflow: hidden;
+                            grid-column: span 2;
+                        ">
+                            <div class="featured-badge" style="
+                                position: absolute;
+                                top: 15px;
+                                right: 15px;
+                                background: var(--gradient-gold);
+                                color: var(--dark-gray);
+                                padding: 6px 12px;
+                                border-radius: 15px;
+                                font-size: 11px;
+                                font-weight: bold;
+                                z-index: 10;
+                                box-shadow: 0 2px 8px rgba(244, 196, 48, 0.3);
+                            ">
+                                🏆 최다매출
+                            </div>
+                            
+                            <div class="project-image" style="position: relative; height: 300px;">
+                                <video
+                                    controls
+                                    preload="metadata"
+                                    playsinline
+                                    webkit-playsinline
+                                    muted
+                                    style="
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: contain;
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        opacity: 1;
+                                        transition: opacity 0.3s ease;
+                                        z-index: 1;
+                                        background: #000;
+                                        border-radius: 8px;
+                                    "
+                                >
+                                    <source
+                                        src="업무TOOL소개/스마트_셀러_AI_매칭_프로그램.mp4"
+                                        type="video/mp4"
+                                    />
+                                    브라우저가 비디오를 지원하지 않습니다.
+                                </video>
+                            </div>
+                            
+                            <div class="project-content">
+                                <div>
+                                    <h3 style="color: var(--primary-gold); margin-bottom: 15px; font-size: 1.3em;">
+                                        🤖 스마트 셀러 AI 매칭 프로그램
+                                    </h3>
+                                    <p style="color: var(--text-primary); line-height: 1.6; margin-bottom: 15px;">
+                                        <strong style="color: var(--primary-gold);">아직도 비정형데이터 손으로 처리해?</strong>
+                                        <br />직원 시간이 아깝다. AI로 셀러·상품·문의 
+                                        <strong style="color: var(--primary-gold);">자동 매칭</strong>하여
+                                        응대·분류·전달 시간을 <strong style="color: var(--primary-gold);">대폭 단축</strong>.
+                                    </p>
+                                    
+                                    <div class="tech-stack" style="margin-bottom: 15px;">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">AI API</span>
+                                        <span class="tech-tag">Automation</span>
+                                    </div>
+                                    
+                                    <div style="padding: 12px; background: rgba(244, 196, 48, 0.1); border-radius: 8px; border-left: 3px solid var(--primary-gold); margin-bottom: 15px;">
+                                        <h4 style="color: var(--primary-gold); margin: 0 0 8px 0; font-size: 1em;">💡 주요 기능</h4>
+                                        <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary); font-size: 0.9em;">
+                                            <li>비정형 데이터 자동 분석 및 분류</li>
+                                            <li>AI 기반 셀러-상품-문의 자동 매칭</li>
+                                            <li>응대 시간 80% 단축</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button
+                                        class="btn btn-primary"
+                                        onclick="openVideo('업무TOOL소개/스마트_셀러_AI_매칭_프로그램.mp4', '스마트 셀러 AI 매칭 프로그램', '비정형 데이터 자동 매칭으로 응대·분류 시간을 절감하는 AI 솔루션')"
+                                        style="flex: 1; min-width: 100px;"
+                                    >
+                                        영상보기
+                                    </button>
+                                    
+                                    <button
+                                        class="btn btn-outline"
+                                        onclick="window.open('업무TOOL소개/(3)스마트 셀러 AI매칭 프로그램_소개.pdf', '_blank')"
+                                        style="flex: 1; min-width: 100px;"
+                                    >
+                                        상세소개서
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card popular popular-marketing" style="height: 500px;">
+                            <div class="pop-badge marketing">인기 · 마케팅</div>
                             <div class="project-image">
                                 <video
                                     controls
@@ -1160,33 +1261,29 @@
                                     "
                                 >
                                     <source
-                                        src="업무TOOL소개/스마트_셀러_AI_매칭_프로그램.mp4"
+                                        src="업무TOOL소개/N사_스마트블록_순위체크_Desktop Application.mp4"
                                         type="video/mp4"
                                     />
                                     브라우저가 비디오를 지원하지 않습니다.
                                 </video>
                             </div>
                             <div class="project-content">
-                                <h3>스마트 셀러 AI 매칭 프로그램</h3>
+                                <h3>N사 스마트블록 순위체크</h3>
                                 <p>
-                                    <strong
-                                        >아직도 비정형데이터 손으로
-                                        처리해?</strong
-                                    >
-                                    <br />직원 시간이 아깝다. AI로
-                                    셀러·상품·문의
-                                    <strong>자동 매칭</strong>하여
-                                    응대·분류·전달 시간을
-                                    <strong>대폭 단축</strong>.
+                                    <strong>내 카페 인기글</strong>이 검색 후
+                                    <strong>상위 몇 위</strong>인지 즉시
+                                    체크하는 고정밀 순위 분석 프로그램. "우리
+                                    바이럴 업체가 잘하고 있나?" 하는 대표님께
+                                    제공
                                 </p>
                                 <div class="tech-stack">
                                     <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">AI API</span>
-                                    <span class="tech-tag">Automation</span>
+                                    <span class="tech-tag">Selenium</span>
+                                    <span class="tech-tag">BeautifulSoup</span>
                                 </div>
                                 <button
                                     class="btn btn-outline"
-                                    onclick="openVideo('업무TOOL소개/스마트_셀러_AI_매칭_프로그램.mp4', '스마트 셀러 AI 매칭 프로그램', '비정형 데이터 자동 매칭으로 응대·분류 시간을 절감하는 AI 솔루션')"
+                                    onclick="openVideo('업무TOOL소개/N사_스마트블록_순위체크_Desktop Application.mp4', 'N사 스마트블록 순위체크', '내 카페 인기글이 검색 후 상위 몇 위인지 즉시 체크하는 고정밀 순위 분석 프로그램')"
                                 >
                                     영상보기
                                 </button>
@@ -1237,57 +1334,6 @@
                                 <button
                                     class="btn btn-outline"
                                     onclick="openVideo('업무TOOL소개/N사_카페_DB_채굴기.mp4', 'N사 카페 DB 채굴기', '카페 내 공개 데이터를 고속 수집·정리하는 자동화 채굴 도구')"
-                                >
-                                    영상보기
-                                </button>
-                            </div>
-                        </div>
-                        <div class="project-card popular popular-marketing">
-                            <div class="pop-badge marketing">인기 · 마케팅</div>
-                            <div class="project-image">
-                                <video
-                                    controls
-                                    preload="metadata"
-                                    playsinline
-                                    webkit-playsinline
-                                    muted
-                                    style="
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: contain;
-                                        position: absolute;
-                                        top: 0;
-                                        left: 0;
-                                        opacity: 1;
-                                        transition: opacity 0.3s ease;
-                                        z-index: 1;
-                                        background: #000;
-                                    "
-                                >
-                                    <source
-                                        src="업무TOOL소개/N사_스마트블록_순위체크_Desktop Application.mp4"
-                                        type="video/mp4"
-                                    />
-                                    브라우저가 비디오를 지원하지 않습니다.
-                                </video>
-                            </div>
-                            <div class="project-content">
-                                <h3>N사 스마트블록 순위체크</h3>
-                                <p>
-                                    <strong>내 카페 인기글</strong>이 검색 후
-                                    <strong>상위 몇 위</strong>인지 즉시
-                                    체크하는 고정밀 순위 분석 프로그램. "우리
-                                    바이럴 업체가 잘하고 있나?" 하는 대표님께
-                                    제공
-                                </p>
-                                <div class="tech-stack">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">Selenium</span>
-                                    <span class="tech-tag">BeautifulSoup</span>
-                                </div>
-                                <button
-                                    class="btn btn-outline"
-                                    onclick="openVideo('업무TOOL소개/N사_스마트블록_순위체크_Desktop Application.mp4', 'N사 스마트블록 순위체크', '내 카페 인기글이 검색 후 상위 몇 위인지 즉시 체크하는 고정밀 순위 분석 프로그램')"
                                 >
                                     영상보기
                                 </button>
@@ -1628,12 +1674,43 @@
                                     <span class="tech-tag">JavaScript</span>
                                     <span class="tech-tag">실시간처리</span>
                                 </div>
-                                <button
-                                    class="btn btn-outline"
-                                    onclick="openVideo('업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4', '임직원 주문접수 시스템', '임직원을 위한 단일 페이지 주문접수 시스템, 주문수집원 클릭 방식으로 간편한 주문 처리 가능')"
-                                >
-                                    영상보기
-                                </button>
+                                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                    <button
+                                        class="btn btn-outline"
+                                        onclick="openVideo('업무TOOL소개/임직원 주문 단일 페이지(주문수집원클릭)_Web Service.mp4', '임직원 주문접수 시스템', '임직원을 위한 단일 페이지 주문접수 시스템, 주문수집원 클릭 방식으로 간편한 주문 처리 가능')"
+                                        style="flex: 1; min-width: 120px;"
+                                    >
+                                        영상보기
+                                    </button>
+                                    
+                                    <button
+                                        class="btn btn-outline"
+                                        onclick="window.open('업무TOOL소개/(1)셀러 주문 관리 시스템(접수페이지)_소개.pdf', '_blank')"
+                                        style="
+                                            background: #f8f9fa;
+                                            border: 1px solid #dee2e6;
+                                            color: #495057;
+                                            flex: 1;
+                                            min-width: 120px;
+                                        "
+                                    >
+                                        📄 소개서
+                                    </button>
+                                    
+                                    <button
+                                        class="btn btn-outline"
+                                        onclick="window.open('업무TOOL소개/(2)주문 관리 시스템 사용 가이드_소개.pdf', '_blank')"
+                                        style="
+                                            background: #e3f2fd;
+                                            border: 1px solid #2196f3;
+                                            color: #1976d2;
+                                            flex: 1;
+                                            min-width: 120px;
+                                        "
+                                    >
+                                        📖 사용가이드
+                                    </button>
+                                </div>
                             </div>
                         </div>
 

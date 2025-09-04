@@ -1131,8 +1131,48 @@ body {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
+    align-items: start;
+}
+
+.featured-card {
+    grid-column: span 2;
+    min-height: auto;
+}
+
+/* 모든 카드들의 높이를 일정하게 맞춤 */
+.project-card {
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card .project-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.featured-card {
+    height: 500px;
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-card {
+        grid-column: span 1;
+        height: 450px;
+    }
+    
+    .project-card {
+        height: 400px;
+    }
 }
 
 .project-card {
