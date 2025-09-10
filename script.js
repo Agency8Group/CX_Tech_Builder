@@ -214,12 +214,16 @@ document.addEventListener("DOMContentLoaded", function () {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           skillBars.forEach((bar, index) => {
-            const width = bar.style.width;
-            bar.style.width = "0";
+            if (bar && bar.style) {
+              const width = bar.style.width;
+              bar.style.width = "0";
 
-            setTimeout(() => {
-              bar.style.width = width;
-            }, index * 200); // 각 스킬 바마다 200ms씩 지연
+              setTimeout(() => {
+                if (bar && bar.style) {
+                  bar.style.width = width;
+                }
+              }, index * 200); // 각 스킬 바마다 200ms씩 지연
+            }
           });
           skillsObserver.unobserve(entry.target);
         }
@@ -269,17 +273,21 @@ document.addEventListener("DOMContentLoaded", function () {
   // 모달 함수들
   window.openRequestForm = function () {
     const modal = document.getElementById("requestModal");
-    if (modal) {
+    if (modal && modal.style) {
       modal.style.display = "block";
-      document.body.style.overflow = "hidden";
+      if (document.body && document.body.style) {
+        document.body.style.overflow = "hidden";
+      }
     }
   };
 
   window.closeRequestForm = function () {
     const modal = document.getElementById("requestModal");
-    if (modal) {
+    if (modal && modal.style) {
       modal.style.display = "none";
-      document.body.style.overflow = "auto";
+      if (document.body && document.body.style) {
+        document.body.style.overflow = "auto";
+      }
     }
   };
 
@@ -297,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const img = projectImage.querySelector("img");
     const video = projectImage.querySelector("video");
 
-    if (img && video) {
+    if (img && video && img.style && video.style) {
       // 현재 이미지의 opacity 상태 확인 (기본값은 '1')
       const currentImgOpacity = img.style.opacity || "1";
 
@@ -305,8 +313,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // 이미지로 전환
         img.style.opacity = "1";
         video.style.opacity = "0";
-        video.pause();
-        video.currentTime = 0;
+        if (video.pause) video.pause();
+        if (video.currentTime !== undefined) video.currentTime = 0;
         console.log("이미지로 전환됨");
       } else {
         // 영상으로 전환
@@ -542,15 +550,21 @@ document.addEventListener("DOMContentLoaded", function () {
   // 프로젝트 카드 호버 효과
   const projectCards = document.querySelectorAll(".project-card");
   projectCards.forEach((card) => {
-    card.addEventListener("mouseenter", function () {
-      this.style.transform = "translateY(-15px) scale(1.02)";
-      this.style.boxShadow = "0 25px 50px rgba(0, 0, 0, 0.2)";
-    });
+    if (card && card.style) {
+      card.addEventListener("mouseenter", function () {
+        if (this && this.style) {
+          this.style.transform = "translateY(-15px) scale(1.02)";
+          this.style.boxShadow = "0 25px 50px rgba(0, 0, 0, 0.2)";
+        }
+      });
 
-    card.addEventListener("mouseleave", function () {
-      this.style.transform = "translateY(0) scale(1)";
-      this.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.1)";
-    });
+      card.addEventListener("mouseleave", function () {
+        if (this && this.style) {
+          this.style.transform = "translateY(0) scale(1)";
+          this.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.1)";
+        }
+      });
+    }
   });
 
   // 서비스 카드 호버 효과
