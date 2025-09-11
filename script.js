@@ -340,19 +340,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // 파티클 생성 함수
+  // 파티클 생성 함수 - 모바일 최적화
   function createParticles() {
+    // 모바일에서는 파티클 수를 대폭 줄임
+    const isMobile = window.innerWidth <= 768;
+    const particleCount = isMobile ? 8 : 30;
+    
     const particlesContainer = document.createElement("div");
     particlesContainer.className = "particles";
     document.body.appendChild(particlesContainer);
 
-    for (let i = 0; i < 30; i++) {
-      // 파티클 수 줄여서 성능 개선
+    for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement("div");
       particle.className = "particle";
 
-      // 랜덤 크기와 위치
-      const size = Math.random() * 4 + 2;
+      // 모바일에서는 더 작은 크기
+      const size = isMobile ? Math.random() * 2 + 1 : Math.random() * 4 + 2;
       const x = Math.random() * window.innerWidth;
       const delay = Math.random() * 20;
 
